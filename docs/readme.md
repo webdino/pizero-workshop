@@ -4,7 +4,7 @@ Raspberry Pi Zero を利用した IoT ワークショップなどの資料置き
 ## ワークショップ参加者向け
 
 * [OMRON センサーを使ってみる](workshop.md)
-* [プログラムをサービス化する手順](deamonize.md)
+* [プログラムをサービス化する手順](daemonize.md)
 
 ##  ワークショップ運営者向け
 
