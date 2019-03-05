@@ -1,1 +1,19 @@
 theme: jekyll-theme-slate
+
+show_downloads: false
+#google_analytics:
+#include:
+#  - _redirects
+
+# Use CommonMarkGhPages for Markdown parser (after v172)
+# https://github.com/github/jekyll-commonmark-ghpages
+# https://github.com/github/pages-gem/releases/tag/v172
+markdown: CommonMarkGhPages
+commonmark:
+  options:
+    - FOOTNOTES
+    - TABLE_PREFER_STYLE_ATTRIBUTES
+  extensions:
+    - strikethrough
+    - autolink
+    - table
