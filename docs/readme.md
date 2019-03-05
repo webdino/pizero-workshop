@@ -9,4 +9,5 @@ Raspberry Pi Zero を利用した IoT ワークショップなどの資料置き
 ##  ワークショップ運営者向け
 
 * [事前セットアップ手順](setup.md)
+* [Wifi 事前設定について](wifi.md)
 
