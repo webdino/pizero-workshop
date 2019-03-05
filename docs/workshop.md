@@ -18,13 +18,13 @@ PPiの電源が入りOSが起動するので1分ほど待ちます
 
 SSHクライアントを起動して、以下のコマンドを入力します。`-xxxx.local`の部分は各自のホスト名に読み替えてください
 
-```
+```sh
 ssh pi@raspberrypi-xxxx.local
 ```
 
 パスワードの入力を求められます。パスワードは `raspberry` です
 
-```
+```sh
 pi@raspberrypi:~ $
 ```
 
@@ -34,7 +34,7 @@ pi@raspberrypi:~ $
 
 テキストエディタで `config.js` を開きます  
 
-```
+```js
 module.exports = {
   "NAME": "Rbt",
   "ADDRESS": "[YOUR BU01 ADDRESS NO SEMICOLON]",
@@ -55,7 +55,7 @@ module.exports = {
 
 SSHクライアントにて、次のコマンドで作業用のディレクトリを作成します
 
-```
+```sh
 mkdir src
 ```
 
@@ -65,13 +65,13 @@ SFTPクライアントを起動して、`pi@raspberrypi-xxxx.local` にログイ
 
 SSHクライアントにて、プログラムファイルのディレクトリに移動します  
 
-```
+```sh
 cd src/Omron2jceBu01
 ```
 
 以下のコマンドを実行します
 
-```
+```sh
 node test.js
 ```
 
@@ -89,7 +89,7 @@ Test Start!
 
 表示されるデータは、オムロン環境センサがセンシングした環境データです。データの中で必要な項目を説明します  
 
-```
+```json
 {
   "companyId": 725,
   "dataType": 1,
@@ -125,7 +125,7 @@ Ambientにログインし、新しいチャネルを作成します
 
 テキストエディタで `config.js` を開きます  
 
-```
+```js
 module.exports = {
   "NAME": "Rbt",
   "ADDRESS": "112233AABBCC",
@@ -144,7 +144,7 @@ module.exports = {
 
 以下のコマンドを実行します
 
-```
+```js
 node main.js
 ```
 
