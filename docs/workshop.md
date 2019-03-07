@@ -163,6 +163,20 @@ Ambient: 200
 
 [Ambient](https://ambidata.io)にログインし作成したチャネルにアクセスします  
 
-データがグラフ表示されていれば成功です  
+データがグラフ表示されていれば成功です。
 
 ![](./images/00003.jpg)
+
+Ambient に送信されグラフに表示される値は `main.js` プログラムの中では次の用に定義されており、温度、相対湿度、大気圧、照度、騒音、総揮発性有機化合物濃度、二酸化炭素濃度の順番になっています:
+
+```js
+    const ambData = {
+      d1: envData.temperature,
+      d2: envData.relativeHumidity,
+      d3: envData.barometricPressure,
+      d4: envData.ambientLight,
+      d5: envData.soundNoise,
+      d6: envData.eTVOC,
+      d7: envData.eCO2,
+    };
+```
