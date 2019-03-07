@@ -1,22 +1,22 @@
 # Getting Started
 
-## Raspberry Piを組み立てる
+## Raspberry Pi を組み立てる
 
-Raspberry Pi (以下 RPi)、OMRON環境センサ、USB変換アダプタ、USBケーブルを用意します
+Raspberry Pi (以下 RPi)、[OMRON 環境センサ (2JCIE-BU)](https://www.fa.omron.co.jp/products/family/3724/)、USB 変換アダプタ、USB ケーブルを用意します
 
 ![](./images/00001.jpg)
 
-各部品を写真のように組み立てます。RPiのUSBポートは同じ型のポートが2つあります。各ケーブルの接続場所を間違えないようにしてください
+各部品を写真のように組み立てます。RPi の USB ポートは同じ型のポートが 2 つあります。各ケーブルの接続場所を間違えないようにしてください。コネクタに向かって右側 (写真で黒いケーブルが繋がっている方) が電源ポート、左側が PC との通信や環境センサーへの給電・接続に利用します。
 
 ![](./images/00002.jpg)
 
-## Raspberry PiにPCでログインする
+## Raspberry Pi に PC でログインする
 
-RPiのUSBケーブルをPCのUSBポートに接続します  
+RPi の USB ケーブルを PC の USB ポートに接続します
 
-PPiの電源が入りOSが起動するので1分ほど待ちます  
+PPi の電源が入り OS が起動するので 1 分ほど待ちます
 
-SSHクライアントを起動して、以下のコマンドを入力します。`-xxxx.local`の部分は各自のホスト名に読み替えてください
+SSH クライアントを起動して、以下のコマンドを入力します。`-xxxx.local` の部分は各自の RPi に設定されているホスト名に読み替えてください
 
 ```sh
 ssh pi@raspberrypi-xxxx.local
@@ -32,7 +32,7 @@ pi@raspberrypi:~ $
 
 ## プログラムを編集する
 
-テキストエディタで `config.js` を開きます  
+テキストエディタで `config.js` を開きます
 
 ```js
 module.exports = {
@@ -44,26 +44,25 @@ module.exports = {
 };
 ```
 
-ファイルの内容を下記に変更します  
+ファイルの内容を下記に変更します
 
-`[YOUR BU01 ADDRESS NO SEMICOLON]`を環境センサのアドレス(セミコロンを除いたもの)に変更  
+`[YOUR BU01 ADDRESS NO SEMICOLON]` を環境センサのアドレス(セミコロンを除いたもの)に変更
 
 ファイルを上書き保存します
 
-
 ## テストプログラムをアップロードする
 
-SSHクライアントにて、次のコマンドで作業用のディレクトリを作成します
+SSH クライアントにて、次のコマンドで作業用のディレクトリを作成します
 
 ```sh
 mkdir src
 ```
 
-SFTPクライアントを起動して、`pi@raspberrypi-xxxx.local` にログインします  
+SFTP クライアントを起動して、`pi@raspberrypi-xxxx.local` にログインします
 
-`src`ディレクトリにプログラムファイルをアップロードします  
+`src` ディレクトリにプログラムファイルをアップロードします
 
-SSHクライアントにて、プログラムファイルのディレクトリに移動します  
+SSH クライアントにて、プログラムファイルのディレクトリに移動します
 
 ```sh
 cd src/Omron2jceBu01
@@ -75,7 +74,7 @@ cd src/Omron2jceBu01
 node test.js
 ```
 
-以下のように表示されれば成功です  
+以下のように表示されれば成功です
 
 ```
 Test Start!
@@ -87,7 +86,7 @@ Test Start!
 
 ## データ内容の説明
 
-表示されるデータは、オムロン環境センサがセンシングした環境データです。データの中で必要な項目を説明します  
+表示されるデータは、オムロン環境センサがセンシングした環境データです。データの中で必要な項目を説明します
 
 ```json
 {
@@ -105,25 +104,25 @@ Test Start!
 }
 ```
 
-* `temperature`: 温度(degC)
-* `relativeHumidity`: 相対湿度(%RH)
-* `ambientLight`: 照度(Lx)
-* `barometricPressure`: 大気圧(hPa)
-* `soundNoise`: 騒音(dB)
-* `eTVOC`: 総揮発性有機化合物濃度(ppb)
-* `eCO2`: 二酸化炭素濃度(ppm)
+- `temperature`: 温度(degC)
+- `relativeHumidity`: 相対湿度(%RH)
+- `ambientLight`: 照度(Lx)
+- `barometricPressure`: 大気圧(hPa)
+- `soundNoise`: 騒音(dB)
+- `eTVOC`: 総揮発性有機化合物濃度(ppb)
+- `eCO2`: 二酸化炭素濃度(ppm)
 
-## Ambientをセットアップする
+## Ambient をセットアップする
 
-Webブラウザで[Ambient](https://ambidata.io)にアクセスし、新規アカウントを作成します  
+Web ブラウザで IoT データの可視化サービス [Ambient](https://ambidata.io) にアクセスし、新規アカウントを作成します
 
-Ambientにログインし、新しいチャネルを作成します  
+Ambient にログインし、新しいチャネルを作成します
 
-作成したチャネルの `チャネルID`、`ライトキー` をメモ帳などに控えておきます  
+作成したチャネルの `チャネルID`、`ライトキー` をメモ帳などに控えておきます
 
 ## メインプログラムを実行する
 
-テキストエディタで `config.js` を開きます  
+テキストエディタで `config.js` を開きます
 
 ```js
 module.exports = {
@@ -135,12 +134,12 @@ module.exports = {
 };
 ```
 
-ファイルの内容を下記に変更します  
+ファイルの内容を下記に変更します
 
-`[YOUR AMBIENT CHANNEL ID]`を先程控えた`チャネルID`に変更  
-`[YOUR AMBIENT WRITE ID]`を先程控えた`ライトキー`に変更  
+`[YOUR AMBIENT CHANNEL ID]` を先程控えた `チャネルID` に変更  
+`[YOUR AMBIENT WRITE ID]` を先程控えた `ライトキー` に変更
 
-`config.js` をRPiにアップロードして上書きします  
+`config.js` を RPi にアップロードして上書きします
 
 以下のコマンドを実行します
 
@@ -148,7 +147,7 @@ module.exports = {
 node main.js
 ```
 
-以下のように表示されれば成功です  
+以下のように表示されれば成功です
 
 ```
 Scan Start!
@@ -161,7 +160,7 @@ Ambient: 200
 ...
 ```
 
-[Ambient](https://ambidata.io)にログインし作成したチャネルにアクセスします  
+[Ambient](https://ambidata.io)にログインし作成したチャネルにアクセスします
 
 データがグラフ表示されていれば成功です。
 
@@ -170,13 +169,13 @@ Ambient: 200
 Ambient に送信されグラフに表示される値は `main.js` プログラムの中では次の用に定義されており、温度、相対湿度、大気圧、照度、騒音、総揮発性有機化合物濃度、二酸化炭素濃度の順番になっています:
 
 ```js
-    const ambData = {
-      d1: envData.temperature,
-      d2: envData.relativeHumidity,
-      d3: envData.barometricPressure,
-      d4: envData.ambientLight,
-      d5: envData.soundNoise,
-      d6: envData.eTVOC,
-      d7: envData.eCO2,
-    };
+const ambData = {
+  d1: envData.temperature,
+  d2: envData.relativeHumidity,
+  d3: envData.barometricPressure,
+  d4: envData.ambientLight,
+  d5: envData.soundNoise,
+  d6: envData.eTVOC,
+  d7: envData.eCO2
+};
 ```
