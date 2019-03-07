@@ -1,0 +1,19 @@
+[Unit]
+Description=Omron2JCIEBU01
+After=syslog.target network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/pi/src/Omron2jceBu01
+ExecStart=/home/pi/.nodebrew/current/bin/node /home/pi/src/Omron2jceBu01/main.js
+TimeoutStopSec=5
+KillMode=process
+Restart=always
+User=pi
+Group=pi
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy = multi-user.target
+
