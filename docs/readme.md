@@ -7,6 +7,7 @@ Raspberry Pi Zero を利用した IoT ワークショップなどの資料置き
 * [プログラムをサービス化 (自動起動) する](Daemonize.md)
 * [Raspberry Pi のパスワードを変更する](ChangePassword.md)
 * [環境センサーをカスタマイズする](Configure2JCIEBU01.md)
+* [Raspberry Pi の Wifi 設定](wifisettings.md)
 
 ##  ワークショップ運営者向け
 
