@@ -3,11 +3,11 @@ Raspberry Pi Zero を利用した IoT ワークショップなどの資料置き
 
 ## ワークショップ参加者向け
 
-* [OMRON センサーを使ってみる](workshop.md)
-* [プログラムをサービス化する手順](daemonize.md)
+* [環境センサー (OMRON 2JCIE-BU) で取得したデータをクラウド (Ambient) に記録する](workshop.md)
+* [プログラムをサービス化 (自動起動) する手順](daemonize.md)
 
 ##  ワークショップ運営者向け
 
-* [事前セットアップ手順](setup.md)
-* [Wifi 事前設定について](wifi.md)
+* [Raspberry Pi の事前セットアップ手順](setup.md)
+* [Raspberry Pi の Wifi 設定手順](wifi.md)
 
