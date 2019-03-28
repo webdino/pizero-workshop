@@ -161,9 +161,9 @@ Ambient: 200
 ...
 ```
 
-[Ambient](https://ambidata.io)にログインし作成したチャネルにアクセスします
+[Ambient](https://ambidata.io)にログインし作成したチャネルにアクセスします。
 
-データがグラフ表示されていれば成功です。
+データがグラフ表示されていれば成功です。([WebDINO Japan での計測結果サンプル](https://ambidata.io/ch/channel.html?id=9662))
 
 ![](./images/00003.jpg)
 
