@@ -98,7 +98,7 @@
   # sudo ifdown wlan0
   # sudo ifup wlan0
   # sudo reboot
-  # 接続状況を確認 (最近は ifconfig より pi addr 推奨)
+  # 接続状況を確認 (最近は ifconfig より ip addr 推奨)
   ip addr
   ping webdino.org
   # テストが終わったら暗号化されていないパスフレーズを含むコメント行を削除
