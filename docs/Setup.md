@@ -144,13 +144,13 @@ OMRON の環境センサー [2JCIE-BU](https://www.fa.omron.co.jp/products/famil
   cd Omron2jceBu01
   npm install
   # ADDRESS 変数に自分の使うセンサーのアドレスを : なしで書き込み
-  nano test.js
+  nano config.js
   node test.js
   ```
 * センサーのアドレスについて
   * OMRON 2JCIE-BU のアドレスは購入時にセンサーに同封されているシールに記載されています
   * シールがなくなるなどして不明な場合は電源を入れ `sudo hcitool lescan | grep Rbt` コマンドで `FB:29:A9:90:F2:4B Rbt` などと表示されるアドレスを確認
-    * この場合 nano test.js では ADDRESS 変数に上記アドレスのコロン無し `FB29A990F24B` を設定
+    * この場合 [config.js](https://github.com/webdino/pizero-workshop/blob/master/config.js) の ADDRESS 変数に上記アドレスのコロン無し `FB29A990F24B` を設定する (`"ADDRESS": "FB29A990F24B",` のような行にする)
 
 出力例:
 ```
