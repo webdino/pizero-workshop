@@ -2,16 +2,19 @@
 
 本ワークショップに必要な機材と購入先をまとめています。
 
-標準的な一式を揃えると合計 17000 円くらいです:
+標準的な一式は安く購入できれば合計 18000 円くらい (送料別) です:
 
 | 機材                           | 価格     |
 | ------------------------------ | -------- |
+| OMRON 環境センサー 2JCIE-BU01  | 13500 円 |
 | Raspberry Pi Zero WH           | 1814 円  |
 | オフィシャル Pi Zero ケース    | 648 円   |
+| microSD カード 16GB            | 400〜 円 |
+| microSD カードリーダー         | 100〜 円 |
 | USB 電源 AC アダプタ           | 500〜 円 |
 | micro USB ケーブル             | 100〜 円 |
 | micro USB - USB-A 変換アダプタ | 100〜 円 |
-| OMRON 環境センサー 2JCIE-BU01  | 13500 円 |
+
 
 ### Raspberry Pi Zero
 まずは計測データを取得・WiFi 経由でインターネットに送信するボードが必要。
@@ -33,6 +36,17 @@
   - [製品情報](https://www.raspberrypi.org/products/raspberry-pi-zero-case/)
     - [Switch Science](https://www.switch-science.com/catalog/3196/)
     - [KSY (RASZEROCASE でショップ内検索)](https://raspberry-pi.ksyic.com/)
+- micro SD カード
+  - 用量は保存するデータ量に応じたものですが、価格は大差無いので 16GB 以上である程度高速なものを
+  - 購入先:
+    - [SanDisk microSDHC 16GB](http://p.akibaoo.co.jp/c/item/0619659161354/)
+    - などなど
+- micro SD カードリーダー - 100〜1300 円程度
+  - 読み書きできれば何でも良いし PC に付属していれば不要
+  - 100 均のものでも問題ないが SD イメージを大量に作る先生は高速な読み書きが可能なものを推奨
+  - 購入先:
+    - microSD カードリーダーは 100 均のものでも大丈夫です
+    - [キングストン MobileLite G4 カードリーダー (十分高速だが比較的安価)](https://www.amazon.co.jp/gp/product/B00KX4TORI/) - 1300 円程度
 - USB 電源 AC アダプタ + micro USB ケーブル - 500 円程度 + 100 円程度
   - Raspberry Pi Zero への給電用 AC アダプターと設置箇所に合わた配線に必要な長さのケーブルです
   - スマートフォン向けなどの一般的な電源で流用可能。持っている場合は追加購入不要
@@ -40,7 +54,7 @@
   - OMRON センサーへの給電に使うことも出来るが直接刺すと AC アダプターの熱でセンサーの値がずれるので注意
   - 購入先:
     - 何でも良いが執筆時に送料無料で安かった例: [エレコム USB 充電器 (Amazon)](https://www.amazon.co.jp/dp/B01M073QDM/)
-    - microUSB 給電ケーブルはなければ 100 均のもので十分です (給電だけに使う場合は通信非対応でもよい)
+    - microUSB 給電ケーブルは 100 均のものでも大丈夫です (給電だけに使う場合は通信非対応でもよい)
 - microUSB - USB 変換アダプタまたは USB 電源 - 100〜数百円
   - OMRON 環境センサーに Raspberry Pi Zero から給電する場合に micro USB から給電できるアダプターかケーブルを用意する
   - Raspberry Pi Zero とは USB ではなく BLE で無線通信するため USB 電源とケーブルを OMRON センサー用に別途用意する場合は不要
