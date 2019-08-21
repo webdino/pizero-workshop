@@ -1,18 +1,23 @@
 ## 機材手配について
 
-本ワークショップに必要な機材と購入先をまとめます。
+本ワークショップに必要な機材と購入先をまとめています。
+
+標準的な一式の場合
+- Raspberry Pi Zero WH - 1814 円
+- オフィシャル Pi Zero ケース - 648 円
+- microUSB 
 
 ### Raspberry Pi Zero
 まずは計測データを取得・WiFi 経由でインターネットに送信するボードが必要。
 
-- Raspberry Pi Zero W or Raspberry Pi Zero WH
+- Raspberry Pi Zero W or Raspberry Pi Zero WH - 1300 円程度 or 1800 円程度
   - WiFi 対応モデルは W または WH であることに注意。
   - OMRON 環境センサーなどを利用する場合は GPIO ピンヘッダのないモデル (W) で良い
   - その他のセンサーを利用する場合はピンヘッダありのモデル (WH) を用意すること
-  - 購入先 (WH, Wifi対応、ピンヘッダ付き): 1800円ちょっと
+  - 購入先 (WH, Wifi対応、ピンヘッダ付き):
     - [Switch Science](https://www.switch-science.com/catalog/3646/)
     - [KSY (RASPIZWHSC0065 でショップ内検索)](https://raspberry-pi.ksyic.com/)
-  - 購入先 (W, Wifi対応、ピンヘッダ無し): - 1300円程度
+  - 購入先 (W, Wifi対応、ピンヘッダ無し):
     - 通常一人 1 つしか購入できないことに注意
     - [Switch Sciense](https://www.switch-science.com/catalog/3200/)
     - [KSY (RASPI0W11 でショップ内検索)](https://raspberry-pi.ksyic.com/)
@@ -22,9 +27,17 @@
   - [製品情報](https://www.raspberrypi.org/products/raspberry-pi-zero-case/)
     - [Switch Science](https://www.switch-science.com/catalog/3196/)
     - [KSY (RASZEROCASE でショップ内検索)](https://raspberry-pi.ksyic.com/)
+- USB 電源 AC アダプタ + micro USB ケーブル - 500 円程度 + 100 円程度
+  - Raspberry Pi Zero への給電用 AC アダプターと設置箇所に合わた配線に必要な長さのケーブルです
+  - スマートフォン向けなどの一般的な電源で流用可能。持っている場合は追加購入不要
+  - PC などでも 24 時間電源を入れておけるものであれば電源として利用可能
+  - OMRON センサーへの給電に使うことも出来るが直接刺すと AC アダプターの熱でセンサーの値がずれるので注意
+  - 購入先:
+    - 何でも良いが執筆時に送料無料で安かった例: [エレコム USB 充電器 (Amazon)](https://www.amazon.co.jp/dp/B01M073QDM/)
+    - microUSB 給電ケーブルはなければ 100 均のもので十分です (給電だけに使う場合は通信非対応でもよい)
 - microUSB - USB 変換アダプタまたは USB 電源 - 100〜数百円
-  - OMRON 環境センサーに Raspberry Pi Zero から直接給電する場合に必要
-  - Raspberry Pi Zero とは USB ではなく BLE で無線通信するため USB 電源が別途あれば不要
+  - OMRON 環境センサーに Raspberry Pi Zero から給電する場合に micro USB から給電できるアダプターかケーブルを用意する
+  - Raspberry Pi Zero とは USB ではなく BLE で無線通信するため USB 電源とケーブルを OMRON センサー用に別途用意する場合は不要
   - 購入先:
     - [超小型変換アダプタ (Amazon)](https://www.amazon.co.jp/gp/product/B01GFOOXO8/)
 
