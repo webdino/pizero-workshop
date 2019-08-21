@@ -39,8 +39,12 @@
 - micro SD カード
   - 用量は保存するデータ量に応じたものですが、価格は大差無いので 16GB 以上である程度高速なものを
   - 購入先:
-    - [SanDisk microSDHC 16GB](http://p.akibaoo.co.jp/c/item/0619659161354/)
-    - などなど
+    - SanDisk Ultra 16GB 変換アダプタ無し (SDSQUAR-016G-GN6MN)
+      - [あきばお〜](http://www.akibaoo.co.jp/c/item/0619659161354/), [あきばお〜 カード決済用](http://p.akibaoo.co.jp/c/item/0619659161354/), [風見鶏](http://www.flashmemory.jp/shopdetail/000000016169/),  [kakaku.com](https://kakaku.com/item/K0001162867/)
+    - SanDisk Ultra 16GB 変換アダプタ付き (SDSQUAR-016G-GN6MA)
+      - [あきばお〜](http://www.akibaoo.co.jp/c/item/0619659161347/), [あきばお〜 カード決済用](http://p.akibaoo.co.jp/c/item/0619659161347) 
+    - SanDisk Extreme 32GB (他用途でも使い高速なものが欲しい場合)
+      - [あきばお〜](http://www.akibaoo.co.jp/c/item/0619659155827/)
 - micro SD カードリーダー - 100〜1300 円程度
   - 読み書きできれば何でも良いし PC に付属していれば不要
   - 100 均のものでも問題ないが SD イメージを大量に作る先生は USB 3.0 などで十分高速なものを推奨
