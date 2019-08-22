@@ -23,50 +23,41 @@
   - WiFi 対応モデルは W または WH であることに注意。
   - OMRON 環境センサーなどを利用する場合は GPIO ピンヘッダのないモデル (W) で良い
   - その他のセンサーを利用する場合はピンヘッダありのモデル (WH) を用意すること
-  - 購入先 (WH, Wifi対応、ピンヘッダ付き):
-    - [Switch Science](https://www.switch-science.com/catalog/3646/)
-    - [KSY (RASPIZWHSC0065 でショップ内検索)](https://raspberry-pi.ksyic.com/)
-  - 購入先 (W, Wifi対応、ピンヘッダ無し):
-    - 通常一人 1 つしか購入できないことに注意
-    - [Switch Sciense](https://www.switch-science.com/catalog/3200/)
-    - [KSY (RASPI0W11 でショップ内検索)](https://raspberry-pi.ksyic.com/)
-- オフィシャル Pi Zero ケース - 税込 648 円
+  - 購入先 (WH, Wifi対応、ピンヘッダ付き): [Switch Science](https://www.switch-science.com/catalog/3646/), [KSY (RASPIZWHSC0065)](https://raspberry-pi.ksyic.com/main/index/pdp.id/406/pdp.open/406)
+  - 購入先 (W, Wifi対応、ピンヘッダ無し): [Switch Sciense](https://www.switch-science.com/catalog/3200/), [KSY (RASPI0W11)](https://raspberry-pi.ksyic.com/main/index/pdp.id/219) - 通常一度に 1 つしか購入できないことに注意
+- [オフィシャル Pi Zero ケース](https://www.raspberrypi.org/products/raspberry-pi-zero-case/) - 税込 648 円
   - ケース本体、フタ 3 種類、カメラケーブル、ゴム足シールのセット。ケース無しの露出で長期間利用はあり得ないので必須
   - ピンヘッダ付モデルでは GPIO 用カバーしか使えないことには注意 (カメラを使って何かしたいときはピンヘッダ無しモデルをケースに入れることを推奨)
-  - [製品情報](https://www.raspberrypi.org/products/raspberry-pi-zero-case/)
-    - [Switch Science](https://www.switch-science.com/catalog/3196/)
-    - [KSY (RASZEROCASE でショップ内検索)](https://raspberry-pi.ksyic.com/)
+  - 購入先: [Switch Science](https://www.switch-science.com/catalog/3196/), [KSY (RASZEROCASE)](https://raspberry-pi.ksyic.com/main/index/pdp.id/225/pdp.open/225)
 - micro SD カード
   - 用量は保存するデータ量に応じたものですが、価格は大差無いので 16GB 以上である程度高速なものを
-  - 購入先:
-    - SanDisk Ultra 16GB 変換アダプタ無し (SDSQUAR-016G-GN6MN)
-      - [あきばお〜](http://www.akibaoo.co.jp/c/item/0619659161354/), [あきばお〜 カード決済用](http://p.akibaoo.co.jp/c/item/0619659161354/), [風見鶏](http://www.flashmemory.jp/shopdetail/000000016169/),  [kakaku.com](https://kakaku.com/item/K0001162867/)
-    - SanDisk Ultra 16GB 変換アダプタ付き (SDSQUAR-016G-GN6MA)
-      - [あきばお〜](http://www.akibaoo.co.jp/c/item/0619659161347/), [あきばお〜 カード決済用](http://p.akibaoo.co.jp/c/item/0619659161347) 
-    - SanDisk Extreme 32GB (他用途でも使い高速なものが欲しい場合)
-      - [あきばお〜](http://www.akibaoo.co.jp/c/item/0619659155827/)
+  - SanDisk Ultra 16GB 変換アダプタ無し (SDSQUAR-016G-GN6MN)
+    - 購入先: [あきばお〜](http://www.akibaoo.co.jp/c/item/0619659161354/), [あきばお〜 カード決済用](http://p.akibaoo.co.jp/c/item/0619659161354/), [風見鶏](http://www.flashmemory.jp/shopdetail/000000016169/),  [kakaku.com](https://kakaku.com/item/K0001162867/) etc.
+  - SanDisk Ultra 16GB 変換アダプタ付き (SDSQUAR-016G-GN6MA)
+    - 購入先:  [あきばお〜](http://www.akibaoo.co.jp/c/item/0619659161347/), [あきばお〜 カード決済用](http://p.akibaoo.co.jp/c/item/0619659161347) etc.
+  - SanDisk Extreme 32GB (他用途でも使い高速なものが欲しい場合)
+    - 購入先: [あきばお〜](http://www.akibaoo.co.jp/c/item/0619659155827/) etc.
 - micro SD カードリーダー - 100〜1300 円程度
   - 読み書きできれば何でも良いし PC に付属していれば不要
-  - [100 均の USB2.0 リーダーでも問題ない](https://tech.nikkeibp.co.jp/atcl/nxt/column/18/00424/101000004/) が SD イメージを大量に作る場合には USB 3.0 などで十分高速なものを推奨
+  - micro USB 端子もスマホ対応リーダーなどを使えば PC ナシでのワークショップも可能 (テキストエディタのインストールは必要)
   - 購入先:
-    - microSD カードリーダーは 100 均のものでも大丈夫です
-    - [エレコム カードリーダー](https://www.amazon.co.jp/dp/B01NBHK133/) - メーカー製のものでも 500 円前後である例。この製品はスマホでの読み書きも可能 (やろうとすれば PC ナシでもワークショップ実施可能)
-    - [キングストン MobileLite G4 カードリーダー](https://www.amazon.co.jp/gp/product/B00KX4TORI/) - 1300 円程度、高速だが比較的安価なものとしてオススメ
+    - [100 均の USB2.0 カードリーダーでも問題ない](https://tech.nikkeibp.co.jp/atcl/nxt/column/18/00424/101000004/)
+    - [エレコム カードリーダー (Amazon)](https://www.amazon.co.jp/dp/B01NBHK133/) - メーカー製のものでも 500 円前後である例
+    - [キングストン MobileLite G4 カードリーダー (Amazon)](https://www.amazon.co.jp/gp/product/B00KX4TORI/) - 1300 円程度、SD イメージ作成などで高速なものが欲しい場合はこちらが比較的安価でオススメ
 - USB 電源 AC アダプタ + micro USB ケーブル - 500 円程度 + 100 円程度
   - Raspberry Pi Zero への給電用 AC アダプターと設置箇所に合わた配線に必要な長さのケーブルです
   - スマートフォン向けなどの一般的な電源で流用可能。持っている場合は追加購入不要
   - PC などでも 24 時間電源を入れておけるものであれば電源として利用可能
   - OMRON センサーへの給電に使うことも出来るが直接刺すと AC アダプターの熱でセンサーの値がずれるので注意
   - 購入先:
-    - 何でも良いが執筆時に送料無料で安かった例: [エレコム USB 充電器 (Amazon)](https://www.amazon.co.jp/dp/B01M073QDM/)
     - microUSB 給電ケーブルは 100 均のものでも大丈夫です (給電だけに使う場合は通信非対応でもよい)
+    -[エレコム USB 充電器 (Amazon)](https://www.amazon.co.jp/dp/B01M073QDM/) -  何でも良いが執筆時に送料無料で安かった
 - microUSB - USB 変換アダプタまたは USB 電源 - 100〜数百円
   - OMRON 環境センサーに Raspberry Pi Zero から給電する場合に micro USB から給電できるアダプターかケーブルを用意する
   - Raspberry Pi Zero とは USB ではなく BLE で無線通信するため USB 電源とケーブルを OMRON センサー用に別途用意する場合は不要
-  - 購入先:
-    - [超小型変換アダプタ (Amazon)](https://www.amazon.co.jp/gp/product/B01GFOOXO8/)
+  - 購入先: [超小型変換アダプタ (Amazon)](https://www.amazon.co.jp/gp/product/B01GFOOXO8/) など
 
-注意: "Pi Zero WH Official Simple Kit" というボード本体・ケースの他に USB 変換ケーブルと HDMI 変換アダプターが同梱されているセットが販売されているが、USB 変換ケーブルの出来が非常に悪く、特に OMRON 環境センサーとは相性が悪く刺したらほぼ確実にピンが曲がって壊れるため非推奨です。その状態で電源を入れると最悪、Raspberry Pi Zero 本体やセンサーの故障に繋がるためご注意ください。
+注意: "Pi Zero WH Official Simple Kit" というボード本体・ケースの他に USB 変換ケーブルと HDMI 変換アダプターが同梱されているセットが 3000 円程度で販売されているが、USB 変換ケーブルの出来が非常に悪く、特に OMRON 環境センサーとは相性が悪く刺したらほぼ確実にピンが曲がって壊れるため非推奨です。その状態で電源を入れると最悪、Raspberry Pi Zero 本体やセンサーの故障に繋がるためご注意ください。
 
 ### OMRON 環境センサー利用時
 企業でも利用できる環境センサーとしては OMRON のものが比較的安価でしっかりしているのでオススメ (本ワークショップでメインに採用)
