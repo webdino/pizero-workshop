@@ -55,7 +55,7 @@
 - microUSB - USB 変換アダプタまたは USB 電源 - 100〜数百円
   - OMRON 環境センサーに Raspberry Pi Zero から給電する場合に micro USB から給電できるアダプターかケーブルを用意する
   - Raspberry Pi Zero とは USB ではなく BLE で無線通信するため USB 電源とケーブルを OMRON センサー用に別途用意する場合は不要
-  - 購入先: [超小型変換アダプタ (Amazon)](https://www.amazon.co.jp/gp/product/B01GFOOXO8/) など
+  - 購入先: [ノーブランド OTG ケーブル (Amazon)](https://www.amazon.co.jp/dp/B0074D3QCK/), [ノーブランド OTG ケーブル x10 (Amazon)](https://www.amazon.co.jp/dp/B07WYYSRN3/), [超小型変換アダプタ x5 (Amazon)](https://www.amazon.co.jp/gp/product/B01GFOOXO8/) など
 
 注意: "Pi Zero WH Official Simple Kit" というボード本体・ケースの他に USB 変換ケーブルと mini HDMI 変換アダプターが同梱されているセットが 3000 円程度で販売されているが、USB 変換ケーブルの出来が非常に悪く、特に OMRON 環境センサーとは相性が悪く刺したらほぼ確実にピンが曲がって壊れるため非推奨です。その状態で電源を入れると最悪、Raspberry Pi Zero 本体やセンサーの故障に繋がるためご注意ください。なお、本ワークショップでは Raspberry Pi Zero をディスプレイに繋いで操作する必要は無いため、mini HDMI 変換アダプタは不要です (欲しい場合は 100 均や Amazon で 100-200 円程度で購入可能)。
 
