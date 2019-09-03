@@ -6,8 +6,6 @@ script_dir=$(cd $(dirname $BASH_SOURCE); pwd)
 
 . $script_dir/env.sh
 
-#rm -rf /boot/setting/log/*
-#rm -rf /home/pi/bird/log/*
 rm -rf $boot_dir/log/*
 rm -rf $dir/log/*
 
@@ -15,7 +13,7 @@ rm -rf $dir/log/*
 : > $boot_dir/wifi.txt
 echo -n raspberrypi | tee $boot_dir/hostname.txt > /dev/null
 
-#cat <<EOF | tee /home/pi/bird/setting/rclone.txt | tee /boot/setting/rclone.txt > /dev/null
+
 cat <<EOF | tee $dir/setting/rclone.txt | tee $boot_dir/rclone.txt > /dev/null
 [gdrive]
 type = drive

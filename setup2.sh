@@ -53,7 +53,7 @@ install_etc () {
 
 install_etc2 () {
 cat <<EOF > /etc/logrotate.d/pizero-workshop
-/home/pi/bird/log/Omron2jcieBu01.csv {
+$dir/log/Omron2jcieBu01.csv {
 	weekly
 	dateext
 	rotate 20
@@ -69,14 +69,14 @@ cat <<EOF > /etc/cron.d/pizero-workshop
 SHELL=/bin/sh
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
-@reboot	       root /home/pi/bird/setup.sh -wifi_txt
+@reboot	       root $dir/setup.sh -wifi_txt
 @reboot	       root /sbin/iw dev wlan0 set power_save off
-@reboot	       root /home/pi/bird/pizero-workshop-starter.sh
-#*/1 * * * *    pi bash -c "/home/pi/bird/traffic.sh >> /home/pi/bird/log/traffic.csv"
+@reboot	       root $dir/pizero-workshop-starter.sh
+#*/1 * * * *    pi bash -c "$dir/traffic.sh >> $dir/log/traffic.csv"
 
-00 0 * * *  root /home/pi/bird/rclone.sh
-00 0 * * *  root rsync -a /home/pi/bird/log/ /boot/setting/log/
-@reboot     root rsync -a /home/pi/bird/log/ /boot/setting/log/
+00 0 * * *  root $dir/rclone.sh
+00 0 * * *  root rsync -a $dir/log/ /boot/setting/log/
+@reboot     root rsync -a $dir/log/ /boot/setting/log/
 
 EOF
 
@@ -87,8 +87,8 @@ After=syslog.target network.target
 
 [Service]
 Type=simple
-WorkingDirectory=/home/pi/bird
-ExecStart=/home/pi/bird/pizero-workshop.sh
+WorkingDirectory=$dir
+ExecStart=$dir/pizero-workshop.sh
 TimeoutStopSec=5
 KillMode=process
 Restart=always
