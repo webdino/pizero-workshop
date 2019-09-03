@@ -23,12 +23,12 @@
   - WiFi 対応モデルは W または WH であることに注意。
   - OMRON 環境センサーなどを利用する場合は GPIO ピンヘッダのないモデル (W) で良い
   - その他のセンサーを利用する場合はピンヘッダありのモデル (WH) を用意すること
-  - 購入先 (WH, Wifi対応、ピンヘッダ付き): [Switch Science](https://www.switch-science.com/catalog/3646/), [KSY (RASPIZWHSC0065)](https://raspberry-pi.ksyic.com/main/index/pdp.id/406/pdp.open/406)
+  - 購入先 (WH, Wifi対応、ピンヘッダ付き): [Switch Science](https://www.switch-science.com/catalog/3646/), [KSY (RASPIZWHSC0065)](https://raspberry-pi.ksyic.com/main/index/pdp.id/406/pdp.open/406), [marutsu](https://www.marutsu.co.jp/pc/i/1320453/)
   - 購入先 (W, Wifi対応、ピンヘッダ無し): [Switch Sciense](https://www.switch-science.com/catalog/3200/), [KSY (RASPI0W11)](https://raspberry-pi.ksyic.com/main/index/pdp.id/219) - 通常一度に 1 つしか購入できないことに注意
 - [オフィシャル Pi Zero ケース](https://www.raspberrypi.org/products/raspberry-pi-zero-case/) - 税込 648 円
   - ケース本体、フタ 3 種類、カメラケーブル、ゴム足シールのセット。ケース無しの露出で長期間利用はあり得ないので必須
   - ピンヘッダ付モデルでは GPIO 用カバーしか使えないことには注意 (カメラを使って何かしたいときはピンヘッダ無しモデルをケースに入れることを推奨)
-  - 購入先: [Switch Science](https://www.switch-science.com/catalog/3196/), [KSY (RASZEROCASE)](https://raspberry-pi.ksyic.com/main/index/pdp.id/225/pdp.open/225)
+  - 購入先: [Switch Science](https://www.switch-science.com/catalog/3196/), [KSY (RASZEROCASE)](https://raspberry-pi.ksyic.com/main/index/pdp.id/225/pdp.open/225), [marutsu](https://www.marutsu.co.jp/pc/i/1320454/)
 - micro SD カード
   - 用量は保存するデータ量に応じたものですが、価格は大差無いので 16GB 以上である程度高速なものを
   - SanDisk Ultra 16GB 変換アダプタ無し (SDSQUAR-016G-GN6MN)
