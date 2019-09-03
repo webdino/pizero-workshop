@@ -1,0 +1,11 @@
+[gdrive]
+type = drive
+client_id = 
+client_secret = 
+token = {
+"access_token": "",
+"token_type": "Bearer",
+"refresh_token": "",
+"expiry": ""
+}
+

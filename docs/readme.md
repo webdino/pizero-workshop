@@ -3,6 +3,7 @@ Raspberry Pi Zero を利用した IoT ワークショップなどの資料置き
 
 ## ワークショップ参加者向け
 
+- [SDカードの編集だけでできるIOT環境センサーデータ収集](Workshop.md)
 - [環境センサー (OMRON 2JCIE-BU) で取得したデータをクラウド (Ambient) に記録する](GettingStarted.md)
 - [プログラムをサービス化 (自動起動) する](Daemonize.md)
 - [Raspberry Pi のパスワードを変更する](ChangePassword.md)

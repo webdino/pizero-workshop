@@ -7,6 +7,7 @@
     "lib": "lib"
   },
   "scripts": {
+    "start": "node main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -14,6 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "ambient-lib": "^0.1.5",
+    "date-utils": "^1.2.21",
     "noble": "^1.9.1"
   }
 }
