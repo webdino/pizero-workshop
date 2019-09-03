@@ -49,7 +49,13 @@ EOF
 chown pi:pi $dir/config.js
 
 #{ pushd /home/pi/; [ -f .emacs ] && rm .emacs; [ -f .emacs~ ] && rm .emacs~; popd; } > /dev/null
+
+set -o history
 history -c
+su - pi <<EOF
+set -o history
+history -c	
+EOF
 cat /dev/null > /home/pi/.bash_history
 
 echo 'Successfully done.'

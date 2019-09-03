@@ -52,6 +52,8 @@ install_etc () {
 }
 
 install_etc2 () {
+    mkdir $dir/log
+    
 cat <<EOF > /etc/logrotate.d/pizero-workshop
 $dir/log/Omron2jcieBu01.csv {
 	weekly
