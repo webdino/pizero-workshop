@@ -2,9 +2,9 @@
 
 ### 必要なもの
 
-- Raspberry pi zero 本体とmicroSDカード(16GBぐらいの新品)
+- Raspberry Pi Zero 本体とmicroSDカード(16GBぐらいの新品)
 - window / mac / chromebookなどのパソコンとSDカードリーダー（パソコンに内蔵ならなくてもOK）
-- 環境センサー（いまのところは[Omron2JCIE-BU01]()のみです）
+- 環境センサー（いまのところは[Omron2JCIE-BU01](https://www.omron.co.jp/ecb/product-info/sensor/iot-sensor/environmental-sensor)のみです）
 
 ### 前準備その１
 
@@ -17,7 +17,7 @@
 
 
 ### 前準備その２
-定期的に環境センサから取得したデータは、都度クラウドサービスにアップロードします。
+定期的に環境センサから取得したデータは、その都度クラウドサービスにアップロードします。
 
 ここからはその準備をします。
 
@@ -82,7 +82,7 @@ module.exports = {
   AMBIENT_MULTIPLE: 1
 };
 ```
-ファイル３行目の、`ADDRESS:` の右の部分に、環境センサ（Omron2JCIE-BU01）のアドレスを入力します。
+ファイル３行目の、`ADDRESS:` の右の部分に、環境センサ（Omron2JCIE-BU01）のアドレス（数字と大文字アルファベット１２桁）を入力します。
 またファイル８行目の、`MACHINIST_API_KEY:` の右の部分には、Machinistのユーザ登録で取得したAPIキーを入力します。
 まずはこの２つを入力します。
 
@@ -106,7 +106,7 @@ module.exports = {
 
 おまたせしました。
 
-それでは、microSDカードをRaspberryPiZero本体に挿入して、電源を入れてみましょう。
+それでは、microSDカードをRaspberry Pi Zero本体に挿入して、電源を入れてみましょう。
 
 …待つこと1,2分…どうですか？
 
@@ -117,8 +117,9 @@ module.exports = {
 - `wifi.txt`のssidとpassphraseは間違っていないか？
 -
 
-#どうでしょう、けっこう簡単にできたでしょう？
+<!--どうでしょう、けっこう簡単にできたでしょう？
 
-#しばらくグラフをみていてなにか気づくことはないでしょうか？
+しばらくグラフをみていてなにか気づくことはないでしょうか？
+-->
 
 ではつづいて[もっと便利につかっていくための設定応用編](Workshop2ndPage.md)にいってみましょう。
