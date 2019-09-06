@@ -46,6 +46,13 @@ module.exports = {
 };
 EOF
 
+cat <<EOF | tee /etc/wpa_supplicant/wpa_supplicant.conf > /dev/null
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+country=JP
+
+EOF
+
 chown pi:pi $dir/config.js
 
 #{ pushd /home/pi/; [ -f .emacs ] && rm .emacs; [ -f .emacs~ ] && rm .emacs~; popd; } > /dev/null
