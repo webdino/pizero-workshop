@@ -37,8 +37,32 @@ multiple
 - 監視機能
   1. アクションにメール通知を登録する https://app.machinist.iij.jp/action-settings
   2. 監視設定を追加する https://app.machinist.iij.jp/monitor/settings
+    - 死活監視 (メトリックが15分途切れたら通知)
+    - 閾値監視 (メトリックの直近 5 分平均などが一定値を超えたら通知)
 - カスタムチャート
   - 高校生向けでは無しでも良いが、大人向けに説明を
+
+
+通知メールの例 (死活監視)
+
+```
+送信者: machinist-noreply@iij.ad.jp
+タイトル: "Machinist監視通知"
+-----
+監視状態に変化がありました
+ (2019/09/06 20:45:11)
+
+エージェント: xxxxxxxx
+メトリック:   2JCIE-BU / 温度
+タグ:         {}
+状態:         未設定 -> 計測中断！
+条件:         死活監視
+
+詳細は以下のページよりご確認ください。
+https://app.machinist.iij.jp/#/metrics/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+
+machinist-noreply@iij.ad.jp は送信専用のメールアドレスです
+```
 
 ### 別のクラウドサービス（Ambient）にアップロードしてみる
 
