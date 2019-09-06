@@ -82,27 +82,45 @@ wifi_txt () {
     setup_wifi_sub () {
 	local priority=0
 	tac $1 | while read _LINE; do
-	    eval $(echo $_LINE | awk -F ',' '{print "wpa_passphrase " $1 " " $2}') | sed "s/\#psk=.*$/priority=${priority}/"
+	    if echo $_LINE | grep -q '^\s*$'; then continue; fi #skip empty line
+	    #eval $(echo $_LINE | awk -F ',' '{print "wpa_passphrase " $1 " " $2}') | sed "s/\#psk=.*$/priority=${priority}/"
+	    eval $(echo $_LINE | awk -F ',' '{print "wpa_passphrase \"" $1 "\" \"" $2 "\""}') | sed "s/\#psk=.*$/priority=${priority}/"
 	    priority=$(( $priority + 1 ))
 	done
     }
 
     check_wifi_txt () {
 	if ! [ -s $1 ]; then echo "$wifi_txt is empty or nothing, and not modified $conf_file."; return 1; fi
-	# format check require here
+	# format check
+	while read _LINE; do
+	    if echo $_LINE | grep -q '^\s*$'; then continue; fi #skip empty line
+	    echo $_LINE | awk -F ',' '{print "wpa_passphrase \"" $1 "\" \"" $2 "\""}'
+	    if eval $(echo $_LINE | awk -F ',' ); then
+		:
+	    else
+		echo "'$1' has invalid form."
+		return 1
+	    fi
+	done < $1
+	echo "'$1' format is ok."
 	return 0
     }
 
     conf_file='/etc/wpa_supplicant/wpa_supplicant.conf'
     if check_wifi_txt $wifi_txt; then
 	result=$(setup_wifi_sub $wifi_txt)
-	header='ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev\nupdate_config=1'
+	header='ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev\nupdate_config=1\ncountry=JP'
 	echo -e "${header}\n\n${result}" | sudo tee $conf_file
+
+	sudo killall wpa_supplicant
+	sudo su -c 'wpa_supplicant -B -i wlan0 -c /etc/wpa_supplicant/wpa_supplicant.conf'
+	
 	sudo rm $wifi_txt; sudo touch $wifi_txt; echo "Successfully done, and $wifi_txt is already empty."
     fi
 }
 
 setup_step1 () {
+    sudo raspi-config nonint do_wifi_country JP
     [ -d "$boot_dir" ] || sudo mkdir "$boot_dir" && sudo touch "$wifi_txt"
     # serial console
     # dhcpcd
