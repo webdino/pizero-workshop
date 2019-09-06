@@ -32,7 +32,7 @@
 - micro SD カード
   - 用量は保存するデータ量に応じたものですが、価格は大差無いので 16GB 以上である程度高速なものを
   - SanDisk Ultra 16GB 変換アダプタ無し (SDSQUAR-016G-GN6MN)
-    - 購入先: [あきばお〜](http://www.akibaoo.co.jp/c/item/0619659161354/), [あきばお〜 カード決済用](http://p.akibaoo.co.jp/c/item/0619659161354/), [風見鶏](http://www.flashmemory.jp/shopdetail/000000016169/),  [kakaku.com](https://kakaku.com/item/K0001162867/) etc.
+    - 購入先: [あきばお〜](http://www.akibaoo.co.jp/c/item/0619659161354/), [あきばお〜 カード決済用](http://p.akibaoo.co.jp/c/item/0619659161354/), [秋葉 Direct](http://www.akibadirect.com/shopdetail/000000016811), [風見鶏](http://www.flashmemory.jp/shopdetail/000000016169/),  [kakaku.com](https://kakaku.com/item/K0001162867/) etc.
   - SanDisk Ultra 16GB 変換アダプタ付き (SDSQUAR-016G-GN6MA)
     - 購入先:  [あきばお〜](http://www.akibaoo.co.jp/c/item/0619659161347/), [あきばお〜 カード決済用](http://p.akibaoo.co.jp/c/item/0619659161347) etc.
   - SanDisk Extreme 32GB (他用途でも使い高速なものが欲しい場合)
