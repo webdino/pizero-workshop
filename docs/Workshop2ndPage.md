@@ -50,7 +50,7 @@ multiple
 タイトル: "Machinist監視通知"
 -----
 監視状態に変化がありました
- (2019/09/06 20:45:11)
+ (YYYY/MM/DD HH:MM:SS)
 
 エージェント: xxxxxxxx
 メトリック:   2JCIE-BU / 温度
@@ -63,6 +63,29 @@ https://app.machinist.iij.jp/#/metrics/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 
 machinist-noreply@iij.ad.jp は送信専用のメールアドレスです
 ```
+
+通知メールの例 (しきい値)
+
+```
+送信者: machinist-noreply@iij.ad.jp
+タイトル: "Machinist監視通知"
+-----
+監視状態に変化がありました
+ (YYYY/MM/DD HH:MM:SS)
+
+エージェント: xxxxxxxx
+メトリック:   2JCIE-BU / 総揮発性有機化合物濃度
+タグ:         {}
+状態:         未設定 -> 揮発してます！
+条件:         1554.0(avg) > 1000.0
+
+
+詳細は以下のページよりご確認ください。
+https://app.machinist.iij.jp/#/metrics/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+
+machinist-noreply@iij.ad.jp は送信専用のメールアドレスです
+```
+
 
 ### 別のクラウドサービス（Ambient）にアップロードしてみる
 
