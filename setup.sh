@@ -94,8 +94,7 @@ wifi_txt () {
 	# format check
 	while read _LINE; do
 	    if echo $_LINE | grep -q '^\s*$'; then continue; fi #skip empty line
-	    echo $_LINE | awk -F ',' '{print "wpa_passphrase \"" $1 "\" \"" $2 "\""}'
-	    if eval $(echo $_LINE | awk -F ',' ); then
+	    if eval $(echo $_LINE | awk -F ',' '{print "wpa_passphrase \"" $1 "\" \"" $2 "\""}'); then
 		:
 	    else
 		echo "'$1' has invalid form."
