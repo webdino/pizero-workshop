@@ -96,10 +96,10 @@ module.exports = {
   //"RECORDS": ["CSV", "AMBIENT"],
   //"RECORDS": ["CSV", "MACHINIST", "AMBIENT"],
   "MACHINIST_API_KEY": "xxxxxxxxxxxxxx",
-  "MACHINIST_MULTIPLE": 1,
-  "AMBIENT_CHANNEL": x,
-  "AMBIENT_WRITE_KEY": "yyyyyyyyyyyyyyyy",
-  "AMBIENT_MULTIPLE": 1
+  "MACHINIST_MULTIPLE": 1
+  //"AMBIENT_CHANNEL": x,
+  //"AMBIENT_WRITE_KEY": "yyyyyyyyyyyyyyyy",
+  //"AMBIENT_MULTIPLE": 1
 };
 ```
 
@@ -153,12 +153,15 @@ Raspberry Pi Zero本体のLEDが点滅状態でないときに、Rapberry Pi Zer
 
 そしてもう一度microSDカードをパソコンに挿入します。
 
-- `wifi.txt`のssidとpassphraseは間違っていないか？
-- `wifi.txt`に余分なスペースなどを入力したりしていないか？
-- `config.js`は正しく入力できているか？
+- `wifi.txt` の ssid とパスフレーズは間違っていないか？
+- `wifi.txt` に余分なスペースなどを入力したりしていないか？
+  - ssid 名とパスフレーズだけを `,` (半角カンマ) 区切りで全て半角で入力してください
+- `config.js` は正しく入力できているか？
+  - 引用符や行末の半角カンマを消してしまっていないか
+  - `ADDRESS` は正しく入力されているか。本当に自分が使っているセンサーのアドレスか
+  - `ADDRESS` は英数字以外に `:` (コロン) を含めていないか (アドレス確認ソフトによっては `:` 区切りで表示されるが省略して入力する)
 - 全角文字を含めていないか？
 - 誤ってファイル名を変更していないか？
-- など
+- などなど...
 
-
-では、つづいて [応用編: もっと便利につかってみよう](Workshop2ndPage.md) にいってみましょう。
+上手くいったら、次は [応用編: もっと便利につかってみよう](Workshop2ndPage.md) にいってみましょう。
