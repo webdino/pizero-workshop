@@ -2,11 +2,17 @@
 theme: jekyll-theme-slate
 repository: webdino/pizero-workshop
 title: 'Raspberry Pi Zero Workshop'
-description: Raspberry Pi Zero を使ったワークショップ用の資料です
+description: Raspberry Pi Zero による IoT ワークショップ
 show_downloads: false
 #google_analytics:
 #include:
 #  - _redirects
+
+# configs for GitHub Pages defult plugins
+# https://help.github.com/en/articles/configuring-jekyll-plugins
+# https://github.com/benbalter/jekyll-readme-index
+readme_index:
+  remove_originals: true
 
 # Use CommonMarkGhPages for Markdown parser (after v172)
 # https://github.com/github/jekyll-commonmark-ghpages
