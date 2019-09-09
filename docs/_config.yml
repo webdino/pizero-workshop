@@ -1,7 +1,7 @@
 # see: https://github.com/pages-themes/slate
 theme: jekyll-theme-slate
 repository: webdino/pizero-workshop
-title: 'Raspberry Pi Zero Workshop'
+title: 'Pi Zero IoT Workshop'
 description: Raspberry Pi Zero による IoT ワークショップ
 show_downloads: false
 #google_analytics:
