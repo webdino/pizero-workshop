@@ -4,8 +4,11 @@
 
 ### 必要なもの
 
-- Raspberry Pi Zero 本体と microSD カード(8GB 以上、16GB くらいが安くて良い)
-- Windows / macOS / Chromebook などのパソコンと SD カードリーダー
+本ワークショップの実施には最低次のものが必要です。詳しくは [詳細と購入先の説明ページ](purchase.md) をご覧ください。
+
+- Raspberry Pi Zero 本体と microSD カード
+- パソコン (Windows / macOS / Chromebook など) と SD カードリーダー
+  - SD カードの読み書きが可能なスマートフォンやタブレットなどでも可能ですが、ここでは詳しく説明していません。
 - 環境センサー [Omron 2JCIE-BU01](https://www.omron.co.jp/ecb/product-info/sensor/iot-sensor/environmental-sensor)
 
 ### 事前準備
