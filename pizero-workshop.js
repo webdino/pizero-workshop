@@ -6,12 +6,12 @@
  */
 
 require('date-utils');
-require('omron2jcieBu01.js');
-require('machinist.js');
-require('csv.js');
-require('pattern.js');
+const Omron2jcieBu01 = require('omron2jcieBu01.js');
+const Machinist = require('machinist.js');
+const Csv = require('csv.js');
+const pattern = require('pattern.js');
 
-const logDirectory = '/home/pi/pizero-workshop/log/'
+const logDirectory = '/home/pi/pizero-workshop/log'
 
 const fs = require('fs');
 function isExistFile(file) {
@@ -26,7 +26,8 @@ const configFile = isExistFile('/boot/setting/config.js') ? '/boot/setting/confi
 console.log('config_file: "' + configFile + '"');
 const config = require(configFile);
 
-config.omron2jcieBu01_Csv_Machinist.each((param)=>{
+config.omron2jcieBu01_Csv_Machinist &&
+config.omron2jcieBu01_Csv_Machinist.forEach((param)=>{
   const omron2jcieBu01 = new Omron2jcieBu01({
     name: param.omron2jcieBu01Name,
     address: param.omron2jcieBu01Address});
@@ -74,7 +75,7 @@ config.omron2jcieBu01_Csv_Machinist.each((param)=>{
       return {agent: param.machinistAgent,
 	      metrics: metrics};}
   });
-  sensorRecords({
+  pattern.sensorRecords({
     loopInterval: param.intervalMillisec,
     sensor: omron2jcieBu01,
     records: [csv, machinist]

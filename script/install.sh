@@ -96,9 +96,11 @@ install_apt_package () {
 
 
 install_files () {
-    touch $boor_dir/ssh
+    touch "$boot_dir/ssh"
+    [ -d "$dir/log" ] || mkdir "$dir/log"
+
+
     
-    [ -d $dir/log ] || mkdir $dir/log
     # logrotate TODO filename.csv #$dir/log/Omron2jcieBu01.csv {
     cat <<EOF > $Logrotate
 $dir/log/name.csv {
@@ -115,7 +117,7 @@ $dir/log/name.csv {
 }
 
 EOF
-    ln -fs /etc/logrotate.d/pizero-workshop $Logrotate
+    ln -fs $Logrotate /etc/logrotate.d/pizero-workshop 
 
     # cron
     cat <<EOF > $Cron
@@ -123,11 +125,11 @@ SHELL=/bin/sh
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
 @reboot	       root bash -c "$dir/script/start.sh > $Error"
-00 0 * * *     root bash -c "($boot_dir/rsync.sh $boot_dir/rclone.sh) 2>> $Error"
+00 0 * * *     root bash -c "($boot_dir/rsync.sh; $boot_dir/rclone.sh) 2>> $Error"
 #*/1 * * * *    pi bash -c "$dir/traffic.sh >> $dir/log/traffic.csv"
 
 EOF
-    ln -fs /etc/cron.d/pizero-workshop $Cron
+    ln -fs $Cron /etc/cron.d/pizero-workshop 
 
     # rclone
     cat <<EOF > $Rclone
