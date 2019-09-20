@@ -43,6 +43,6 @@ if(err.length > 0){
   console.error(err.join("\n"));
   process.exit(1);
 }else{
-  console.error('config.jsのチェックは正常に終了しました。');
+  console.log('config.jsのチェックは正常に終了しました。');
   process.exit(0);
 }

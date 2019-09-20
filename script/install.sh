@@ -102,26 +102,25 @@ install_apt_package () {
 
 install_files () {
     touch "$boot_dir/ssh"
+    touch "$boot_dir/otg"
     [ -d "$dir/log" ] || mkdir "$dir/log"
 
+#     cat <<EOF > $Logrotate
+# $dir/log/name.csv {
+# 	weekly
+# 	dateext
+# 	dateformat %Y%m%d
+# 	postrotate
+# 	  mv $dir/log/name.csv-`date '+%Y%m%d'` $dir/log/name.`date '+%Y%m%d'`.csv
+# 	rotate 100
+# 	missingok
+# 	nocompress
+# 	ifempty
+# 	create 0640 pi pi
+# }
 
-    
-    # logrotate TODO filename.csv #$dir/log/Omron2jcieBu01.csv {
-    cat <<EOF > $Logrotate
-$dir/log/name.csv {
-	weekly
-	dateext
-	dateformat %Y%m%d
-	postrotate
-	  mv $dir/log/name.csv-`date '+%Y%m%d'` $dir/log/name.`date '+%Y%m%d'`.csv
-	rotate 100
-	missingok
-	nocompress
-	ifempty
-	create 0640 pi pi
-}
-
-EOF
+# EOF
+    : > $Logrotate
     ln -fs $Logrotate /etc/logrotate.d/pizero-workshop 
 
     # cron
@@ -129,7 +128,7 @@ EOF
 SHELL=/bin/sh
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
-@reboot	       root bash -c "$dir/script/start.sh > $Error"
+@reboot	       root bash -c "$dir/script/start.sh > $StartStatus"
 00 0 * * *     root bash -c "($boot_dir/rsync.sh; $boot_dir/rclone.sh) 2>> $Error"
 #*/1 * * * *    pi bash -c "$dir/traffic.sh >> $dir/log/traffic.csv"
 
@@ -139,14 +138,14 @@ EOF
     # rclone
     cat <<EOF > $Rclone
 #!/bin/bash
-rclone --config $RcloneConf copy $boot_dir/log [google drive]:pizero-workshop
+rclone --config $RcloneConf copy $boot_dir/log gdrive:pizero-workshop
 EOF
     chmod +x $Rclone
     
     # rsync
     cat <<EOF > $Rsync
 #!/bin/bash
-rsync -a $dir/log/ $boot_dir/log/
+rsync -rlpt $dir/log/ $boot_dir/log/
 EOF
     chmod +x $Rclone
     
@@ -159,9 +158,8 @@ After=syslog.target network.target
 [Service]
 Type=simple
 WorkingDirectory=$dir
-ExecStart=/bin/bash -c "$StartCommand > $Error 2>&1"
+ExecStart=/bin/bash -c "cd $dir; NODE_PATH=lib /home/pi/.nodebrew/current/bin/node pizero-workshop.js 2> $Error"
 TimeoutStopSec=5
-KillMode=process
 Restart=always
 User=root
 Group=root

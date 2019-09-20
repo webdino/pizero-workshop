@@ -2,6 +2,8 @@
 
 set -eu
 
+date 
+
 script_dir=$(cd $(dirname $BASH_SOURCE); pwd)
 . $script_dir/env.sh
 
@@ -12,11 +14,13 @@ if ! [ $(whoami) = root ]; then echo 'Root permission required.'; exit 1; fi
 ConfigFile="$boot_dir/config.js"
 CheckConfig="$dir/script/checkConfig.js"
 ConfigTemp=$(mktemp)
-GenerateWpaPassphraseCommandJs="$dir/script/genarateWpaPassphraseCommand.js"
+GenerateLogrotate="$dir/script/generateLogrotate.js"
+GenerateWpaPassphraseCommandJs="$dir/script/generateWpaPassphraseCommand.js"
 WpaSupplicantConf='/etc/wpa_supplicant/wpa_supplicant.conf'
 
-
-# . beforeStart.sh
+set +e
+. beforeStart.sh
+set -e
 
 # convert Config to ConfigTemp(UTF-8 LF)
 echo 'Convert config.js to (UTF-8 LF) ...'
@@ -36,6 +40,14 @@ $Node -c $ConfigTemp
 echo 'Check config.js (value) ...'
 $Node $CheckConfig $ConfigTemp
 [ $? = 0 ] || exit 1
+
+
+# generate logrotate
+echo 'GenerateLogrotate ...'
+LogrotateContent=$($Node $GenerateLogrotate $ConfigTemp $dir)
+result=$?
+[ $result = 0 ] || exit 1
+echo $LogrotateContent > $Logrotate
 
 
 # generate command(wpa_passphrase)
@@ -93,9 +105,9 @@ result=$?
 echo 'Start sensing loop ... ' 
 systemctl start pizero-workshop
 
-# echo 'Start rsync ... ' 
-# $Rclone &
-# echo 'Start rclone ... ' 
-# $Rsync &
+echo 'Start rsync ... ' 
+$Rclone 
+echo 'Start rclone ... ' 
+$Rsync 
 
 echo 'All start process successfully finished.'; exit 0

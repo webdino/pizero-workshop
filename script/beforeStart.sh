@@ -3,26 +3,31 @@
 RebootFlag=1
 
 Ssh () {
-    if [ -z $SshFile ]; then _ssh='enable'; else _ssh='disable'; fi
+    echo "ssh ..."
+    local _ssh
+    if [ -f $SshFile ]; then _ssh='enable'; else _ssh='disable'; fi
     local Current
-    _current=$(systemctl list-unit-files --type service | grep ssh.service | awk '{print $2}')
-    [ $_ssh = 'enable' ] && [ $Current = 'disabled' ] && systemctl enable ssh && $RebootFlag=0
-    [ $_ssh = 'disable' ] && [ $Current = 'enabled' ] && systemctl disable ssh && $RebootFlag=0
+    Current=$(systemctl list-unit-files --type service | grep ssh.service | awk '{print $2}')
+    if [ $_ssh = 'enable' ] && [ $Current = 'disabled' ]; then systemctl enable ssh; RebootFlag=0; fi
+    if [ $_ssh = 'disable' ] && [ $Current = 'enabled' ]; then systemctl disable ssh; RebootFlag=0; fi
 }
 
 Otg () {
-    if [ -z $OtgFile ]; then _ssh='enable'; else _ssh='disable'; fi
+    echo "otg ..."
     local Current
-    _current=$(grep -q 'dtoverlay=dwc2' '/boot/config.txt')
-    if [ $otg = 'enable' ] && ( ! $Current ); then
+    grep -q 'dtoverlay=dwc2' < '/boot/config.txt'
+    Current=$?
+    if [ -f $OtgFile ] && [ $Current != 0 ]; then
 	echo 'dtoverlay=dwc2' | tee -a '/boot/config.txt'
 	sed -i 's/rootwait /rootwait modules-load=dwc2,g_ether /g' '/boot/cmdline.txt'
-	$RebootFlag=0
+	echo 'otg enabled'
+	RebootFlag=0
     fi
-    if [ $otg = 'diseble' ] && $Current; then
-	grep -v 'dtoverlay=dwc2' > '/boot/config.txt'
+    if ( ! [ -f $OtgFile ] ) && [ $Current = 0 ]; then
+	grep -v 'dtoverlay=dwc2' < '/boot/config.txt'
 	sed -i 's/rootwait modules-load=dwc2,g_ether /rootwait /g' '/boot/cmdline.txt'
-	$RebootFlag=0
+	echo 'otg disabled'
+	RebootFlag=0
     fi
 }
 
@@ -48,19 +53,25 @@ Otg () {
 # }
 
 Hostname () {
-    if ! [ -f $HostnameConf ]; then return 0; fi
+    echo 'hostname ...'
+    echo $(hostname)
+    if ! [ -f $HostnameConf ]; then echo bar; return 0; fi
     local CommentRemoved=$(cat $HostnameConf |sed s/^#.*$//g)
     if [ 1 -ne $(echo $CommentRemoved | wc -w) ]; then
-	echo 'hostname.conf has invalid form.'
+	echo "'$HostnameConf' has invalid form."
 	return 1
     fi
     local NewHostname=$(echo $CommentRemoved | grep '^[a-z0-9]\+\([a-z0-9]\|[a-z0-9\-][a-z0-9]\)*$')
     if [ ! $? ]; then
-	echo 'Invalid hostname format.'
+	echo 'Invalid hostname format(charactor).'
 	return 1
     fi
-    if [ ${#NewHostname} -gt 255 ]; then return 1; fi
+    if [ ${#NewHostname} -gt 255 ]; then
+	echo 'Invalid hostname format(too long).'
+	return 1
+    fi
     if [ $NewHostname != $(hostname) ]; then
+	echo 'change hostname ...'
 	#raspi-config nonint do_hostname $CurrentHostname
 	RebootFlag=0
     fi
@@ -71,11 +82,12 @@ Hostname () {
 if [ -f '.reboot' ]; then
     rm '.reboot'
 else
-    $Ssh
-    $Otg
-    $Hostname
-    if [ $RebootFlag ]; then
+    Ssh
+    Otg
+    Hostname
+    if [ $RebootFlag = 0 ]; then
 	: > '.reboot'
+	echo 'reboot ...'
 	#reboot
     fi
 fi
