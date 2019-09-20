@@ -15,4 +15,5 @@ Rclone="${boot_dir}/rclone.sh"
 Rsync="${boot_dir}/rsync.sh"
 Cron="${boot_dir}/cron"
 Logrotate="${boot_dir}/logrotate"
-StartCommand="$dir/script/start.sh"
+StartCommand="$dir/pizero-workshop.sh"
+Node='/home/pi/.nodebrew/current/bin/node'

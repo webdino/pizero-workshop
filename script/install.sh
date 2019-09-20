@@ -49,6 +49,7 @@ install_first () {
     setup_locale
     sudo raspi-config nonint do_wifi_country JP
     # sudo raspi-config nonint do_expand_rootfs
+    echo 'Successfully done.'
 }
 
 install_node () {
@@ -74,6 +75,7 @@ install_node () {
 	fi
     fi
 EOF
+    echo 'Successfully done.'
 }
 
 install_npm_package () {
@@ -85,13 +87,16 @@ install_npm_package () {
     npm i
     if [ \$? ]; then echo "Done."; else "Warning: npm package install is not successfully finished."; fi
 EOF
+    echo 'Successfully done.'
 }
 
 install_apt_package () {
+    apt install -y nkf
     apt install -y rclone
     apt install -y libcap2-bin
     # setcap cap_net_raw+eip $(eval readlink -f `which node`)
     setcap cap_net_raw+eip /home/pi/.nodebrew/current/bin/node
+    echo 'Successfully done.'
 }
 
 
@@ -136,12 +141,14 @@ EOF
 #!/bin/bash
 rclone --config $RcloneConf copy $boot_dir/log [google drive]:pizero-workshop
 EOF
-
+    chmod +x $Rclone
+    
     # rsync
     cat <<EOF > $Rsync
 #!/bin/bash
 rsync -a $dir/log/ $boot_dir/log/
 EOF
+    chmod +x $Rclone
     
     # systemd 
     cat <<EOF > /etc/systemd/system/pizero-workshop.service
