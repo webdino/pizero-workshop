@@ -15,6 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "ambient-lib": "^0.1.5",
+    "bme280-sensor": "^0.1.6",
     "date-utils": "^1.2.21",
     "noble": "^1.9.1"
   }
