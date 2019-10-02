@@ -4,6 +4,9 @@ set -eu
 
 if ! [ $(whoami) = root ]; then echo 'Error: root permission required.'; exit 1; fi
 
+ScriptDir=$(cd $(dirname $BASH_SOURCE); pwd)
+cd $ScriptDir
+
 if [ $# -gt 0 ] && [ "$1" = '-h' ] ; then
 cat <<EOF
 
@@ -56,9 +59,6 @@ EOF
     esac
 done
 
-
-ScriptDir=$(cd $(dirname $BASH_SOURCE); pwd)
-cd $ScriptDir
 . env.sh
 
 echo 'install syncLog ...'

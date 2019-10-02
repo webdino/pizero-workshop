@@ -1,6 +1,5 @@
 #!/bin/bash
 
-Start="start.sh"
-CheckConfig="checkConfig.js"
-ConfigFile="config.js"
-StatusFile="status.txt"
+PackageName="pizero-workshop"
+Dir="/home/pi/${PackageName}"
+BootDir="/boot/setting"
