@@ -2,15 +2,68 @@
 
 set -eu
 
-echo 'install bootWifi ...'
-
 if ! [ $(whoami) = root ]; then echo 'Root permission required.'; exit 1; fi
 
+if [ $# -gt 0 ] && [ "$1" = '-h' ] ; then
+cat <<EOF
+
+- install without any options (default)
+
+- install with following options
+   -y (skip confirm (force overwrite if config file is already exists))
+   -s filepath (status log file path (default ./status.txt)
+   -c filepath (config file path (default ./bootPi.conf)
+
+- initialize
+   -i initialize (set defalut) env.sh (Status="status.txt" , ConfigFile="config.js")
+
+EOF
+exit 0
+fi
+
+ForceOverwite='no'
+while getopts "yis:c:" op
+do
+    case $op in
+        y)
+            ForceOverwite='yes'
+            ;;
+	s)
+            StatusFile="$OPTARG"
+	    sed -i "/^StatusFile=/d" env.sh
+	    echo "StatusFile=\"$StatusFile\"" >> env.sh
+            ;;
+        c)
+            ConfigFile="$OPTARG"
+	    sed -i '/^ConfigFile=/d' env.sh
+	    echo "ConfigFile=\"$ConfigFile\"" >> env.sh
+            ;;
+	i)
+	    cat <<EOF > env.sh
+#!/bin/bash
+
+Script="bootWifi.sh"
+ConfigFile="config.js"
+StatusFile="status.txt"
+EOF
+	    echo "Initialized env.sh, done."
+	    exit 0
+	    ;;
+
+        *)
+	    exit 1
+            ;;
+    esac
+done
+
 ScriptDir=$(cd $(dirname $BASH_SOURCE); pwd)
+cd $ScriptDir
 . env.sh
 
-ConfFileWrite(){
-    cat <<EOF > $ConfigJs
+echo 'install bootWifi ...'
+
+ConfigFileWrite(){
+    cat <<EOF > $ConfigFile
 /*
 This is bootWifi setting file (Javascript source).
  
@@ -29,7 +82,7 @@ module.exports = [
   {ssid: "ssid2", passphrase: "!@#$%^&*()_+-="}
   ,
   {ssid: "ss\"id3", passphrase: "abcdef\"pqrstuv"}
-]
+];
 */
 
 module.exports = [
@@ -38,24 +91,24 @@ module.exports = [
 
 EOF
 }
-	   
-if [ -f $ConfigJs ]; then
-    echo "Setting file:${ConfigJs} is already exist, overwrite? (yes|no)"
+
+if [ -f $ConfigFile ] && [ $ForceOverwite != 'yes' ] ; then
+    echo "Setting file:${ConfigFile} is already exist, overwrite? (yes|no)"
     echo -n "> "
-    read Answer
-    case $Answer in
+    read ForceOverwite
+    case $ForceOverwite in
 	yes)
-	    ConfFileWrite
+	    ConfigFileWrite
 	    ;;
 	no)
 	    :
 	    ;;
 	*)
-	    echo -e "Cannot understand $Answer.\nInstall fail."
+	    echo -e "Cannot understand $ForceOverwite.\nInstall fail."
 	    exit 1
             ;;
     esac
-else ConfFileWrite; fi
+else ConfigFileWrite; fi
 
 which nkf > /dev/null || apt install -y nkf
 which node > /dev/null || apt install -y nodejs
@@ -69,7 +122,7 @@ After=syslog.target network.target
 [Service]
 Type=simple
 WorkingDirectory=$ScriptDir
-ExecStart=/bin/bash -c "./$Script > $Status 2>&1"
+ExecStart=/bin/bash -c "./$Script > $StatusFile 2>&1"
 User=root
 Group=root
 StandardOutput=journal
@@ -87,7 +140,7 @@ cat <<EOF
 
 Installed successfully.
 
-Please edit setting file:$ConfigJs , and execute following command.
+Please edit setting file:$ConfigFile , and execute following command.
 
 'sudo systemctl enable bootWifi'
 'sudo systemctl start bootWifi'

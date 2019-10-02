@@ -1,5 +1,5 @@
 #!/bin/bash
 
-Script=bootPi.sh
-Status=/boot/setting/bootPiStatus.txt
-ConfFile=/boot/setting/bootPi.conf
+Script="bootPi.sh"
+ConfigFile="bootPi.conf"
+StatusFile="status.txt"

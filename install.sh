@@ -13,6 +13,7 @@ Logrotate="${BootDir}/logrotate"
 Starter="$Dir/starter.sh"
 Node='/home/pi/.nodebrew/current/bin/node'
 Npm='/home/pi/.nodebrew/current/bin/npm'
+
 Error="${Dir}/log/error.txt"
 StarterStatus="${BootDir}/starterStatus.txt"
 ConfigJs="${Dir}/setting/config.js"
@@ -82,7 +83,7 @@ EOF
     echo 'Successfully done.'
 }
 
-installNpmPackage () {
+installNpmPackages () {
     apt install -y bluetooth bluez libbluetooth-dev libudev-dev
     su - pi <<EOF
     export PATH=/home/pi/.nodebrew/current/bin:\$PATH
@@ -94,7 +95,7 @@ EOF
     echo 'Successfully done.'
 }
 
-installAptPackage () {
+installAptPackages () {
     which nkf > /dev/null || apt install -y nkf
     which node > /dev/null || apt install -y nodejs
     apt install -y libcap2-bin
@@ -106,6 +107,11 @@ installAptPackage () {
 installFiles () {
     [ -d "$Dir/log" ] || mkdir "$Dir/log"
     [ -d "$BootDir" ] || sudo mkdir "$BootDir"
+    [ -d "$BootDir/log" ] || sudo mkdir "$BootDir/log"
+
+    (cd syncLog; ./install.sh -c /boot/setting/syncLogConfig.js -s /boot/setting/syncLogStatus.txt)
+    (cd bootPi; ./install.sh -c /boot/setting/bootPi.conf -s /boot/setting/bootPiStatus.txt)
+    (cd bootWifi; ./install.sh -c /boot/setting/bootWifiConfig.js -s /boot/setting/bootWifiStatus.txt)
     
     cat <<EOF > $Logrotate
 $Dir/log/*.csv {
@@ -146,7 +152,7 @@ After=syslog.target network.target
 [Service]
 Type=simple
 WorkingDirectory=$Dir
-ExecStart=/bin/bash -c "cd $Dir; NODE_PATH=lib $Node pizero-workshop.js 2>> $Error"
+ExecStart=/bin/bash -c "NODE_PATH=lib $Node pizero-workshop.js 2>> $Error"
 TimeoutStopSec=5
 Restart=always
 User=root
@@ -222,7 +228,7 @@ module.exports = [
 ];
 EOF
     chown pi:pi $ConfigJs
-    
+
     echo 'Successfully done.'
 }
 
@@ -233,8 +239,8 @@ showOptions () {
 OPTIONS
    -installFirst	
    -installNode
-   -installNpmPackage
-   -installAptPackage
+   -installNpmPackages
+   -installAptPackages
    -installFiles
 
 EOF
@@ -244,8 +250,8 @@ if [ $# -gt 0 ]; then
     case "$1" in
 	-installFirst) installFirst;;
 	-installNode) installNode;;
-	-installNpmPackage) installNpmPackage;;
-	-installAptPackage) installAptPackage;;
+	-installNpmPackages) installNpmPackages;;
+	-installAptPackages) installAptPackages;;
 	-installFiles) installFiles;;
 	*) showOptions;;
     esac

@@ -11,10 +11,10 @@ ScriptDir=$(cd $(dirname $BASH_SOURCE); pwd)
 cd $ScriptDir
 . env.sh
 
-Origin=$ConfFile
-ConfFile=$(mktemp)
+Origin=$ConfigFile
+ConfigFile=$(mktemp)
 # convert to UTF-8 LF & remove comment line & add line number
-nkf -w -d < $Origin | sed s/^#.*$//g | awk '{print NR, $0}' > $ConfFile
+nkf -w -d < $Origin | sed s/^#.*$//g | awk '{print NR, $0}' > $ConfigFile
 RebootFlag=1
 
 Ssh=default
@@ -35,7 +35,7 @@ while read Line || [ -n "${Line}" ]; do
     elif(echo $Line | grep -q '^[0-9]*\s*otg:\s*enable\s*$'); then Otg=0
     elif(echo $Line | grep -q '^[0-9]*\s*otg:\s*disable\s*$'); then Otg=1
     elif(echo $Line | grep -q '^[0-9]*\s*hostname:'); then
-	Hostname=$(echo $Line | sed 's/^hostname:\s*\(.*\)\s*$/\1/g')
+	Hostname=$(echo $Line | sed 's/^[0-9]*\s*hostname:\s*\(.*\)\s*$/\1/g')
     elif(echo $Line | grep -q '^[0-9]*\s*static_ip_address:\s*[0-9\.\/]*\s*$'); then
 	StaticIpAddress=$(echo $Line | sed 's/^[0-9]*\s*static_ip_address:\s*\(.*\)\s*$/\1/g')
     elif(echo $Line | grep -q '^[0-9]*\s*static_rooters:\s*[0-9\.\/]*\s*$'); then
@@ -47,12 +47,12 @@ while read Line || [ -n "${Line}" ]; do
 	exit 1
     fi
     set -e    
-done < $ConfFile
+done < $ConfigFile
 
 SshOnOff () {
     if [ $Ssh != default ] && [ $Ssh != $(raspi-config nonint get_ssh) ];then
 	echo 'change ssh setting ...'
-	raspi-config nonint do_serial $Ssh
+	raspi-config nonint do_ssh $Ssh
 	RebootFlag=0
     fi    
 }

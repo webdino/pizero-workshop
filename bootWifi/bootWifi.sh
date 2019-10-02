@@ -13,28 +13,28 @@ cd $ScriptDir
 WpaSupplicantConf='/etc/wpa_supplicant/wpa_supplicant.conf'
 CheckConfig="${ScriptDir}/checkConfig.js"
 GenerateWpaPassphraseCommandJs="${ScriptDir}/generateWpaPassphraseCommand.js"
-Origin=$ConfigJs
-ConfigJs=$(mktemp)
+Origin=$ConfigFile
+ConfigFile=$(mktemp)
 
 if ! [ -f $Origin ]; then echo "'$Origin' is not found, finished."; exit 0; fi
 
 # UTF-8 LF convert config.js 
 echo -n "Convert '$Origin' to (UTF-8 LF) ... "
-nkf -w -d  < $Origin > $ConfigJs
+nkf -w -d  < $Origin > $ConfigFile
 echo 'ok.'
-cat $ConfigJs 
+cat $ConfigFile 
 
 echo -n 'syntax ... '
-node -c $ConfigJs
+node -c $ConfigFile
 echo 'ok.'
 
 echo -n 'value ... '
-node $CheckConfig $ConfigJs
+node $CheckConfig $ConfigFile
 echo 'ok.'
 
 # generate command(wpa_passphrase)
 echo 'GenerateWpaPassphrase ...'
-WpaPassphrase=$(node $GenerateWpaPassphraseCommandJs $ConfigJs)
+WpaPassphrase=$(node $GenerateWpaPassphraseCommandJs $ConfigFile)
 echo $WpaPassphrase
 if [ ${#WpaPassphrase} = 0 ]; then
     echo "Wifi setting in '$Origin' is empty, and not modfiy '$WpaSupplicantConf', finished."

@@ -2,16 +2,67 @@
 
 set -eu
 
-echo 'install bootPi ...'
-
 if ! [ $(whoami) = root ]; then echo 'Root permission required.'; exit 1; fi
+
+if [ $# -gt 0 ] && [ "$1" = '-h' ] ; then
+cat <<EOF
+
+- install without any options (default)
+
+- install with following options
+   -y (skip confirm (force overwrite if config file is already exists))
+   -s filepath (status log file path (default ./status.txt)
+   -c filepath (config file path (default ./bootPi.conf)
+
+- initialize
+   -i initialize (set defalut) env.sh (Status="status.txt" , ConfigFile="bootPi.conf")
+
+EOF
+exit 0
+fi
+
+ForceOverwite='no'
+while getopts "yis:c:" op
+do
+    case $op in
+        y)
+            ForceOverwite='yes'
+            ;;
+	s)
+            StatusFile="$OPTARG"
+	    sed -i "/^StatusFile=/d" env.sh
+	    echo "StatusFile=\"$StatusFile\"" >> env.sh
+            ;;
+        c)
+            ConfigFile="$OPTARG"
+	    sed -i '/^ConfigFile=/d' env.sh
+	    echo "ConfigFile=\"$ConfigFile\"" >> env.sh
+            ;;
+	i)
+	    cat <<EOF > env.sh
+#!/bin/bash
+
+Script="bootPi.sh"
+ConfigFile="bootPi.conf"
+StatusFile="status.txt"
+EOF
+	    echo "Initialized env.sh, done."
+	    exit 0
+	    ;;
+        *)
+	    exit 1
+            ;;
+    esac
+done
 
 ScriptDir=$(cd $(dirname $BASH_SOURCE); pwd)
 cd $ScriptDir
 . env.sh
 
-ConfFileWrite(){
-    cat <<EOF > $ConfFile
+echo 'install bootPi ...'
+
+ConfigFileWrite(){
+    cat <<EOF > $ConfigFile
 # This is bootPi setting file.
 #
 # Comment line is available only with line head # charactor.
@@ -44,24 +95,24 @@ ConfFileWrite(){
 #hostname: raspberrypi
 EOF
 }
-	   
-if [ -f $ConfFile ]; then
-    echo "Setting file:${ConfFile} is already exist, overwrite? (yes|no)"
+
+if [ -f $ConfigFile ] && [ $ForceOverwite != 'yes' ] ; then
+    echo "Setting file:${ConfigFile} is already exist, overwrite? (yes|no)"
     echo -n "> "
-    read Answer
-    case $Answer in
+    read ForceOverwite
+    case $ForceOverwite in
 	yes)
-	    ConfFileWrite
+	    ConfigFileWrite
 	    ;;
 	no)
 	    :
 	    ;;
 	*)
-	    echo -e "Cannot understand $Answer.\nInstall fail."
+	    echo -e "Cannot understand '$ForceOverwite'.\nInstall fail."
 	    exit 1
             ;;
     esac
-else ConfFileWrite; fi
+else ConfigFileWrite; fi
    
 which nkf > /dev/null || apt install -y nkf
 
@@ -73,7 +124,7 @@ After=syslog.target network.target
 [Service]
 Type=simple
 WorkingDirectory=$ScriptDir
-ExecStart=/bin/bash -c "./$Script > $Status 2>&1"
+ExecStart=/bin/bash -c "./$Script > $StatusFile 2>&1"
 User=root
 Group=root
 StandardOutput=journal
@@ -91,7 +142,7 @@ cat <<EOF
 
 Installed successfully.
 
-Please edit setting file:$ConfFile , and execute following command.
+Please edit setting file:$ConfigFile , and execute following command.
 
 'sudo systemctl enable bootPi'
 'sudo systemctl start bootPi'

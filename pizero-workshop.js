@@ -23,7 +23,7 @@ function isExistFile(file) {
     if(err.code === 'ENOENT') return false
   }
 }
-const configFile = isExistFile('/boot/setting/config.js') ? '/boot/setting/config.js' : './config.js';
+const configFile = isExistFile('/boot/setting/config.js') ? '/boot/setting/config.js' : './setting/config.js';
 console.log('config_file: "' + configFile + '"');
 const config = require(configFile);
 
