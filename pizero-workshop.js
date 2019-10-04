@@ -1,3 +1,4 @@
+// @ts-check
 'use strict';
 /*
  * Author: TAKASHI NISHIO
@@ -25,6 +26,31 @@ function isExistFile(file) {
 }
 const configFile = isExistFile('/boot/setting/config.js') ? '/boot/setting/config.js' : './setting/config.js';
 console.log('config_file: "' + configFile + '"');
+
+/**
+ * @typedef {{csvFilename: string}} CsvConfig
+ * @typedef {{
+ *   machinistApiKey: string,
+ *   machinistAgent: string,
+ *   machinistBatchQuantity: number
+ * }} MachinistConfig
+ * @typedef {{
+ *   ambientChannelId: string,
+ *   ambientUserId: string,
+ *   ambientWriteKey: string,
+ *   ambientReadKey: string,
+ *   ambientBatchQuantity: number
+ * }} AmbientConfig
+ * @type {Array<
+ *   {
+ *     intervalMillisec: number,
+ *     omron2jcieBu01Name: string,
+ *     omron2jcieBu01Address: string
+ *   } & Partial<CsvConfig>
+ *     & Partial<MachinistConfig>
+ *     & Partial<AmbientConfig>
+ * >}
+ */
 const config = require(configFile);
 
 config && config.forEach((param)=>{
