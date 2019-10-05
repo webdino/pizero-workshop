@@ -2,5 +2,5 @@
 
 Start="start.sh"
 CheckConfig="checkConfig.js"
-ConfigFile="config.js"
-StatusFile="status.txt"
+ConfigFile="/boot/setting/syncLogConfig.js"
+StatusFile="/boot/setting/syncLogStatus.txt"

@@ -1,3 +1,5 @@
+Started at 2019年 10月  5日 土曜日 15:24:11 JST
+Using Following config file:config.js ... 
 /*
 This is syncLog setting file (Javascript source).
 Setting is array of objects. 
@@ -26,3 +28,7 @@ module.exports = [
 
 ];
 
+Converting 'config.js' to UTF-8 LF ... ok.
+syntax ... ok.
+value ... ok.
+Start!

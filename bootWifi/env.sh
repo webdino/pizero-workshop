@@ -1,5 +1,6 @@
 #!/bin/bash
 
 Script="bootWifi.sh"
-ConfigFile="config.js"
-StatusFile="status.txt"
+
+ConfigFile="/boot/setting/bootWifiConfig.js"
+StatusFile="/boot/setting/bootWifiStatus.txt"

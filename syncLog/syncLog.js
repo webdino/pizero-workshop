@@ -28,14 +28,13 @@ if(!config){
 	  }
 	}
       }catch(e){
-	console.error(e);
+	console.error(new Date());
+	console.error(e.toString());
       }
     });
     hourCount++;
     const sleepMillisec = Math.max(0, 60 * 60 * 1000 - (Date.now() - startTime));
-    //console.log(Math.floor(sleepMillisec/1000) + ' sec sleep ... ');
-    //once || setTimeout(loop, sleepMillisec);
-    setTimeout(loop, sleepMillisec);
+    setTimeout(loop, sleepMillisec); //once || setTimeout(loop, sleepMillisec);
   }
   loop();
 }

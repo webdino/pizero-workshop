@@ -1,9 +1,11 @@
 #!/bin/bash
 
+# This shell script is called by bootPi.service (systemd).
+
 set -eu
 
+echo -n 'Started at '
 date
-echo 'Start!'
 
 if ! [ $(whoami) = root ]; then echo 'Root permission required.'; exit 1; fi
 
@@ -13,10 +15,15 @@ cd $ScriptDir
 
 Origin=$ConfigFile
 ConfigFile=$(mktemp)
+
+echo "Using Following config file:$Origin ... "
+cat $Origin
+echo -n "Converting '$Origin' to UTF-8 LF ... "
 # convert to UTF-8 LF & remove comment line & add line number
 nkf -w -d < $Origin | sed s/^#.*$//g | awk '{print NR, $0}' > $ConfigFile
-RebootFlag=1
+echo 'ok'
 
+RebootFlag=1
 Ssh=default
 Otg=default
 SerialConsole=default
@@ -79,13 +86,13 @@ GetOtg(){
 DoOtg(){
     if [ $1 = 0 ]; then
 	if ! grep -q 'dtoverlay=dwc2' < '/boot/config.txt'; then
-	    echo 'dtoverlay=dwc2' | tee -a '/boot/config.txt' > /dev/null
+	    echo 'dtoverlay=dwc2' >> '/boot/config.txt' 
 	fi
 	if ! grep -q ' modules-load=dwc2,g_ether ' < '/boot/cmdline.txt'; then
 	    sed -i 's/rootwait /rootwait modules-load=dwc2,g_ether /g' '/boot/cmdline.txt'
 	fi
     else
-	grep -v 'dtoverlay=dwc2' < '/boot/config.txt' > '/boot/config.txt'
+	sed -i '/^dtoverlay=dwc2/d' '/boot/config.txt'
 	sed -i 's/rootwait modules-load=dwc2,g_ether /rootwait /g' '/boot/cmdline.txt'
     fi
 }

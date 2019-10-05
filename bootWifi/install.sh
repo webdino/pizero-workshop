@@ -18,7 +18,7 @@ cat <<EOF
    -c filepath (config file path (default ./bootPi.conf)
 
 - initialize
-   -i initialize (set defalut) env.sh (Status="status.txt" , ConfigFile="config.js")
+   -i initialize (set defalut) env.sh (StatusFile="status.txt" , ConfigFile="config.js")
 
 EOF
 exit 0
@@ -45,11 +45,17 @@ do
 	    cat <<EOF > env.sh
 #!/bin/bash
 
+# This shell script is called by install.sh, uninstall.sh, bootWifi.sh. 
+# And generated and modified by executing install.sh with c,s,i options
+
 Script="bootWifi.sh"
 ConfigFile="config.js"
 StatusFile="status.txt"
+
 EOF
 	    echo "Initialized env.sh, done."
+	    . env.sh
+	    [ -f $StatusFile ] && rm $StatusFile
 	    exit 0
 	    ;;
 
@@ -67,27 +73,44 @@ ConfigFileWrite(){
     cat <<EOF > $ConfigFile
 /*
 This is bootWifi setting file (Javascript source).
- 
-Setting is array of objects(ssid and passphrase). 
 
+Setting is array of objects (ssid and passphrase). 
 Priority of wifi connection is from head to tail in the array.
 
-Followings are example of setting.
+複数のwifiアクセスポイントへの接続設定ができます。
+上に記述したものから順に優先的に接続されます。
+SSIDとパスワードを、ダブルクォーテーションの間（"と"の間）に記述してください。
 
-(複数のwifiを接続候補にすることができます。
-以下のサンプルでは、まずssid1に優先的に接続が試みられ、ついでssid2、最後にss"id3になります。)
-
-module.exports = [
-  {ssid: "ssid1", passphrase: "pass111111111"}
-  ,
-  {ssid: "ssid2", passphrase: "!@#$%^&*()_+-="}
-  ,
-  {ssid: "ss\"id3", passphrase: "abcdef\"pqrstuv"}
-];
+すべてのダブルクォーテーションの間を記述しなかった場合は、システムのwifi設定は更新されません。
+１つでも接続設定が記述されている場合は、システムのwifi設定は一度すべて破棄され、新たな設定が有効になります。
 */
 
 module.exports = [
 
+  //１番優先的に接続させたいアクセスポイント（ないならそのままでよい）
+  {ssid: "", passphrase: ""}
+
+  ,
+  
+  //次に優先的に接続させたいアクセスポイント（ないならそのままでよい）
+  {ssid: "", passphrase: ""}
+
+  ,
+  
+  //３番優先的に接続させたいアクセスポイント（ないならそのままでよい）
+  {ssid: "", passphrase: ""}
+
+  ,
+  
+  //４番優先的に接続させたいアクセスポイント（ないならそのままでよい）
+  {ssid: "", passphrase: ""}
+
+  ,
+  
+  //５番優先的に接続させたいアクセスポイント（ないならそのままでよい）
+  {ssid: "", passphrase: ""}
+
+  //以降、よりたくさんのアクセスポイントの接続設定をすることができます。その場合はカンマで区切って同様に記述してください。
 ];
 
 EOF
@@ -123,7 +146,7 @@ After=syslog.target network.target
 [Service]
 Type=simple
 WorkingDirectory=$ScriptDir
-ExecStart=/bin/bash -c "./$Script > $StatusFile 2>&1"
+ExecStart=/bin/bash -c ": > $StatusFile; ./$Script > $StatusFile 2>&1"
 User=root
 Group=root
 StandardOutput=journal

@@ -1,10 +1,5 @@
 // @ts-check
 'use strict';
-/*
- * Author: TAKASHI NISHIO
- * Created: 2019.8.11
- * Last updated: 2019.9.19
- */
 
 require('date-utils');
 const Omron2jcieBu01 = require('omron2jcieBu01.js');
@@ -54,16 +49,16 @@ console.log('config_file: "' + configFile + '"');
 const config = require(configFile);
 
 config && config.forEach((param)=>{
-  const omron2jcieBu01 = new Omron2jcieBu01({
+  const omron2jcieBu01 = param.omron2jcieBu01Name && param.omron2jcieBu01Address && new Omron2jcieBu01({
     name: param.omron2jcieBu01Name,
     address: param.omron2jcieBu01Address});
-    const csv = param.csvFilename &&
-	  new Csv({
-	    path: `${logDirectory}/${param.csvFilename}`,
-	    date: true,
-	    dateFormat: 'YYYY-MM-DD HH24:MI:SS',
-	    order: ['temperature', 'relativeHumidity', 'barometricPressure', 'ambientLight','soundNoise', 'eTVOC', 'eCO2']
-	  });
+  const csv = param.csvFilename &&
+	new Csv({
+	  path: `${logDirectory}/${param.csvFilename}`,
+	  date: true,
+	  dateFormat: 'YYYY-MM-DD HH24:MI:SS',
+	  order: ['temperature', 'relativeHumidity', 'barometricPressure', 'ambientLight','soundNoise', 'eTVOC', 'eCO2']
+	});
   const machinist = (param.machinistApiKey && param.machinistAgent && param.machinistBatchQuantity)
 	&& new Machinist({
 	  agent: param.machinistAgent,
@@ -123,11 +118,19 @@ config && config.forEach((param)=>{
 	      d7: data.eCO2
 	    };})
 	});
-  console.log('sensorRecords pattern start with: ' + (csv ? 'csv ' : ' ') + (machinist ? 'machinist ' : ' ') + (ambient ? 'ambient ' : ' '))
-  pattern.sensorRecords({
-    loopInterval: param.intervalMillisec,
-    sensor: omron2jcieBu01,
-    records: [csv, machinist, ambient].filter(record=>record)
-  });
+  if(omron2jcieBu01 && (csv || machinist || ambient)){
+    console.log('sensorRecords pattern start with: ' + (omron2jcieBu01 ? 'omron2jcieBu01' : ' ') + (csv ? 'csv ' : ' ') + (machinist ? 'machinist ' : ' ') + (ambient ? 'ambient ' : ' '));
+    pattern.sensorRecords({
+      loopInterval: param.intervalMillisec,
+      sensor: omron2jcieBu01,
+      records: [csv, machinist, ambient].filter(record=>record)
+    });
+  }else{
+    console.log('sensorRecords pattern coud not start with this uncomplete setting.');
+  };
 });
 
+console.log('All sensorRecords pattern starter is finished, and wait loop start!');
+(function waitLoop(){
+  setTimeout(waitLoop, 1000);
+})();

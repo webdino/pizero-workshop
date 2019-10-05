@@ -9,13 +9,13 @@ try{
     }else{
       config.forEach((c)=>{
 	if(c.type=='rsync'){
-	  if(!c.intervalHours) err.push('rsyncにintervalHoursが設定されていません（必須項目です）。');
+	  if(!(typeof c.intervalHours === 'number' &&　c.intervalHours > 0 &&　Math.round(c.intervalHours) === c.intervalHours)) err.push('rsyncのintervalHoursに１以上の整数を設定してください（必須項目です）。');
 	  if(!c.source) err.push('rsyncにsourceが設定されていません（必須項目です）。');
  	  if(!c.dest) err.push('rsyncにdestが設定されていません（必須項目です）。');
 	}
 	if(c.type=='rclone'){
-	  if(!c.rcloneConf) err.push('rcloneConfにintervalHoursが設定されていません（必須項目です）。');
-	  if(!c.intervalHours) err.push('rcloneにintervalHoursが設定されていません（必須項目です）。');
+	  if(!(typeof c.intervalHours === 'number' &&　c.intervalHours > 0 &&　Math.round(c.intervalHours) === c.intervalHours)) err.push('rcloneのintervalHoursに１以上の整数を設定してください（必須項目です）。');
+	  if(!c.rcloneConf) err.push('rcloneにrcloneConfが設定されていません（必須項目です）。');
 	  if(!c.source) err.push('rcloneにsourceが設定されていません（必須項目です）。');
  	  if(!c.destService) err.push('rcloneにdestServiceが設定されていません（必須項目です）。');
 	  if(!c.destDir) err.push('rcloneにdestDirが設定されていません（必須項目です）。');
@@ -33,6 +33,5 @@ if(err.length > 0){
   console.error(err.join("\n"));
   process.exit(1);
 }else{
-  //console.log('チェックは正常に終了しました。');
   process.exit(0);
 }

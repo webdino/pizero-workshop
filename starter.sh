@@ -1,7 +1,11 @@
 #!/bin/bash
 
+# This shell script is called by cron when reboot.
+# And this shell script start pizero-workshop.service (systemd).
+
 set -eu
 
+echo -n 'Started at '
 date
 
 if ! [ $(whoami) = root ]; then echo 'Root permission required.'; exit 1; fi
@@ -9,32 +13,46 @@ if ! [ $(whoami) = root ]; then echo 'Root permission required.'; exit 1; fi
 . env.sh
 
 ScriptDir=$(cd $(dirname $BASH_SOURCE); pwd)
-OriginalConfigJs="${BootDir}/config.js"
+Origin="${BootDir}/config.js"
 ConfigJs=$(mktemp)
 CheckConfig="${Dir}/checkConfig.js"
 
-echo "Convert '$OriginalConfigJs' to (UTF-8 LF) ..."
-nkf -w -d  < $OriginalConfigJs > $ConfigJs
+if [ -f $Origin ]; then
+    echo "Using Following config file:$Origin ... "
+    cat $Origin
 
-echo 'syntax ...'
-node -c $ConfigJs
+    echo "Converting '$Origin' to UTF-8 LF ... "
+    nkf -w -d  < $Origin > $ConfigJs
+    echo "ok"
+    
+    echo -n 'syntax ... '
+    node -c $ConfigJs
+    echo 'ok'
+    
+    echo 'value ... '
+    node $CheckConfig $ConfigJs
+    echo 'ok'
+else
+    echo "$Origin is not found, may be using ${Dir}/setting/config.js ."
+fi
 
-echo 'value ...'
-node $CheckConfig $ConfigJs
-
-echo 'ping ...'
+set +e
+echo -n 'ping ... '
 while :; do
-    ping webdino.org -c 1 > /dev/null
+    ping webdino.org -c 1 > /dev/null 2>&1
     if [ $? = 0 ]; then break; fi
     sleep 10
 done
-echo 'ping ok.'
+echo 'ok'
+
 echo 'Restart systemd-timesyncd ... '
 systemctl restart systemd-timesyncd
+echo 'ok'
 
 #sleep 10
-echo 'Start main service (sensing and records) ... ' 
+echo 'Start sensing and records ... '
 systemctl start pizero-workshop
+echo 'ok'
 
-echo 'All start process successfully finished.'
+echo 'All start process finished.'
 exit 0

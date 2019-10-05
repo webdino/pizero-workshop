@@ -8,10 +8,12 @@ try {
       err.push('設定はオブジェクトの配列である必要があります。');
     }else{
       config.forEach((c)=>{
-	if(!c.ssid) err.push('ssidが設定されていません（必須項目です）。');
-	if(typeof c.ssid != "string") err.push('ssidは文字列である必要があります。');
-	if(!c.passphrase) err.push('passphraseが設定されていません（必須項目です）。');
-	if(typeof c.passphrase != "string") err.push('passphraseは文字列である必要があります。');
+	if(c.ssid || c.passphrase){
+	  if(!c.ssid) err.push('ssidが設定されていません（必須項目です）。');
+	  if(typeof c.ssid != "string") err.push('ssidは文字列である必要があります。');
+	  if(!c.passphrase) err.push('passphraseが設定されていません（必須項目です）。');
+	  if(typeof c.passphrase != "string") err.push('passphraseは文字列である必要があります。');
+	}
       });
     }
   }

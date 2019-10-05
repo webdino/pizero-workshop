@@ -4,10 +4,12 @@ let command = '';
 try {
   let priority = config.length
   config && config.forEach((spot)=>{
-    command += "priority=" + priority + ";";
-    command += "wpa_passphrase " + JSON.stringify(spot.ssid) + " " + JSON.stringify(spot.passphrase);
-    command += "| sed \"s/\#psk=.*$/priority=${priority}/\";"
-    priority -= 1
+    if(spot.ssid && spot.passphrase){
+      command += "priority=" + priority + ";";
+      command += "wpa_passphrase " + JSON.stringify(spot.ssid) + " " + JSON.stringify(spot.passphrase);
+      command += "| sed \"s/\#psk=.*$/priority=${priority}/\";";
+      priority -= 1;
+    }
   });
 } catch (e) {
   console.error(e);
@@ -15,4 +17,3 @@ try {
 }
 console.log(command);
 process.exit(0);
-

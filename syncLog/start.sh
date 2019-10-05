@@ -1,9 +1,11 @@
 #!/bin/bash
 
+# This shell script is called by syncLog.service (systemd).
+
 set -eu
 
+echo -n 'Started at '
 date
-echo 'Start!'
 
 if ! [ $(whoami) = root ]; then echo 'Root permission required.'; exit 1; fi
 
@@ -13,8 +15,11 @@ cd $ScriptDir;
 Origin=$ConfigFile
 ConfigFile=$(mktemp)
 
+echo "Using Following config file:$Origin ... "
+cat $Origin
+
 # UTF-8 LF convert config.js 
-echo -n "Convert '$Origin' to (UTF-8 LF) ... "
+echo -n "Converting '$Origin' to UTF-8 LF ... "
 ConfigJs=$(mktemp)
 nkf -w -d  < $Origin > $ConfigFile
 echo 'ok.'

@@ -1,0 +1,34 @@
+Started at 2019年 10月  5日 土曜日 15:24:12 JST
+Using Following config file:bootPi.conf ... 
+# This is bootPi setting file.
+#
+# Comment line is available only with line head # charactor.
+#
+# Setting is a collection of directive and value with semicolon separation.
+#
+# ssh, otg, serial_console (these are enable or disable.)
+# ssh (enable|disable)
+# otg (enable|disable)
+# serial_console (enable|disable)
+#
+# static_ip_address, static_rooters, static_domain_name_servers (these are will be into /etc/dhcpcd.conf .)
+# static_ip_address (ip address)
+# static_rooters (ip address)
+# static_domain_name_servers (ip address)
+#
+# hostname (first and last charactors are only 0-9 or a-z, others are 0-9 or a-z or -(hiphen).)
+#
+# Followings are example of setting.
+
+#ssh: enable
+#ssh: disable
+#otg: enable
+#otg: disable
+#serial_console: enable
+#serial_console: disable
+#static_ip_address: 192.168.0.2/24
+#static_rooters: 192.168.0.1
+#static_domain_name_servers: 192.168.0.1
+#hostname: raspberrypi
+Converting 'bootPi.conf' to UTF-8 LF ... ok
+Successfully finished.

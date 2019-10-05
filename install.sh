@@ -17,6 +17,7 @@ Npm='/home/pi/.nodebrew/current/bin/npm'
 Error="${Dir}/log/error.txt"
 StarterStatus="${BootDir}/starterStatus.txt"
 ConfigJs="${Dir}/setting/config.js"
+BootDirConfigJs="${BootDir}/config.js"
 
 setupTimezone () {
     echo -n 'Setup timezone... '
@@ -65,8 +66,8 @@ installFirst () {
 }
 
 installNode () {
-    which node > /dev/null || apt install -y nodejs
-    which npm > /dev/null || apt install -y npm
+    #which node > /dev/null || apt install -y nodejs
+    #which npm > /dev/null || apt install -y npm
     su - pi <<EOF
     if [ -f $Node ] && [ \$($Node -v) = 'v8.15.0' ]; then
 	echo 'Already exist node v8.15.0 in nodebrew, Ok.'
@@ -80,6 +81,12 @@ installNode () {
 	nodebrew use v8.15.0
     fi
 EOF
+    echo -n "make symbolic link /home/pi/.nodebrew/current/bin/node -> /usr/local/bin/node ... "
+    ln -sf /home/pi/.nodebrew/current/bin/node /usr/local/bin/node
+    echo 'ok'
+    echo "make symbolic link /home/pi/.nodebrew/current/bin/npm -> /usr/local/bin/npm ... "
+    ln -sf /home/pi/.nodebrew/current/bin/npm /usr/local/bin/npm
+    echo 'ok'
     echo 'Successfully done.'
 }
 
@@ -97,11 +104,102 @@ EOF
 
 installAptPackages () {
     which nkf > /dev/null || apt install -y nkf
-    which node > /dev/null || apt install -y nodejs
+    #which node > /dev/null || apt install -y nodejs
     apt install -y libcap2-bin
     # setcap cap_net_raw+eip $(eval readlink -f `which node`)
     setcap cap_net_raw+eip /home/pi/.nodebrew/current/bin/node
     echo 'Successfully done.'
+}
+
+initConfigJs () {
+    cat <<EOF > $ConfigJs
+/*
+This is pizero-workshop config.js.
+
+The configuration of single or mulitiple sensing and records are available as array of each setting objects.
+Please fill the values of some properties (sensing and records interval time, sensor info, csv file path, machinist acount info, and ambient acount info).
+*/
+
+module.exports = [
+
+  //first setting
+  {
+    intervalMillisec: 60000,    //sensing and record interval (milli second)
+
+    //have to filled belows to sensing
+    omron2jcieBu01Name: "Rbt", //maybe fix "Rbt"
+    omron2jcieBu01Address: "", //12 charactors of number or aphabet (like "A1B2C3D4E5F6")
+
+    //if filled below, saving csv file 
+    csvFilename: "",           //csv file path for saving sensing data. if value is "", not saving.
+
+    //if filled belows, uploading to Machinist
+    machinistApiKey: "",       //from Machinist acount. if value is "", uploading to Machinst is disable.
+    machinistAgent: "",        //from Machinist acount. if value is "", uploading to Machinst is disable.
+    machinistBatchQuantity: 1, //number of temporary stock the sensing data before sending
+
+    //if filled belows, uploading to Ambient
+    ambinetChannelId: "",      //from Ambient acount. if value is "", uploading to Ambient is disable.
+    ambientWriteKey: "",       //from Ambient acount. if value is "", uploading to Ambient is disable.
+    ambietnBatchQuantity: 1    //number of temporary stock the sensing data before sending
+  }
+
+  ,
+  
+  //second setting
+  {
+    intervalMillisec: 60000,    //sensing and record interval (milli second)
+
+    //have to filled belows to sensing
+    omron2jcieBu01Name: "Rbt", //maybe fix "Rbt"
+    omron2jcieBu01Address: "", //12 charactors of number or aphabet (like "A1B2C3D4E5F6")
+
+    //if filled below, saving csv file 
+    csvFilename: "",           //csv file path for saving sensing data. if value is "", not saving.
+
+    //if filled belows, uploading to Machinist
+    machinistApiKey: "",       //from Machinist acount. if value is "", uploading to Machinst is disable.
+    machinistAgent: "",        //from Machinist acount. if value is "", uploading to Machinst is disable.
+    machinistBatchQuantity: 1, //number of temporary stock the sensing data before sending
+
+    //if filled belows, uploading to Ambient
+    ambinetChannelId: "",      //from Ambient acount. if value is "", uploading to Ambient is disable.
+    ambientWriteKey: "",       //from Ambient acount. if value is "", uploading to Ambient is disable.
+    ambietnBatchQuantity: 1    //number of temporary stock the sensing data before sending
+  }
+
+  ,
+  
+  //third setting
+  {
+    intervalMillisec: 60000,    //sensing and record interval (milli second)
+
+    //have to filled belows to sensing
+    omron2jcieBu01Name: "Rbt", //maybe fix "Rbt"
+    omron2jcieBu01Address: "", //12 charactors of number or aphabet (like "A1B2C3D4E5F6")
+
+    //if filled below, saving csv file 
+    csvFilename: "",           //csv file path for saving sensing data. if value is "", not saving.
+
+    //if filled belows, uploading to Machinist
+    machinistApiKey: "",       //from Machinist acount. if value is "", uploading to Machinst is disable.
+    machinistAgent: "",        //from Machinist acount. if value is "", uploading to Machinst is disable.
+    machinistBatchQuantity: 1, //number of temporary stock the sensing data before sending
+
+    //if filled belows, uploading to Ambient
+    ambinetChannelId: "",      //from Ambient acount. if value is "", uploading to Ambient is disable.
+    ambientWriteKey: "",       //from Ambient acount. if value is "", uploading to Ambient is disable.
+    ambietnBatchQuantity: 1    //number of temporary stock the sensing data before sending
+  }
+
+  //more settings (fourth, fifth, ...) are available in following space with comma and setting objects like above.
+  
+  
+];
+
+EOF
+    echo "Initializing '$ConfigJs' is done."
+    chown pi:pi $ConfigJs
 }
 
 installFiles () {
@@ -137,7 +235,7 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 @reboot	       root bash -c "systemctl start bootPi > $StarterStatus 2>&1"
 @reboot	       root bash -c "systemctl start bootWifi > $StarterStatus 2>&1"
 @reboot	       root bash -c "systemctl start syncLog > $StarterStatus 2>&1"
-@reboot	       root bash -c "cd $Dir; $Starter > $StarterStatus 2>&1"
+@reboot	       root bash -c ": > $Error; cd $Dir; $Starter > $StarterStatus 2>&1"
 #*/1 * * * *    pi bash -c "$Dir/traffic.sh >> $Dir/log/traffic.csv"
 
 EOF
@@ -169,66 +267,11 @@ EOF
     systemctl disable pizero-workshop #systemctl enable pizero-workshop
     systemctl daemon-reload
 
+    initConfigJs
+    cp $ConfigJs $BootDirConfigJs 
 
-    cat <<EOF > $ConfigJs
-/*
-Following is a sample of pizero-workshop config.js.
-Plearse export the array of setting object (sensing and record interval time, sensor info, csv file path, machinist acount info, ambient acount info).
-
-//sample setting object of sensing and record to csv, machinist, ambient 
-const setting1 =   {
-  intervalMillisec: 60000    //sensing and record interval (milli second)
-  omron2jcieBu01Name: "Rbt", //maybe fix "Rbt"
-  omron2jcieBu01Address: "", //12 charactors of number or aphabet (like "A1B2C3D4E5F6")
-  csvFilename: "",           //csv file path for saving sensing data
-  machinistApikey: "",       //from machinist acount
-  machinistAgent: "",        //from machinist acount
-  machinistBatchQuantity: 1, //temporary stock number of sensing data before sending
-  ambinetChannelId: 0,       //from ambient acount (number)
-  ambientWriteKey: "",       //from ambient acount
-  ambietnBatchQuantity: 1    //temporary stock number of sensing data before sending
-}
-
-//sample setting object of sensing and record to machinist
-const machinist =   {
-  intervalMillisec: 60000
-  omron2jcieBu01Name: "Rbt",
-  omron2jcieBu01Address: "", 
-  machinistApikey: "",       
-  machinistAgent: "",        
-  machinistBatchQuantity: 1
-}
-
-//sample setting object of sensing and record to csv, ambient
-const ambientAndCsv =   {
-  intervalMillisec: 60000
-  omron2jcieBu01Name: "Rbt",
-  omron2jcieBu01Address: "", 
-  csvFilename: "",
-  ambinetChannelId: 0,     
-  ambientWriteKey: "",     
-  ambietnBatchQuantity: 1  
-}
-
-//sample setting object of sensing and record to csv
-const csvOnly =   {
-  intervalMillisec: 60000
-  omron2jcieBu01Name: "Rbt",
-  omron2jcieBu01Address: "",
-  csvFilename: ""
-}
-
-//must exports array of each setting object like this.
-module.exports = [setting1, machinistAndCsv, csvOnly];
-
-*/
-
-module.exports = [
-
-];
-EOF
-    chown pi:pi $ConfigJs
-
+    [ -f $StarterStatus ] && rm $StarterStatus
+    
     echo 'Successfully done.'
 }
 
@@ -237,11 +280,14 @@ showOptions () {
     cat <<EOF
 
 OPTIONS
+
    -installFirst	
    -installNode
    -installNpmPackages
    -installAptPackages
    -installFiles
+
+   -initConfigJs
 
 EOF
 }
@@ -253,6 +299,7 @@ if [ $# -gt 0 ]; then
 	-installNpmPackages) installNpmPackages;;
 	-installAptPackages) installAptPackages;;
 	-installFiles) installFiles;;
+	-initConfigJs) initConfigJs;;
 	*) showOptions;;
     esac
 else

@@ -18,7 +18,7 @@ cat <<EOF
    -c filepath (config file path (default ./bootPi.conf)
 
 - initialize
-   -i initialize (set defalut) env.sh (Status="status.txt" , ConfigFile="bootPi.conf")
+   -i initialize (set defalut) env.sh (StatusFile="status.txt" , ConfigFile="bootPi.conf")
 
 EOF
 exit 0
@@ -45,11 +45,16 @@ do
 	    cat <<EOF > env.sh
 #!/bin/bash
 
+# This shell script is called by install.sh, uninstall.sh, bootWifi.sh. 
+# And generated and modifid by executing install.sh with c,s,i options
+
 Script="bootPi.sh"
 ConfigFile="bootPi.conf"
 StatusFile="status.txt"
 EOF
 	    echo "Initialized env.sh, done."
+	    . env.sh
+	    [ -f $StatusFile ] && rm $StatusFile
 	    exit 0
 	    ;;
         *)
@@ -125,7 +130,7 @@ After=syslog.target network.target
 [Service]
 Type=simple
 WorkingDirectory=$ScriptDir
-ExecStart=/bin/bash -c "./$Script > $StatusFile 2>&1"
+ExecStart=/bin/bash -c ": > $StatusFile; ./$Script > $StatusFile 2>&1"
 User=root
 Group=root
 StandardOutput=journal

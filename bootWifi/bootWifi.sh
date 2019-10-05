@@ -1,7 +1,10 @@
 #!/bin/bash
 
+# This shell script is called by bootWifi.service (systemd).
+
 set -eu
 
+echo -n 'Started at '
 date
 
 if ! [ $(whoami) = root ]; then echo 'Root permission required.'; exit 1; fi
@@ -18,8 +21,11 @@ ConfigFile=$(mktemp)
 
 if ! [ -f $Origin ]; then echo "'$Origin' is not found, finished."; exit 0; fi
 
+echo "Using Following config file:$Origin ... "
+cat $Origin
+
 # UTF-8 LF convert config.js 
-echo -n "Convert '$Origin' to (UTF-8 LF) ... "
+echo -n "Converting '$Origin' to UTF-8 LF ... "
 nkf -w -d  < $Origin > $ConfigFile
 echo 'ok.'
 cat $ConfigFile 
@@ -56,17 +62,17 @@ EOF
 echo "Result of '$WpaSupplicantConf' is ..." 
 cat $WpaSupplicantConf 
 
-sudo killall wpa_supplicant
+killall wpa_supplicant
 echo 'start wlan0 ...'
-sudo su -c 'wpa_supplicant -B -i wlan0 -c /etc/wpa_supplicant/wpa_supplicant.conf'
+su -c 'wpa_supplicant -B -i wlan0 -c /etc/wpa_supplicant/wpa_supplicant.conf'
 
-sudo /sbin/iw dev wlan0 set power_save off
+/sbin/iw dev wlan0 set power_save off
 sleep 5
 echo 'scan wlan0 ...'
 set +e
-sudo iwlist wlan0 scan | grep 'ESSID'
+iwlist wlan0 scan | grep 'ESSID'
 
-#ifconfig wlan0
+ifconfig wlan0
 echo -n 'ping ...'
 while :; do
     ping webdino.org -c 1 > /dev/null
