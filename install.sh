@@ -57,6 +57,7 @@ setupLocale (){
 }
 
 installFirst () {
+    apt update;
     setupTimezone
     extendSwap
     setupLocale
@@ -91,6 +92,7 @@ EOF
 }
 
 installNpmPackages () {
+    apt update;
     apt install -y bluetooth bluez libbluetooth-dev libudev-dev
     su - pi <<EOF
     export PATH=/home/pi/.nodebrew/current/bin:\$PATH
@@ -103,6 +105,7 @@ EOF
 }
 
 installAptPackages () {
+    apt update;
     which nkf > /dev/null || apt install -y nkf
     #which node > /dev/null || apt install -y nodejs
     apt install -y libcap2-bin
@@ -111,13 +114,26 @@ installAptPackages () {
     echo 'Successfully done.'
 }
 
-initConfigJs () {
-    cat <<EOF > $ConfigJs
+
+ConfigJsInitialContent=$(mktemp)
+cat <<EOF > $ConfigJsInitialContent
 /*
 This is pizero-workshop config.js.
 
 The configuration of single or mulitiple sensing and records are available as array of each setting objects.
 Please fill the values of some properties (sensing and records interval time, sensor info, csv file path, machinist acount info, and ambient acount info).
+
+これはpizeroワークショップの設定ファイルです。
+
+１つ以上の環境センサーからデータを集めて、それらをクラウドサービスにアップロードすることが出来ます。（ローカルcsvファイルに保存することも出来ます。）
+以下に、それぞれの環境センサーごとに、そのアドレスとcsvファイル保存とクラウドアップロードに関する設定を記述してください。（環境センサー１つの場合はfirst settingの部分だけでよいです）
+
+環境センサーのアドレスを、omron2jcieBu01Addressに記述します。（必須）
+データをcsvファイルに出力する場合は、そのファイル名をcsvFilenameに記述します。（任意）
+データをMachinistに送信する場合は、machinistApiKeyとmachinistAgentの両方を記述します。（任意）
+データをAmbientに送信する場合は、ambientChannelIdとambientWriteKeyの両方を記述します。（任意）
+記述は２つのダブルクォーテーション""の間にしてください。
+
 */
 
 module.exports = [
@@ -131,7 +147,7 @@ module.exports = [
     omron2jcieBu01Address: "", //12 charactors of number or aphabet (like "A1B2C3D4E5F6")
 
     //if filled below, saving csv file 
-    csvFilename: "",           //csv file path for saving sensing data. if value is "", not saving.
+    csvFilename: "",           //csv file name for saving sensing data. if value is "", not saving.
 
     //if filled belows, uploading to Machinist
     machinistApiKey: "",       //from Machinist acount. if value is "", uploading to Machinst is disable.
@@ -139,9 +155,9 @@ module.exports = [
     machinistBatchQuantity: 1, //number of temporary stock the sensing data before sending
 
     //if filled belows, uploading to Ambient
-    ambinetChannelId: "",      //from Ambient acount. if value is "", uploading to Ambient is disable.
+    ambientChannelId: "",      //from Ambient acount. if value is "", uploading to Ambient is disable.
     ambientWriteKey: "",       //from Ambient acount. if value is "", uploading to Ambient is disable.
-    ambietnBatchQuantity: 1    //number of temporary stock the sensing data before sending
+    ambientBatchQuantity: 1    //number of temporary stock the sensing data before sending
   }
 
   ,
@@ -155,7 +171,7 @@ module.exports = [
     omron2jcieBu01Address: "", //12 charactors of number or aphabet (like "A1B2C3D4E5F6")
 
     //if filled below, saving csv file 
-    csvFilename: "",           //csv file path for saving sensing data. if value is "", not saving.
+    csvFilename: "",           //csv file name for saving sensing data. if value is "", not saving.
 
     //if filled belows, uploading to Machinist
     machinistApiKey: "",       //from Machinist acount. if value is "", uploading to Machinst is disable.
@@ -163,9 +179,9 @@ module.exports = [
     machinistBatchQuantity: 1, //number of temporary stock the sensing data before sending
 
     //if filled belows, uploading to Ambient
-    ambinetChannelId: "",      //from Ambient acount. if value is "", uploading to Ambient is disable.
+    ambientChannelId: "",      //from Ambient acount. if value is "", uploading to Ambient is disable.
     ambientWriteKey: "",       //from Ambient acount. if value is "", uploading to Ambient is disable.
-    ambietnBatchQuantity: 1    //number of temporary stock the sensing data before sending
+    ambientBatchQuantity: 1    //number of temporary stock the sensing data before sending
   }
 
   ,
@@ -179,7 +195,7 @@ module.exports = [
     omron2jcieBu01Address: "", //12 charactors of number or aphabet (like "A1B2C3D4E5F6")
 
     //if filled below, saving csv file 
-    csvFilename: "",           //csv file path for saving sensing data. if value is "", not saving.
+    csvFilename: "",           //csv file name for saving sensing data. if value is "", not saving.
 
     //if filled belows, uploading to Machinist
     machinistApiKey: "",       //from Machinist acount. if value is "", uploading to Machinst is disable.
@@ -187,10 +203,11 @@ module.exports = [
     machinistBatchQuantity: 1, //number of temporary stock the sensing data before sending
 
     //if filled belows, uploading to Ambient
-    ambinetChannelId: "",      //from Ambient acount. if value is "", uploading to Ambient is disable.
+    ambientChannelId: "",      //from Ambient acount. if value is "", uploading to Ambient is disable.
     ambientWriteKey: "",       //from Ambient acount. if value is "", uploading to Ambient is disable.
-    ambietnBatchQuantity: 1    //number of temporary stock the sensing data before sending
+    ambientBatchQuantity: 1    //number of temporary stock the sensing data before sending
   }
+
 
   //more settings (fourth, fifth, ...) are available in following space with comma and setting objects like above.
   
@@ -198,8 +215,34 @@ module.exports = [
 ];
 
 EOF
-    echo "Initializing '$ConfigJs' is done."
-    chown pi:pi $ConfigJs
+
+initConfigJs () {
+    echo "Initialize '$ConfigJs' ... "
+    local Answer=default
+    if [ -f $ConfigJs ] ; then
+	echo "$ConfigJs is already exists, over write it ? (yes|no)"
+	read Answer
+	[ $Answer = 'yes' -o $Answer = 'no' ] || exit 1;
+    fi
+    if [ $Answer = 'default' -o $Answer = 'yes' ]; then
+	cat $ConfigJsInitialContent > $ConfigJs
+	chown pi:pi $ConfigJs
+	echo "'$ConfigJs' initialized, done."
+    fi
+}
+
+initBootConfigJs () {
+    echo "Initialize '$BootDirConfigJs' ... "
+    local Answer=default
+    if [ -f $BootDirConfigJs ] ; then
+	echo "$BootDirConfigJs is already exists, over write it ? (yes|no)"
+	read Answer
+	[ $Answer = 'yes' -o $Answer = 'no' ] || exit 1;
+    fi
+    if [ $Answer = 'default' -o $Answer = 'yes' ]; then
+	cat $ConfigJsInitialContent > $BootDirConfigJs
+	echo "'$BootDirConfigJs' initialized, done."
+    fi
 }
 
 installFiles () {
@@ -232,11 +275,11 @@ EOF
 SHELL=/bin/sh
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
-@reboot	       root bash -c "systemctl start bootPi > $StarterStatus 2>&1"
-@reboot	       root bash -c "systemctl start bootWifi > $StarterStatus 2>&1"
-@reboot	       root bash -c "systemctl start syncLog > $StarterStatus 2>&1"
-@reboot	       root bash -c ": > $Error; cd $Dir; $Starter > $StarterStatus 2>&1"
-#*/1 * * * *    pi bash -c "$Dir/traffic.sh >> $Dir/log/traffic.csv"
+@reboot	       root bash -c "systemctl start bootPi >> $StarterStatus 2>&1"
+@reboot	       root bash -c "systemctl start bootWifi >> $StarterStatus 2>&1"
+@reboot	       root bash -c "systemctl start syncLog >> $StarterStatus 2>&1"
+@reboot	       root bash -c "cd $Dir; $Starter >> $StarterStatus 2>&1"
+#*/1 * * * *    pi bash -c "$Dir/script/traffic.sh >> $Dir/log/traffic.csv"
 
 EOF
     ln -fs $Cron /etc/cron.d/pizero-workshop 
@@ -266,9 +309,9 @@ EOF
     [ -d /home/pi/Desktop ] && ln -nfs /boot/setting /home/pi/Desktop/setting
     systemctl disable pizero-workshop #systemctl enable pizero-workshop
     systemctl daemon-reload
-
+    
     initConfigJs
-    cp $ConfigJs $BootDirConfigJs 
+    initBootConfigJs
 
     [ -f $StarterStatus ] && rm $StarterStatus
     

@@ -62,9 +62,9 @@ EOF
 echo "Result of '$WpaSupplicantConf' is ..." 
 cat $WpaSupplicantConf 
 
-killall wpa_supplicant
-echo 'start wlan0 ...'
-su -c 'wpa_supplicant -B -i wlan0 -c /etc/wpa_supplicant/wpa_supplicant.conf'
+# killall wpa_supplicant
+# echo 'start wlan0 ...'
+# su -c 'wpa_supplicant -B -i wlan0 -c /etc/wpa_supplicant/wpa_supplicant.conf'
 
 /sbin/iw dev wlan0 set power_save off
 sleep 5

@@ -1,6 +1,9 @@
 #!/bin/bash
 
+# This shell script is called by install.sh, uninstall.sh, start.sh 
+# And generated and modifid by executing install.sh with c,s,i options
+
 Start="start.sh"
 CheckConfig="checkConfig.js"
-ConfigFile="/boot/setting/syncLogConfig.js"
-StatusFile="/boot/setting/syncLogStatus.txt"
+ConfigFile="config.js"
+StatusFile="status.txt"
