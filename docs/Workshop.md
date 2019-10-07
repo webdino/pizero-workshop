@@ -32,7 +32,7 @@ IIJ の IoT データ可視化クラウドサービス [Machinist (マシニス�
 
 ## microSD カードの編集
 
-それではいよいよパソコンで microSD カードを編集していきます。カードの中にある `wifi.txt` に WiFi 接続先の設定を、`config.js` にセンサーを識別するアドレスとデータを送信する Machinist の API キーを書き込みます。
+それではいよいよパソコンで microSD カードを編集していきます。カードの中にある `bootWifiConfig.js` に WiFi 接続先の設定を、`config.js` にセンサーを識別するアドレスとデータを送信する Machinist の API キーを書き込みます。
 
 まず、パソコンに microSD カードを挿入しましょう。Windows / macOS / Chromebook それぞれのユーザ別に説明します。
 
@@ -42,17 +42,18 @@ IIJ の IoT データ可視化クラウドサービス [Machinist (マシニス�
 2. 「boot このドライブで問題がみつかりました。今すぐドライブを・・・」と右下に表示されますが構いません。
 3. そしてここからが注意です。さらに、「ドライブを使うにはフォーマットする必要があります。フォーマットしますか？」とアラートがポップアップされるので、ここは**必ず「キャンセル」を選択してください**。
     - 誤ってフォーマット (初期化) してしまうと SD カードの中身が全て空になってしまうので注意してください！
-4. エクスプローラー（普段よく使うファイルやフォルダ一覧を表示するもの）の左のエリアに boot というドライブがあらわれます。その中に `setting` フォルダ、さらにその中に `wifi.txt` と `config.js` の 2 つのファイルがあることを確認します。
-5. `wifi.txt` をクリックして選択し、さらに右クリックしてメニューから「プログラムから開く」を選択、そして「[TeraPad](https://tera-net.com/library/tpad.html)」などのプログラムファイルの編集に適したテキストエディタを選択し、ファイルを開きます。
-    - Windows 標準のテキストファイル編集ソフト (テキストエディタ) **「メモ帳」では開かないでください！** メモ帳は Raspberry Pi で使用するテキストファイル形式 (文字コードと改行コードの種類) に対応できず、正しく動作しなくなります (将来改善予定)
+4. エクスプローラー（普段よく使うファイルやフォルダ一覧を表示するもの）の左のエリアに boot というドライブがあらわれます。その中に `setting` フォルダ、さらにその中に `bootWifiConfig.js` と `config.js` の 2 つのファイルがあることを確認します。
+5. `bootWifiConfig.js` をクリックして選択し、さらに右クリックしてメニューから「プログラムから開く」を選択、そして「[TeraPad](https://tera-net.com/library/tpad.html)」などのプログラムファイルの編集に適したテキストエディタを選択し、ファイルを開きます。
+<!--     - Windows 標準のテキストファイル編集ソフト (テキストエディタ) **「メモ帳」では開かないでください！** メモ帳は Raspberry Pi で使用するテキストファイル形式 (文字コードと改行コードの種類) に対応できず、正しく動作しなくなります (将来改善予定)
+ -->
 6. 同様に `config.js` も開きます。
-7. テキストエディタで **「保存文字コード」は「UTF-8」に、「保存改行コード」は「LF」に設定します**。TeraPad の場合、[「表示」 > 「オプション」メニューを開き](images/TeraPad_option.png)、[「文字コード」タブで](images/TeraPad_UTF8_LF.png)、「保存文字コード」を「UTF-8」に、「保存改行コード」を「LF」に設定します (設定画面はリンク先参照)。
-
+<!-- 7. テキストエディタで **「保存文字コード」は「UTF-8」に、「保存改行コード」は「LF」に設定します**。TeraPad の場合、[「表示」 > 「オプション」メニューを開き](images/TeraPad_option.png)、[「文字コード」タブで](images/TeraPad_UTF8_LF.png)、「保存文字コード」を「UTF-8」に、「保存改行コード」を「LF」に設定します (設定画面はリンク先参照)。
+ -->
 #### macOS の場合
 
 1. パソコンに SD カードを挿入します。
-2. Finder（ファインダー）にbootデバイスがあらわれます。そのなかに`setting`フォルダ、さらにそのなかに`wifi.txt`と`config.js`の２つのファイルがあることを確認します。
-3. `wifi.txt`をクリックして選択し、さらに右クリックして「このアプリケーションで開く」から「テキストエディット」を選択し、ファイルを開きます。
+2. Finder（ファインダー）にbootデバイスがあらわれます。そのなかに`setting`フォルダ、さらにそのなかに`bootWifiConfig.js`と`config.js`の２つのファイルがあることを確認します。
+3. `bootWifiConfig.js`をクリックして選択し、さらに右クリックして「このアプリケーションで開く」から「テキストエディット」を選択し、ファイルを開きます。
 4. 同様に`config.js`も開きます。
 
 #### Chromebook の場合
@@ -66,48 +67,73 @@ IIJ の IoT データ可視化クラウドサービス [Machinist (マシニス�
 
 ファイルを開いたら、２つのファイルそれぞれを以下の様に編集していきましょう。
 
-### WiFi 接続の設定 (wifi.txt)
+### WiFi 接続の設定 (bootWifiConfig.js)
 
-まずはインターネット接続させるため **WiFi 接続先を `wifi.txt` に次のように書き込みます**。
+まずはインターネット接続させるため **WiFi 接続先を `bootWifiConfig.js` に次のように書き込みます**。
 
+```js
+module.exports = [
+  {ssid: "AAA", passphrase: "XXX"}
+  ,
+  {ssid: "BBB", passphrase: "YYY"}
+  ,
+  {ssid: "CCC", passphrase: "zzz"}
+  ,
+  {ssid: "", passphrase: ""}
+  ,
+  {ssid: "", passphrase: ""}
+];
 ```
-ssid,passphrase
-ssid,passphrase
-ssid,passphrase
-```
 
-接続する WiFi スポットの **SSID とパスワードを半角カンマ `,` で区切って書きます**。
-複数の WiFi スポットを接続候補にしたいときは、**上から一行づつ、接続優先順に書きます**。
-なおこのファイルは、Raspberry Pi Zero の起動後に、正常に WiFi 設定が完了すると自動で内容が空っぽになります。
-
-> `wifi.txt` の書き方に**誤りがあった場合**、Raspberry Pi Zero 起動時に WiFi 設定は更新されず以前の WiFi の設定のままとなります。この場合 **`wifi.txt` ファイルはそのまま残ります**。  
-> `wifi.txt` の書き方が**誤りが無かった場合**、起動時に WiFi 設定は一度全部クリアされ、新たな WiFi 設定で置き換えられます。この場合 **`wifi.txt` ファイルは空になります**。WiFi パスワードをそのまま保存しないためです。
-
+<!-- 接続する WiFi スポットの **SSID とパスワードを半角カンマ `,` で区切って書きます**。
+ -->
+ 複数の WiFi スポットを接続候補にしたいときは、**上から接続優先順に書きます**。
+<!-- なおこのファイルは、Raspberry Pi Zero の起動後に、正常に WiFi 設定が完了すると自動で内容が空っぽになります。
+ -->
+> `bootWifiConfig.js` の書き方に**誤りがあった場合**、Raspberry Pi Zero 起動時に WiFi 設定は更新されず以前の WiFi の設定のままとなります。<!-- この場合 **`wifi.txt` ファイルはそのまま残ります**。   -->
+> `bootWifiConfig.js` の書き方に**誤りが無かった場合**、起動時に WiFi 設定は一度全部クリアされ、新たな WiFi 設定で置き換えられます。<!-- この場合 **`bootWifiConfig.js` ファイルは空になります**。WiFi パスワードをそのまま保存しないためです。
+ -->
 ### データ収集プログラムの設定 (config.js)
 
 続いて、データ収集・送信プログラムの設定ファイル `config.js` です。**環境センサのアドレスとデータ送信先クラウドサービスの API キーを指定**しましょう。
 
 ```js
-module.exports = {
-  "NAME": "Rbt",
-  "ADDRESS": "XXXXXXXXXXXX",
-  "INTERVAL_MILLISEC": 60000,
-  "RECORDS": ["CSV", "MACHINIST"],
-  //"RECORDS": ["CSV", "AMBIENT"],
-  //"RECORDS": ["CSV", "MACHINIST", "AMBIENT"],
-  "MACHINIST_API_KEY": "xxxxxxxxxxxxxx",
-  "MACHINIST_MULTIPLE": 1
-  //"AMBIENT_CHANNEL": x,
-  //"AMBIENT_WRITE_KEY": "yyyyyyyyyyyyyyyy",
-  //"AMBIENT_MULTIPLE": 1
-};
+module.exports = [
+
+  {
+    intervalMillisec: 60000,    //sensing and record interval (milli second)
+
+    //have to filled belows to sensing
+    omron2jcieBu01Name: "Rbt", //maybe fix "Rbt"
+    omron2jcieBu01Address: "", //12 charactors of number or aphabet (like "A1B2C3D4E5F6")
+
+    //if filled below, saving csv file 
+    csvFilename: "",           //csv file name for saving sensing data. if value is "", not saving.
+
+    //if filled belows, uploading to Machinist
+    machinistApiKey: "",       //from Machinist acount. if value is "", uploading to Machinst is disable.
+    machinistAgent: "",        //from Machinist acount. if value is "", uploading to Machinst is disable.
+    machinistBatchQuantity: 1, //number of temporary stock the sensing data before sending
+
+    //if filled belows, uploading to Ambient
+    ambientChannelId: "",      //from Ambient acount. if value is "", uploading to Ambient is disable.
+    ambientWriteKey: "",       //from Ambient acount. if value is "", uploading to Ambient is disable.
+    ambientBatchQuantity: 1    //number of temporary stock the sensing data before sending
+  }
+
+];
 ```
 
-ファイル 3 行目の、`"ADDRESS":` の右の部分に、**環境センサ（Omron 2JCIE-BU01）のアドレス（数字と大文字アルファベット12桁）をすべて半角で入力**します。アドレスは環境センサー付属のシールに記載されています。
+`"omron2jcieBu01Address":` の右の部分に、**環境センサ（Omron 2JCIE-BU01）のアドレス（数字と大文字アルファベット12桁）をすべて半角で入力**します。アドレスは環境センサー付属のシールに記載されています。
 
-またファイル 8 行目の、`"MACHINIST_API_KEY":` の右の部分には、**Machinist の「アカウント設定」画面に表示される API キーを入力**します。デフォルトで表示されている API キーをそのままか、今回のワークショップ用に追加するかいずれでも構いません。
+`"machinistApiKey:":` の右の部分には、**Machinist の「アカウント設定」画面に表示される API キーを入力**します。デフォルトで表示されている API キーをそのままか、今回のワークショップ用に追加するかいずれでも構いません。
 
 表示されている API キーの右に「クリップボードにコピー」するボタンがあるのでコピーして、`coonfig.js` の `MACHINIST_API_KEY` の値にペーストしてください (上記の例では xxxxx となっている部分です)。手入力の場合は入力ミスがないかよく確認してください。
+
+`"machinistAgent":` の右の部分には、自分で決めたわかりやすい単語などを書きます。センサーの設置場所などを記述するとよいでしょう。これは自動でMachinistのエージェント名になります。
+
+`"csvFilename":` の右の部分にも、同様に自分で決めたわかりやすい単語などを書きます。こちらも同様にセンサーの設置場所を記述するのがよいでしょう。これは自動でmicroSDカードに保存されるcsvファイルの名前になります。`xxx.csv`というように`.csv`という拡張子をつけるようにしてください。
+
 
 とくに、コロン `:` やセミコロン `;`、カンマ `,` やピリオド `.` 、クオート (一重引用符) `'` とダブルクォート (二重引用符) `"` 、カッコの種類 `[] {} ()`、そしてスラッシュ `/` の数などは注意深くみましょう。（これらの記号文字は、プログラミングではそれぞれが１文字の違いが重要です。ちなみにこの `config.js` ファイルは JavaScript のプログラムファイルです。）
 
@@ -149,11 +175,11 @@ Raspberry Pi Zero本体の LED が点滅状態でないときに、Rapberry Pi Z
 
 そしてもう一度 microSD カードをパソコンに挿入して中身を確認します。
 
-- `wifi.txt` の ssid とパスフレーズは間違っていないか
-- `wifi.txt` に余分なスペースなどを入力したりしていないか
-  - ssid 名とパスフレーズだけを **半角カンマ `,` 区切りで** 入力してください
+- `bootWifiConfig.js` の ssid とパスフレーズは間違っていないか
+- `bootWifiConfig.js` は正しく入力できているか
+  - **二重引用符 `"` や半角カンマ `,`** を消してしまっていないか
 - `config.js` は正しく入力できているか
-  - **二重引用符 `"` や行末の半角カンマ `,`** を消してしまっていないか
+  - **二重引用符 `"` や半角カンマ `,`** を消してしまっていないか
   - `ADDRESS` 12 桁は正しく入力されているか。本当に自分が使っているセンサーのアドレスか
   - `ADDRESS` は英数字以外に `:` (コロン) を含めていないか (アドレス確認ソフトによっては `:` 区切りで表示されるが省略して入力する)
 - 全て半角で入力されているか。全角文字を含めていないか。全角空白文字も含まれていないか。

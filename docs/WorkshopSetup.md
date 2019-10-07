@@ -1,50 +1,70 @@
+# pizero-workshop
 
-# bird
+Only edit the microSD car boot area, sensing and uploading and saving.
 
-## setup from raspbian buster
+## Installl in raspbian buster
+
+For showing command options, execute following.
 ```
-cd bird;
-./setup.sh -setup_step1
-./setup2.sh -install_node
-./setup2.sh -install_npm
-./setup2.sh -install_etc
-./setup2.sh -install_etc2
-```
-
-## test
-edit the `config.js` (sensor address, and cloud api key, etc)
-
-```
-sudo ./pizero-workshop.sh
+cd pizero-workshop;
+sudo ./install
 ```
 
-## Create a directory and files in Sd card boot area for auto starting the service
+Step by step to install.
 ```
-/boot/setting/hostname.txt
-/boot/setting/wifi.txt
-/boot/setting/config.js
+sudo ./install -installFirst
+sudo ./install -installNode
+sudo ./install -installNpmPackages
+sudo ./install -installAptPackages
+sudo ./install -installFiles
 ```
 
-### /boot/setting/wifi.txt
-separate by comma, upper line has higher priority
+## Main service
+
+Main service do sensing, and uploading to the cloud, and saving the csv to local.
+
+### Configuration and test
+
+Edit the `setting/config.js` (sensor address, and cloud api key, csv filename, etc)
+
+After configuration, execute following command.
 ```
-ssid,passphrase
-ssid,passphrase
-ssid,passphrase
+cd pizero-workshop
+sudo npm start
 ```
-### /boot/setting/config.js
+
+And testing start service (systemd).
 ```
-module.exports = {
-    "NAME": "Rbt",
-    "ADDRESS": "",
-    "INTERVAL_MILLISEC": 60000,
-    "RECORDS": ["CSV", "MACHINIST"],
-    //"RECORDS": ["CSV", "AMBIENT"]
-    //"RECORDS": ["CSV", "MACHINIST", "AMBIENT],
-    "MACHINIST_API_KEY": "",
-    "MACHINIST_MULTIPLE": 
-    //"AMBIENT_CHANNEL": ,
-    //"AMBIENT_WRITE_KEY": ""
-    //"AMBIENT_MULTIPLE": 
-};
+sudo systemctl start pizero-workshop
+```
+
+## Sub services
+
+There are 3 sub services (systemd) for supporting pizero-workshop.
+
+### bootPi
+
+Service (systemd) for editing microSD card boot area to changing hostname, ssh(on/off) , otg(on/off), serial console(on/off), fixing wifi local ip address when system start up.
+
+configuration
+```
+/boot/setting/bootPi.conf
+```
+
+### bootWifi
+
+Service (systemd) for editing microSD card boot area to setup wifi connection when system start up.
+
+configuration
+```
+/boot/setting/bootWifiConfig.js
+```
+
+### syncLog
+
+Service (systemd) for editing microSD card boot area to execute rsync and rclone regularly.
+
+configuration
+```
+/boot/setting/syncLogConfig.js
 ```
