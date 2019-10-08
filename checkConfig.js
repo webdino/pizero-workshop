@@ -17,13 +17,16 @@ try {
 			    'ambientWriteKey',
 			    'ambientBatchQuantity'].indexOf(key) == -1 && err.push(`${key}は誤った設定項目です。`));
 
-    if(!c.intervalMillisec) err.push('interval_millisecが設定されていません（必須項目です）。');
-    if(typeof c.intervalMillisec != 'number' || c.intervalMillisec < 1000) err.push('interval_millisecは1000以上の数値である必要があります。');
-
-    if(!(c.omron2jcieBu01Name && c.omron2jcieBu01Address)) err.push('omron2jcieBu01Nameとomron2jcieBu01Addressの設定は必須です。');
-    //if(c.omron2jcieBu01Name != "Rbt") err.push('');
-    if(c.omron2jcieBu01Address.length != 12) err.push('omron2jcieBu01Addressが１２文字ではありません。');
-    if(!c.omron2jcieBu01Address.match(/^[A-Z0-9]*$/)) err.push('omron2jcieBu01Addressがアルファベット大文字か数字でありません。');
+    if(c.omron2jcieBu01Name && c.omron2jcieBu01Address){
+      if(!c.intervalMillisec) err.push('interval_millisecが設定されていません（必須項目です）。');
+      if(typeof c.intervalMillisec != 'number' || c.intervalMillisec < 1000) err.push('interval_millisecは1000以上の数値である必要があります。');
+    }
+    if(c.omron2jcieBu01Address){
+      if(!c.omron2jcieBu01Name) err.push('omron2jcieBu01Nameの設定は必須です。');
+      //if(c.omron2jcieBu01Name != "Rbt") err.push('');                                                                                                                                  \
+      if(c.omron2jcieBu01Address.length != 12) err.push('omron2jcieBu01Addressが１２文字ではありません。');
+      if(!c.omron2jcieBu01Address.match(/^[A-Z0-9]*$/)) err.push('omron2jcieBu01Addressがアルファベット大文字か数字でありません。');
+    }
        
     //if(c.csvFilename) err.push('csvが設定されていません（必須項目です）。');
 
