@@ -13,7 +13,7 @@ Raspberry Pi へのログイン・遠隔操作などとそのためのソフト�
 ### ワークショップ運営者向け
 
 - [機材の紹介と購入先](purchase.md)
-- [Raspbian をこのワークショップ用にセットアップ](WorkshopSetup.md)
+- [Raspbian をこのワークショップ用にセットアップ](ForDevelopers/pizero-workshopForDevelopers.md)
 
 ## Raspberry Pi Zero で IoT センサーデータ収集
 
