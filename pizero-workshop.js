@@ -119,7 +119,8 @@ config && config.forEach((param)=>{
 	    };})
 	});
   if(omron2jcieBu01 && (csv || machinist || ambient)){
-    console.log('sensorRecords pattern start with: ' + (omron2jcieBu01 ? 'omron2jcieBu01' : ' ') + (csv ? 'csv ' : ' ') + (machinist ? 'machinist ' : ' ') + (ambient ? 'ambient ' : ' '));
+    console.log('sensorRecords pattern start with: ' + (omron2jcieBu01 ? 'omron2jcieBu01 ' : ' ') + (csv ? 'csv ' : ' ') + (machinist ? 'machinist ' : ' ') + (ambient ? 'ambient ' : ' '));
+    // call pattern function //
     pattern.sensorRecords({
       loopInterval: param.intervalMillisec,
       sensor: omron2jcieBu01,

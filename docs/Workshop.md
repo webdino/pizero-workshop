@@ -14,7 +14,7 @@
 
 ### 事前準備
 
-まずはじめに、Raspberry Pi Zero を起動させるためには、OS（Rapbian Buster）をインストールし、本ワークショップ用プログラムをセットアップした microSD カードの準備が必要です。これは講師の方で [セットアップ手順ページ](WorkshopSetup.md) に従って事前に準備してください。
+まずはじめに、Raspberry Pi Zero を起動させるためには、OS（Rapbian Buster）をインストールし、本ワークショップ用プログラムをセットアップした microSD カードの準備が必要です。これは講師の方で [セットアップ手順ページ](ForDevelopers/pizero-workshopForDevelopers.md) に従って事前に準備してください。
 
 ## クラウドサービスアカウントの作成
 

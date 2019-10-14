@@ -1,3 +1,5 @@
+'use strict';
+
 let config = require(process.argv[2]);
 
 let err = [];
@@ -23,12 +25,17 @@ try {
     }
     if(c.omron2jcieBu01Address){
       if(!c.omron2jcieBu01Name) err.push('omron2jcieBu01Nameの設定は必須です。');
-      //if(c.omron2jcieBu01Name != "Rbt") err.push('');                                                                                                                                  \
-      if(c.omron2jcieBu01Address.length != 12) err.push('omron2jcieBu01Addressが１２文字ではありません。');
-      if(!c.omron2jcieBu01Address.match(/^[A-Z0-9]*$/)) err.push('omron2jcieBu01Addressがアルファベット大文字か数字でありません。');
+      //if(c.omron2jcieBu01Name != "Rbt") err.push('');
+      
+      if(! (c.omron2jcieBu01Address.match(/^[A-Za-z0-9][A-Za-z0-9][A-Za-z0-9][A-Za-z0-9][A-Za-z0-9][A-Za-z0-9]$/) || c.omron2jcieBu01Address.match(/^[A-Za-z0-9][A-Za-z0-9]\:?[A-Za-z0-9][A-Za-z0-9]\:?[A-Za-z0-9][A-Za-z0-9]\:?[A-Za-z0-9][A-Za-z0-9]\:?[A-Za-z0-9][A-Za-z0-9]\:?[A-Za-z0-9][A-Za-z0-9]$/))){
+	err.push('omron2jcieBu01Addressのフォーマットが間違っています。（アルファベットと数字の１２文字（２文字おきに:があってもよい）が正しいフォーマットです）');
+      }
     }
-       
+
     //if(c.csvFilename) err.push('csvが設定されていません（必須項目です）。');
+    if(c.csvFilename){
+      c.csvFilename.match(/[\0|\/]/) && err.push('csvFilenameに/文字やnull文字は使えません。');
+    }
 
     if(c.machinistApiKey || c.machinistAgent){
       if(!c.machinistApiKey) err.push('machinistApiKeyが設定されていません（Machinistを使用するなら必須項目です）。');

@@ -49,7 +49,6 @@ echo 'Restart systemd-timesyncd ... '
 systemctl restart systemd-timesyncd
 echo 'ok'
 
-#sleep 10
 echo 'Start sensing and records ... '
 systemctl start pizero-workshop
 echo 'ok'

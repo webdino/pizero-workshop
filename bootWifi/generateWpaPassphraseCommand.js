@@ -1,3 +1,8 @@
+'use strict';
+
+// This program generate wpa_passphrase command string from configuration file (javascript source). //
+
+
 let config = require(process.argv[2]);
 
 let command = '';

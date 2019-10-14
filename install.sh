@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# This shell script is executed by a user manually #
+
 set -eu
 
 if ! [ $(whoami) = root ]; then echo 'Error: root permission required.'; exit 1; fi
@@ -66,6 +68,10 @@ installFirst () {
     echo 'Successfully done.'
 }
 
+
+# node js from apt package (version 10), it's heavy to execute. (I don't realy know why) #
+# For connect to omron2jcie on bluetooth, install noble (node package for bluetooth programming), but it's require node version 8, so install via nodebrew. #
+# npm is execute 'node' command internally, so have to modify path for root user. #
 installNode () {
     #which node > /dev/null || apt install -y nodejs
     #which npm > /dev/null || apt install -y npm
@@ -107,9 +113,9 @@ EOF
 installAptPackages () {
     apt update;
     which nkf > /dev/null || apt install -y nkf
-    #which node > /dev/null || apt install -y nodejs
     apt install -y libcap2-bin
-    # setcap cap_net_raw+eip $(eval readlink -f `which node`)
+    # for using noble (node package for bluetooth programming) by non root user. #
+    #setcap cap_net_raw+eip $(eval readlink -f `which node`)
     setcap cap_net_raw+eip /home/pi/.nodebrew/current/bin/node
     echo 'Successfully done.'
 }
@@ -216,6 +222,7 @@ module.exports = [
 
 EOF
 
+# initialize 'config.js' #
 initConfigJs () {
     echo "Initialize '$ConfigJs' ... "
     local Answer=default
@@ -231,6 +238,7 @@ initConfigJs () {
     fi
 }
 
+# initialize 'config.js' in /boot area #
 initBootConfigJs () {
     echo "Initialize '$BootDirConfigJs' ... "
     local Answer=default
@@ -250,6 +258,8 @@ installFiles () {
     [ -d "$BootDir" ] || sudo mkdir "$BootDir"
     [ -d "$BootDir/log" ] || sudo mkdir "$BootDir/log"
 
+    # install syncLog, bootPi, bootWifi, #
+    # with setting each configuration file path and status file path in '/boot/setting' #
     (cd syncLog; ./install.sh -c /boot/setting/syncLogConfig.js -s /boot/setting/syncLogStatus.txt)
     (cd bootPi; ./install.sh -c /boot/setting/bootPi.conf -s /boot/setting/bootPiStatus.txt)
     (cd bootWifi; ./install.sh -c /boot/setting/bootWifiConfig.js -s /boot/setting/bootWifiStatus.txt)
@@ -284,7 +294,8 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 EOF
     ln -fs $Cron /etc/cron.d/pizero-workshop 
     
-    # systemd
+    # create systemd service#
+    # ExecStart is ok, as case of '/bin/bash -c "npm start 2>> $Error "' if there is 'npm' path for root user #
     cat <<EOF > /etc/systemd/system/pizero-workshop.service
 [Unit]
 Description=pizero-workshop
@@ -331,6 +342,15 @@ OPTIONS
    -installFiles
 
    -initConfigJs
+
+
+   Install pizero-workshop, please execute with following options
+    1 -installFirst
+    2 -installNode
+    3 -installNpmPackages
+    4 -installAptpackages
+    5 -installFiles
+   from 1 to 5, step by step manually.
 
 EOF
 }

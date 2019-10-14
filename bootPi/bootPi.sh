@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# This shell script is called by bootPi.service (systemd).
+# This shell script is called by bootPi.service (systemd). #
 
 set -eu
 
@@ -19,7 +19,7 @@ ConfigFile=$(mktemp)
 echo "Using Following config file:$Origin ... "
 cat $Origin
 echo -n "Converting '$Origin' to UTF-8 LF ... "
-# convert to UTF-8 LF & remove comment line & add line number
+# convert to UTF-8 LF & remove comment line & add line number #
 nkf -w -d < $Origin | sed s/^#.*$//g | awk '{print NR, $0}' > $ConfigFile
 echo 'ok'
 
@@ -32,8 +32,10 @@ StaticRooters=default
 StaticDomainNameServers=default
 Hostname=default
 
+# check and bind values in configuration file #
 while read Line || [ -n "${Line}" ]; do
-    set +e
+    # line number and property and value #
+    set +e # for grep command #
     if(echo $Line | grep -q '^[0-9]*\s*$'); then : #empty line
     elif(echo $Line | grep -q '^[0-9]*\s*ssh:\s*enable\s*$'); then Ssh=0
     elif(echo $Line | grep -q '^[0-9]*\s*ssh:\s*disable\s*$'); then Ssh=1
@@ -109,6 +111,7 @@ OtgOnOff () {
     set -e
 }	   
 
+# insert wlan0 settings into '/etc/dhcpcd.conf' #
 DhcpcdInsert(){
     if ( [ $StaticIpAddress = default ] && [ $StaticRooters = default ] && [ $StaticDomainNameServers = default ]); then return 0; fi
     EtcDhcpcdConf='/etc/dhcpcd.conf'    
@@ -155,7 +158,9 @@ HostnameChange () {
     fi
 }
 
-# block sequential reboot
+# After rebooted by bootPi, if bootPi will reboot (something wrong), it's sequencial reboot. (bad) #
+# For blocking sequential reboot, bootPi uses '.reboot' flag file. #
+# If '.reboot' file is exists, bootPi do nothing and delete '.reboot' file. #
 if [ -f '.reboot' ]; then
     rm '.reboot'
     echo 'bootPi did nothing after rebooted by bootPi, finished.'

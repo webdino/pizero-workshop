@@ -1,3 +1,8 @@
+'use strict';
+
+// This program is call by start.sh for checking values in syncLog configuration file. //
+
+// process.argv[2] is syncLog configuration file path //
 let config = require(process.argv[2]);
 
 let err = [];

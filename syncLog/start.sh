@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# This shell script is called by syncLog.service (systemd).
+# This shell script is called by syncLog.service (systemd). #
+# And output will be redirected to status file #
 
 set -eu
 
@@ -18,7 +19,7 @@ ConfigFile=$(mktemp)
 echo "Using Following config file:$Origin ... "
 cat $Origin
 
-# UTF-8 LF convert config.js 
+# UTF-8 LF convert config.js #
 echo -n "Converting '$Origin' to UTF-8 LF ... "
 ConfigJs=$(mktemp)
 nkf -w -d  < $Origin > $ConfigFile

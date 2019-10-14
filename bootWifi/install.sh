@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# This shell script is executed by a user manually or another auto installer programs. #
+
 set -eu
 
 if ! [ $(whoami) = root ]; then echo 'Root permission required.'; exit 1; fi
@@ -7,6 +9,7 @@ if ! [ $(whoami) = root ]; then echo 'Root permission required.'; exit 1; fi
 ScriptDir=$(cd $(dirname $BASH_SOURCE); pwd)
 cd $ScriptDir
 
+# display command options #
 if [ $# -gt 0 ] && [ "$1" = '-h' ] ; then
 cat <<EOF
 
@@ -32,16 +35,19 @@ do
             ForceOverwite='yes'
             ;;
 	s)
+	    # modify the value of StatusFile in env.sh #
             StatusFile="$OPTARG"
 	    sed -i "/^StatusFile=/d" env.sh
 	    echo "StatusFile=\"$StatusFile\"" >> env.sh
             ;;
         c)
+	    # modify the value of ConfigFile in env.sh #
             ConfigFile="$OPTARG"
 	    sed -i '/^ConfigFile=/d' env.sh
 	    echo "ConfigFile=\"$ConfigFile\"" >> env.sh
             ;;
 	i)
+	    # initialize env.sh #
 	    cat <<EOF > env.sh
 #!/bin/bash
 
@@ -116,10 +122,11 @@ module.exports = [
 EOF
 }
 
+# for interaction #
 if [ -f $ConfigFile ] && [ $ForceOverwite != 'yes' ] ; then
     echo "Setting file:${ConfigFile} is already exist, overwrite? (yes|no)"
     echo -n "> "
-    read ForceOverwite
+    read ForceOverwite # read #
     case $ForceOverwite in
 	yes)
 	    ConfigFileWrite
@@ -134,10 +141,11 @@ if [ -f $ConfigFile ] && [ $ForceOverwite != 'yes' ] ; then
     esac
 else ConfigFileWrite; fi
 
+# install depend packages #
 which nkf > /dev/null || apt install -y nkf
 which node > /dev/null || apt install -y nodejs
 
-# systemd
+# create systemd service #
 cat <<EOF > /etc/systemd/system/bootWifi.service
 [Unit]
 Description=bootWifi

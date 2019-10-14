@@ -1,3 +1,8 @@
+'use strict';
+
+// This program is call by bootWifi.sh for checking values in wifi configuration file. //
+
+// process.argv[2] is wifi configuration file path //
 let config = require(process.argv[2]);
 
 let err = [];
