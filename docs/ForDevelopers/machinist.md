@@ -5,26 +5,29 @@ Library for sending some data to [Machinist](https://machinist.iij.jp/), this mo
 ## Machinist class (extends Record class)
 #### Usage example
 ```javascript
-let machinist = require('file path to this machinist.js');
+  let machinist = require('file path to this machinist.js');
 
-let machinist = new Machinist({
-  agent: "agent_something",
-  apiKey: "xxxxxxxxxx",
-  batchQuantity: 1,
-  format: (datas)=>{
-  let metrics = [];
-  datas.forEach((data)=>{
-  let timestamp = Math.floor(data.timestamp / 1000);
-  metrics.push({
-  name: "a",
-  namespace: "namespace_somethig",
-  data_point: {value: data.a, timestamp: timestamp}});
-  metrics.push({
-  name: "b",
-  namespace: "namespace_somethig",
-  data_point: {value: data.b, timestamp: timestamp}});});
-  return {agent: "agent_something",
-  metrics: metrics};}
+  let machinist = new Machinist({
+    agent: "agent_something",
+    apiKey: "xxxxxxxxxx",
+    batchQuantity: 1,
+    format: (datas)=>{
+      let metrics = [];
+      datas.forEach((data)=>{
+        let timestamp = Math.floor(data.timestamp / 1000);
+        metrics.push({
+          name: "a",
+          namespace: "namespace_somethig",
+          data_point: {value: data.a, timestamp: timestamp}});
+        metrics.push({
+          name: "b",
+          namespace: "namespace_somethig",
+          data_point: {value: data.b, timestamp: timestamp}});});
+      return {
+        agent: "agent_something",
+        metrics: metrics
+        };
+    }
   });
 
 machinist.write({a: 1, b: 2, timestamp: new Date.getTime()});
@@ -55,25 +58,37 @@ machinist.write({a: 1, b: 2, timestamp: new Date.getTime()});
   }
   ```  
 
-  - return a Promise object (this resolve function return nothing) or reject error object `Machinist リクエストのフォーマットが不正です` or `Machinist 認証に失敗しました` or `Machinist リソース利用上限数に達しています`
- or `Machinist リクエストボディのパラメータに問題があります` or `Machinist 単位時間あたりの送信回数が規定値を超えています` or valiable errors (?) `Machinist response status is ?, body is ?` or `Machinist http request is not responsed, timeouted` or valiable errors (?) `Machinist http request error: ?`
+  - return a Promise object 
+    - resolve nothing
+    - reject error object
+      - `Machinist リクエストのフォーマットが不正です` 
+      - `Machinist 認証に失敗しました` 
+      - `Machinist リソース利用上限数に達しています`
+      - `Machinist リクエストボディのパラメータに問題があります` 
+      - `Machinist 単位時間あたりの送信回数が規定値を超えています` 
+      - valiable errors (?) `Machinist response status is ?, body is ?`
+      - `Machinist http request is not responsed, timeouted` 
+      - valiable errors (?) `Machinist http request error: ?`
 
 #### format function in constructor argument
 Like above sample, argument of `format` function, `datas` is an array (this is internal stocks of which from `write` method argument), and `format` function return object of `agent` and `metrics`.
 
 ```javascript
   format: (datas)=>{
-  let metrics = [];
-  datas.forEach((data)=>{
-  let timestamp = Math.floor(data.timestamp / 1000);
-  metrics.push({
-  name: "a",
-  namespace: "namespace_somethig",
-  data_point: {value: data.a, timestamp: timestamp}});
-  metrics.push({
-  name: "b",
-  namespace: "namespace_somethig",
-  data_point: {value: data.b, timestamp: timestamp}});});
-  return {agent: "agent_something",
-  metrics: metrics};}
+    let metrics = [];
+    datas.forEach((data)=>{
+      let timestamp = Math.floor(data.timestamp / 1000);
+      metrics.push({
+        name: "a",
+        namespace: "namespace_somethig",
+        data_point: {value: data.a, timestamp: timestamp}});
+      metrics.push({
+        name: "b",
+        namespace: "namespace_somethig",
+        data_point: {value: data.b, timestamp: timestamp}});});
+    return {
+      agent: "agent_something",
+      metrics: metrics
+    };
+  }
 ```

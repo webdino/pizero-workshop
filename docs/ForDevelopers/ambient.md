@@ -51,7 +51,12 @@ ambient.write({a: 1, b: 2, timestamp: new Date.getTime()});
   }
   ```  
     
-  - return a Promise object (this resolve function return nothing) or reject error object `Ambient writeKey might be invalid` or `Ambient channelId might be invalid` or valiable errors (?) `Ambient Error, response status code is ?, response body is ?`
+  - return a Promise object
+    - resolve nothing
+    - reject error object
+      -  `Ambient writeKey might be invalid` 
+      -  `Ambient channelId might be invalid` 
+      -  valiable errors (?) `Ambient Error, response status code is ?, response body is ?`
 
 #### format function in constructor argument
 Like above sample, argument of `format` function, `datas` is an array (this is internal stocks of which from `write` method argument), and `format` function return formated objects array.

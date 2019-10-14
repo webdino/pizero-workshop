@@ -31,7 +31,7 @@ data is like this.
     "eTVOC":0,
     "eCO2":403,
     "reserveForFutureUse":255
-    }
+}
 ```
 
 #### Constructor & Method
