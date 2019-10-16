@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>HTTP Server for Raspberry Pi Zero Workshop</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      io().on("message", function(message) {
+        logger(JSON.stringify(message));
+      });
+
+      function logger(message) {
+        console.log("message: " + message);
+        const li = document.createElement("li");
+        li.textContent = message;
+        document.body.querySelector("ul.log").append(li);
+      }
+    </script>
+  </head>
+  <body>
+    <ul class="log"></ul>
+  </body>
+</html>

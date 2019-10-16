@@ -82,7 +82,7 @@ installNode () {
     else
 	echo -n 'Install node v8.15.0 from nodebrew ... '
 	if ! [ "$(which nodebrew)" ]; then curl -L git.io/nodebrew | perl - setup; fi
-        export PATH=/home/pi/.nodebrew/current/bin:\$PATH		   
+        export PATH=/home/pi/.nodebrew/current/bin:\$PATH
 	nodebrew ls-all
 	nodebrew install v8.15.0
 	nodebrew use v8.15.0
@@ -143,83 +143,75 @@ Please fill the values of some properties (sensing and records interval time, se
 */
 
 module.exports = [
-
   //first setting
   {
-    intervalMillisec: 60000,    //sensing and record interval (milli second)
+    intervalMillisec: 60000, //sensing and record interval (milli second)
+    // sever: true, // Enable local server.
 
     //have to filled belows to sensing
     omron2jcieBu01Name: "Rbt", //maybe fix "Rbt"
     omron2jcieBu01Address: "", //12 charactors of number or aphabet (like "A1B2C3D4E5F6")
 
-    //if filled below, saving csv file 
-    csvFilename: "",           //csv file name for saving sensing data. if value is "", not saving.
+    //if filled below, saving csv file
+    csvFilename: "", //csv file name for saving sensing data. if value is "", not saving.
 
     //if filled belows, uploading to Machinist
-    machinistApiKey: "",       //from Machinist acount. if value is "", uploading to Machinst is disable.
-    machinistAgent: "",        //from Machinist acount. if value is "", uploading to Machinst is disable.
+    machinistApiKey: "", //from Machinist acount. if value is "", uploading to Machinst is disable.
+    machinistAgent: "", //from Machinist acount. if value is "", uploading to Machinst is disable.
     machinistBatchQuantity: 1, //number of temporary stock the sensing data before sending
 
     //if filled belows, uploading to Ambient
-    ambientChannelId: "",      //from Ambient acount. if value is "", uploading to Ambient is disable.
-    ambientWriteKey: "",       //from Ambient acount. if value is "", uploading to Ambient is disable.
-    ambientBatchQuantity: 1    //number of temporary stock the sensing data before sending
-  }
+    ambientChannelId: "", //from Ambient acount. if value is "", uploading to Ambient is disable.
+    ambientWriteKey: "", //from Ambient acount. if value is "", uploading to Ambient is disable.
+    ambientBatchQuantity: 1 //number of temporary stock the sensing data before sending
+  },
 
-  ,
-  
   //second setting
   {
-    intervalMillisec: 60000,    //sensing and record interval (milli second)
+    intervalMillisec: 60000, //sensing and record interval (milli second)
 
     //have to filled belows to sensing
     omron2jcieBu01Name: "Rbt", //maybe fix "Rbt"
     omron2jcieBu01Address: "", //12 charactors of number or aphabet (like "A1B2C3D4E5F6")
 
-    //if filled below, saving csv file 
-    csvFilename: "",           //csv file name for saving sensing data. if value is "", not saving.
+    //if filled below, saving csv file
+    csvFilename: "", //csv file name for saving sensing data. if value is "", not saving.
 
     //if filled belows, uploading to Machinist
-    machinistApiKey: "",       //from Machinist acount. if value is "", uploading to Machinst is disable.
-    machinistAgent: "",        //from Machinist acount. if value is "", uploading to Machinst is disable.
+    machinistApiKey: "", //from Machinist acount. if value is "", uploading to Machinst is disable.
+    machinistAgent: "", //from Machinist acount. if value is "", uploading to Machinst is disable.
     machinistBatchQuantity: 1, //number of temporary stock the sensing data before sending
 
     //if filled belows, uploading to Ambient
-    ambientChannelId: "",      //from Ambient acount. if value is "", uploading to Ambient is disable.
-    ambientWriteKey: "",       //from Ambient acount. if value is "", uploading to Ambient is disable.
-    ambientBatchQuantity: 1    //number of temporary stock the sensing data before sending
-  }
+    ambientChannelId: "", //from Ambient acount. if value is "", uploading to Ambient is disable.
+    ambientWriteKey: "", //from Ambient acount. if value is "", uploading to Ambient is disable.
+    ambientBatchQuantity: 1 //number of temporary stock the sensing data before sending
+  },
 
-  ,
-  
   //third setting
   {
-    intervalMillisec: 60000,    //sensing and record interval (milli second)
+    intervalMillisec: 60000, //sensing and record interval (milli second)
 
     //have to filled belows to sensing
     omron2jcieBu01Name: "Rbt", //maybe fix "Rbt"
     omron2jcieBu01Address: "", //12 charactors of number or aphabet (like "A1B2C3D4E5F6")
 
-    //if filled below, saving csv file 
-    csvFilename: "",           //csv file name for saving sensing data. if value is "", not saving.
+    //if filled below, saving csv file
+    csvFilename: "", //csv file name for saving sensing data. if value is "", not saving.
 
     //if filled belows, uploading to Machinist
-    machinistApiKey: "",       //from Machinist acount. if value is "", uploading to Machinst is disable.
-    machinistAgent: "",        //from Machinist acount. if value is "", uploading to Machinst is disable.
+    machinistApiKey: "", //from Machinist acount. if value is "", uploading to Machinst is disable.
+    machinistAgent: "", //from Machinist acount. if value is "", uploading to Machinst is disable.
     machinistBatchQuantity: 1, //number of temporary stock the sensing data before sending
 
     //if filled belows, uploading to Ambient
-    ambientChannelId: "",      //from Ambient acount. if value is "", uploading to Ambient is disable.
-    ambientWriteKey: "",       //from Ambient acount. if value is "", uploading to Ambient is disable.
-    ambientBatchQuantity: 1    //number of temporary stock the sensing data before sending
+    ambientChannelId: "", //from Ambient acount. if value is "", uploading to Ambient is disable.
+    ambientWriteKey: "", //from Ambient acount. if value is "", uploading to Ambient is disable.
+    ambientBatchQuantity: 1 //number of temporary stock the sensing data before sending
   }
 
-
   //more settings (fourth, fifth, ...) are available in following space with comma and setting objects like above.
-  
-  
 ];
-
 EOF
 
 # initialize 'config.js' #
@@ -258,7 +250,7 @@ overwritePizeroWorkshopDefaultSyncLogConfigJs (){
     cat <<EOF > /boot/setting/syncLogConfig.js
 /*
 This is syncLog setting file (Javascript source).
-Setting is array of objects. 
+Setting is array of objects.
 Followings are example of setting.
 
 module.exports = [
@@ -313,7 +305,7 @@ installFiles () {
     (cd bootWifi; ./install.sh -c /boot/setting/bootWifiConfig.js -s /boot/setting/bootWifiStatus.txt)
 
     overwritePizeroWorkshopDefaultSyncLogConfigJs
-    
+
     cat <<EOF > $Logrotate
 $Dir/log/*.csv {
 	weekly
@@ -328,7 +320,7 @@ $Dir/log/*.csv {
 
 EOF
     # : > $Logrotate
-    ln -fs $Logrotate /etc/logrotate.d/pizero-workshop 
+    ln -fs $Logrotate /etc/logrotate.d/pizero-workshop
 
     # cron
     cat <<EOF > $Cron
@@ -342,8 +334,8 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 #*/1 * * * *    pi bash -c "$Dir/script/traffic.sh >> $Dir/log/traffic.csv"
 
 EOF
-    ln -fs $Cron /etc/cron.d/pizero-workshop 
-    
+    ln -fs $Cron /etc/cron.d/pizero-workshop
+
     # create systemd service#
     # ExecStart is ok, as case of '/bin/bash -c "npm start 2>> $Error "' if there is 'npm' path for root user #
     cat <<EOF > /etc/systemd/system/pizero-workshop.service
@@ -370,12 +362,12 @@ EOF
     [ -d /home/pi/Desktop ] && ln -nfs /boot/setting /home/pi/Desktop/setting
     systemctl disable pizero-workshop #systemctl enable pizero-workshop
     systemctl daemon-reload
-    
+
     initConfigJs
     initBootConfigJs
 
     [ -f $StarterStatus ] && rm $StarterStatus
-    
+
     echo 'Successfully done.'
 }
 
@@ -385,7 +377,7 @@ showOptions () {
 
 OPTIONS
 
-   -installFirst	
+   -installFirst
    -installNode
    -installNpmPackages
    -installAptPackages

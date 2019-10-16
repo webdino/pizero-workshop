@@ -6,6 +6,7 @@ const Omron2jcieBu01 = require('omron2jcieBu01.js');
 const Csv = require('csv.js');
 const Machinist = require('machinist.js');
 const Ambient = require('ambient.js');
+const localServer = require("pizero-workshop-http");
 const pattern = require('pattern.js');
 
 const logDirectory = '/home/pi/pizero-workshop/log'
@@ -36,6 +37,7 @@ console.log('config_file: "' + configFile + '"');
  *   ambientReadKey: string,
  *   ambientBatchQuantity: number
  * }} AmbientConfig
+ * @typedef {{server: boolean}} ServerConfig
  * @type {Array<
  *   {
  *     intervalMillisec: number,
@@ -44,6 +46,7 @@ console.log('config_file: "' + configFile + '"');
  *   } & Partial<CsvConfig>
  *     & Partial<MachinistConfig>
  *     & Partial<AmbientConfig>
+ *     & Partial<ServerConfig>
  * >}
  */
 const config = require(configFile);
@@ -118,13 +121,14 @@ config && config.forEach((param)=>{
 	      d7: data.eCO2
 	    };})
 	});
+	const server = param.server && localServer();
   if(omron2jcieBu01 && (csv || machinist || ambient)){
     console.log('sensorRecords pattern start with: ' + (omron2jcieBu01 ? 'omron2jcieBu01 ' : ' ') + (csv ? 'csv ' : ' ') + (machinist ? 'machinist ' : ' ') + (ambient ? 'ambient ' : ' '));
     // call pattern function //
     pattern.sensorRecords({
       loopInterval: param.intervalMillisec,
       sensor: omron2jcieBu01,
-      records: [csv, machinist, ambient].filter(record=>record)
+      records: [server, csv, machinist, ambient].filter(record=>record)
     });
   }else{
     console.log('sensorRecords pattern coud not start with this uncomplete setting.');

@@ -18,80 +18,72 @@ Please fill the values of some properties (sensing and records interval time, se
 */
 
 module.exports = [
-
   //first setting
   {
-    intervalMillisec: 60000,    //sensing and record interval (milli second)
+    intervalMillisec: 60000, //sensing and record interval (milli second)
+    // sever: true, // Enable local server.
 
     //have to filled belows to sensing
     omron2jcieBu01Name: "Rbt", //maybe fix "Rbt"
     omron2jcieBu01Address: "", //12 charactors of number or aphabet (like "A1B2C3D4E5F6")
 
-    //if filled below, saving csv file 
-    csvFilename: "",           //csv file name for saving sensing data. if value is "", not saving.
+    //if filled below, saving csv file
+    csvFilename: "", //csv file name for saving sensing data. if value is "", not saving.
 
     //if filled belows, uploading to Machinist
-    machinistApiKey: "",       //from Machinist acount. if value is "", uploading to Machinst is disable.
-    machinistAgent: "",        //from Machinist acount. if value is "", uploading to Machinst is disable.
+    machinistApiKey: "", //from Machinist acount. if value is "", uploading to Machinst is disable.
+    machinistAgent: "", //from Machinist acount. if value is "", uploading to Machinst is disable.
     machinistBatchQuantity: 1, //number of temporary stock the sensing data before sending
 
     //if filled belows, uploading to Ambient
-    ambientChannelId: "",      //from Ambient acount. if value is "", uploading to Ambient is disable.
-    ambientWriteKey: "",       //from Ambient acount. if value is "", uploading to Ambient is disable.
-    ambientBatchQuantity: 1    //number of temporary stock the sensing data before sending
-  }
+    ambientChannelId: "", //from Ambient acount. if value is "", uploading to Ambient is disable.
+    ambientWriteKey: "", //from Ambient acount. if value is "", uploading to Ambient is disable.
+    ambientBatchQuantity: 1 //number of temporary stock the sensing data before sending
+  },
 
-  ,
-  
   //second setting
   {
-    intervalMillisec: 60000,    //sensing and record interval (milli second)
+    intervalMillisec: 60000, //sensing and record interval (milli second)
 
     //have to filled belows to sensing
     omron2jcieBu01Name: "Rbt", //maybe fix "Rbt"
     omron2jcieBu01Address: "", //12 charactors of number or aphabet (like "A1B2C3D4E5F6")
 
-    //if filled below, saving csv file 
-    csvFilename: "",           //csv file name for saving sensing data. if value is "", not saving.
+    //if filled below, saving csv file
+    csvFilename: "", //csv file name for saving sensing data. if value is "", not saving.
 
     //if filled belows, uploading to Machinist
-    machinistApiKey: "",       //from Machinist acount. if value is "", uploading to Machinst is disable.
-    machinistAgent: "",        //from Machinist acount. if value is "", uploading to Machinst is disable.
+    machinistApiKey: "", //from Machinist acount. if value is "", uploading to Machinst is disable.
+    machinistAgent: "", //from Machinist acount. if value is "", uploading to Machinst is disable.
     machinistBatchQuantity: 1, //number of temporary stock the sensing data before sending
 
     //if filled belows, uploading to Ambient
-    ambientChannelId: "",      //from Ambient acount. if value is "", uploading to Ambient is disable.
-    ambientWriteKey: "",       //from Ambient acount. if value is "", uploading to Ambient is disable.
-    ambientBatchQuantity: 1    //number of temporary stock the sensing data before sending
-  }
+    ambientChannelId: "", //from Ambient acount. if value is "", uploading to Ambient is disable.
+    ambientWriteKey: "", //from Ambient acount. if value is "", uploading to Ambient is disable.
+    ambientBatchQuantity: 1 //number of temporary stock the sensing data before sending
+  },
 
-  ,
-  
   //third setting
   {
-    intervalMillisec: 60000,    //sensing and record interval (milli second)
+    intervalMillisec: 60000, //sensing and record interval (milli second)
 
     //have to filled belows to sensing
     omron2jcieBu01Name: "Rbt", //maybe fix "Rbt"
     omron2jcieBu01Address: "", //12 charactors of number or aphabet (like "A1B2C3D4E5F6")
 
-    //if filled below, saving csv file 
-    csvFilename: "",           //csv file name for saving sensing data. if value is "", not saving.
+    //if filled below, saving csv file
+    csvFilename: "", //csv file name for saving sensing data. if value is "", not saving.
 
     //if filled belows, uploading to Machinist
-    machinistApiKey: "",       //from Machinist acount. if value is "", uploading to Machinst is disable.
-    machinistAgent: "",        //from Machinist acount. if value is "", uploading to Machinst is disable.
+    machinistApiKey: "", //from Machinist acount. if value is "", uploading to Machinst is disable.
+    machinistAgent: "", //from Machinist acount. if value is "", uploading to Machinst is disable.
     machinistBatchQuantity: 1, //number of temporary stock the sensing data before sending
 
     //if filled belows, uploading to Ambient
-    ambientChannelId: "",      //from Ambient acount. if value is "", uploading to Ambient is disable.
-    ambientWriteKey: "",       //from Ambient acount. if value is "", uploading to Ambient is disable.
-    ambientBatchQuantity: 1    //number of temporary stock the sensing data before sending
+    ambientChannelId: "", //from Ambient acount. if value is "", uploading to Ambient is disable.
+    ambientWriteKey: "", //from Ambient acount. if value is "", uploading to Ambient is disable.
+    ambientBatchQuantity: 1 //number of temporary stock the sensing data before sending
   }
 
-
   //more settings (fourth, fifth, ...) are available in following space with comma and setting objects like above.
-  
-  
 ];
-
