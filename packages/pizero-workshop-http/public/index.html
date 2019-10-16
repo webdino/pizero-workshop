@@ -1,24 +1,100 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>HTTP Server for Raspberry Pi Zero Workshop</title>
+    <title>Raspberry Pi Zero Workshop</title>
+    <style>
+      :root {
+        --medium-font-size: 3rem;
+        --small-font-size: 2rem;
+        --primary-color: #ffffff;
+        --primary-bg-color: #000000;
+      }
+
+      html {
+        font-size: calc(100vw / 80);
+      }
+
+      body {
+        font-size: var(--medium-font-size);
+        color: var(--primary-color);
+        background-color: var(--primary-bg-color);
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-size: var(--medium-font-size);
+      }
+
+      dl,
+      dt,
+      dd {
+        margin: 0;
+      }
+      dl {
+        display: grid;
+        font-size: var(--medium-font-size);
+        grid-template-columns: 1fr 1fr;
+      }
+    </style>
     <script src="/socket.io/socket.io.js"></script>
     <script>
-      io().on("message", function(message) {
-        logger(JSON.stringify(message));
+      io().on("message", function(data) {
+        update(data);
+        logger(JSON.stringify(data));
       });
 
+      function update(data) {
+        const root = document.body.querySelector(".values-group");
+        root.querySelector(".date").textContent = new Date().toLocaleString();
+
+        const keys = [
+          "temperature",
+          "relativeHumidity",
+          "barometricPressure",
+          "ambientLight",
+          "soundNoise",
+          "eTVOC",
+          "eCO2"
+        ];
+
+        keys.forEach(key => {
+          root.querySelector(`.${key.toLowerCase()}`).textContent = Number(
+            data[key]
+          ).toString();
+        });
+      }
+
       function logger(message) {
-        console.log("message: " + message);
-        const li = document.createElement("li");
-        li.textContent = message;
-        document.body.querySelector("ul.log").append(li);
+        console.log(`message: ${message}`);
       }
     </script>
   </head>
   <body>
-    <ul class="log"></ul>
+    <h1>Raspberry Pi Zero Workshop</h1>
+
+    <dl class="values-group">
+      <dt>現在</dt>
+      <dd><span class="date">-</span></dd>
+      <dt>温度</dt>
+      <dd><span class="temperature">NaN</span> ℃</dd>
+      <dt>湿度</dt>
+      <dd><span class="relativehumidity">NaN</span> %</dd>
+      <dt>大気圧</dt>
+      <dd><span class="barometricpressure">NaN</span> hPa</dd>
+      <dt>照度</dt>
+      <dd><span class="ambientlight">NaN</span> lx</dd>
+      <dt>騒音</dt>
+      <dd><span class="soundnoise">NaN</span> db</dd>
+      <dt>総揮発性有機化合物</dt>
+      <dd><span class="etvoc">NaN</span> ppb</dd>
+      <dt>二酸化炭素濃度</dt>
+      <dd><span class="eco2">NaN</span> ppm</dd>
+    </dl>
   </body>
 </html>
