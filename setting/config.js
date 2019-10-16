@@ -21,7 +21,8 @@ module.exports = [
   //first setting
   {
     intervalMillisec: 60000, //sensing and record interval (milli second)
-    // sever: true, // Enable local server.
+    // sever: true, // Enable local server (default: false).
+    // talk: true,  // Enable talk mode (default: false).
 
     //have to filled belows to sensing
     omron2jcieBu01Name: "Rbt", //maybe fix "Rbt"
