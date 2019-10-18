@@ -41,7 +41,7 @@ console.log('config_file: "' + configFile + '"');
  *   ambientBatchQuantity: number
  * }} AmbientConfig
  * @typedef {{server: boolean}} ServerConfig
- * @typedef {{talk: boolean}} TalkConfig
+ * @typedef {{talk: Object}} TalkConfig
  * @type {Array<
  *   {
  *     intervalMillisec: number,
@@ -161,7 +161,7 @@ config &&
           })
       });
     const server = param.server && localServer();
-    const talk = param.talk && talker();
+    const talk = param.talk && talker(param.talk);
     if (omron2jcieBu01 && (server || talk || csv || machinist || ambient)) {
       console.log(
         [

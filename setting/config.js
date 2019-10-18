@@ -22,7 +22,13 @@ module.exports = [
   {
     intervalMillisec: 60000, //sensing and record interval (milli second)
     // sever: true, // Enable local server (default: false).
-    // talk: true,  // Enable talk mode (default: false).
+    talk: {
+      enable: false, // Enable talk mode (default: false).
+      /** @type {({ temperature, relativeHumidity, barometricPressure, ambientLight, soundNoise, eTVOC, eCO2 }) => boolean} */
+      on: ({ temperature }) => temperature > 20,
+      /** @type {({ temperature, relativeHumidity, barometricPressure, ambientLight, soundNoise, eTVOC, eCO2 }) => string} */
+      script: ({ temperature }) => `現在の温度は${temperature}度です。`
+    },
 
     //have to filled belows to sensing
     omron2jcieBu01Name: "Rbt", //maybe fix "Rbt"

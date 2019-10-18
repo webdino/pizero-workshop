@@ -2,7 +2,35 @@
 
 const OpenJTalk = require("openjtalk");
 
-function main() {
+function main(
+  { enable, on, script } = {
+    enable: false,
+    /** @type {({ temperature, relativeHumidity, barometricPressure, ambientLight, soundNoise, eTVOC, eCO2 }) => boolean} */
+    on: () => true,
+    /** @type {({ temperature, relativeHumidity, barometricPressure, ambientLight, soundNoise, eTVOC, eCO2 }) => string} */
+    script: ({
+      temperature,
+      relativeHumidity,
+      barometricPressure,
+      ambientLight,
+      soundNoise,
+      eTVOC,
+      eCO2
+    }) =>
+      [
+        "現在",
+        `温度${temperature}度`,
+        `湿度${relativeHumidity}パーセント`,
+        `大気圧${barometricPressure}ヘクトパスカル`,
+        `照度${ambientLight}ルクス`,
+        `騒音${soundNoise}デシベル`,
+        `総揮発性有機化合物${eTVOC}ピーピービー`,
+        `二酸化炭素濃度${eCO2}ピーピーエム`
+      ].join("。")
+  }
+) {
+  if (!enable) return;
+
   const talker = new OpenJTalk();
 
   return {
@@ -18,29 +46,14 @@ function main() {
      * }} data
      */
     async write(data) {
-      const {
-        temperature,
-        relativeHumidity,
-        barometricPressure,
-        ambientLight,
-        soundNoise,
-        eTVOC,
-        eCO2
-      } = data;
+      if (!on(data)) return;
 
-      const script = [
-        "っ", // FIXME: HDMIの音声出力を使うと最初数ミリ秒出力されない
-        "現在",
-        `温度${temperature}度`,
-        `湿度${relativeHumidity}パーセント`,
-        `大気圧${barometricPressure}ヘクトパスカル`,
-        `照度${ambientLight}ルクス`,
-        `騒音${soundNoise}デシベル`,
-        `総揮発性有機化合物${eTVOC}ピーピービー`,
-        `二酸化炭素濃度${eCO2}ピーピーエム`
-      ].join("。");
-
-      talker.talk(script);
+      talker.talk(
+        [
+          "っ。", // FIXME: HDMIの音声出力を使うと最初数ミリ秒出力されない
+          script(data)
+        ].join("")
+      );
     }
   };
 }
