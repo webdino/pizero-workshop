@@ -389,7 +389,6 @@ setupKiosk () {
         echo '@xset s off -dpms'
         echo '@chromium-browser --incognito --kiosk http://localhost:3000'
     } >> "$lxsession_path/LXDE-pi/autostart"
-EOF
     chown -R pi:pi "$lxsession_path"
 }
 
