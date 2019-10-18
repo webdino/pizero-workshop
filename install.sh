@@ -372,6 +372,24 @@ EOF
     echo 'Successfully done.'
 }
 
+setupKiosk () {
+    local lxsession_path=/home/pi/.config/lxsession
+    mkdir -p "$lxsession_path/LXDE-pi"
+    {
+        echo '@xset s off -dpms'
+        echo '@chromium-browser --incognito --kiosk http://localhost:3000'
+    } >> "$lxsession_path/LXDE-pi/autostart"
+EOF
+    chown -R pi:pi "$lxsession_path"
+}
+
+teardownKiosk () {
+    local lxsession_path=/home/pi/.config/lxsession
+    sed -i'' \
+        -e '/^@xset s off -dpms$/d' \
+        -e '/^@chromium-browser --incognito --kiosk /d' \
+        "$lxsession_path/LXDE-pi/autostart"
+}
 
 showOptions () {
     cat <<EOF
@@ -386,6 +404,8 @@ OPTIONS
 
    -initConfigJs
 
+   -setupKiosk
+   -teardownKiosk
 
    Install pizero-workshop, please execute with following options
     1 -installFirst
@@ -406,6 +426,8 @@ if [ $# -gt 0 ]; then
 	-installAptPackages) installAptPackages;;
 	-installFiles) installFiles;;
 	-initConfigJs) initConfigJs;;
+	-setupKiosk)    setupKiosk;;
+	-teardownKiosk) teardownKiosk;;
 	*) showOptions;;
     esac
 else
