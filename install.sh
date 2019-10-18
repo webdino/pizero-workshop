@@ -146,7 +146,11 @@ module.exports = [
   //first setting
   {
     intervalMillisec: 60000, //sensing and record interval (milli second)
-    // sever: true, // Enable local server (default: false).
+    sever: {
+      enable: false, // Enable local server (default: false).
+      /** @type {({ temperature, relativeHumidity, barometricPressure, ambientLight, soundNoise, eTVOC, eCO2 }) => boolean} */
+      notifyWhen: ({ temperature }) => temperature > 20
+    },
     talk: {
       enable: false, // Enable talk mode (default: false).
       /** @type {({ temperature, relativeHumidity, barometricPressure, ambientLight, soundNoise, eTVOC, eCO2 }) => boolean} */

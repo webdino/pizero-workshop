@@ -40,7 +40,7 @@ console.log('config_file: "' + configFile + '"');
  *   ambientReadKey: string,
  *   ambientBatchQuantity: number
  * }} AmbientConfig
- * @typedef {{server: boolean}} ServerConfig
+ * @typedef {{server: Object}} ServerConfig
  * @typedef {{talk: Object}} TalkConfig
  * @type {Array<
  *   {
@@ -160,7 +160,7 @@ config &&
             };
           })
       });
-    const server = param.server && localServer();
+    const server = param.server && localServer(param.server);
     const talk = param.talk && talker(param.talk);
     if (omron2jcieBu01 && (server || talk || csv || machinist || ambient)) {
       console.log(

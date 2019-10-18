@@ -10,6 +10,7 @@
         --small-font-size: 2rem;
         --primary-color: #ffffff;
         --primary-bg-color: #000000;
+        --notify-bg-color: #a00000;
       }
 
       html {
@@ -20,6 +21,19 @@
         font-size: var(--medium-font-size);
         color: var(--primary-color);
         background-color: var(--primary-bg-color);
+      }
+
+      body[data-notify] {
+        animation: notify 1s infinite;
+      }
+
+      @keyframes notify {
+        from {
+          background-color: var(--notify-bg-color);
+        }
+        to {
+          background-color: var(--primary-bg-color);
+        }
       }
 
       h1,
@@ -49,6 +63,11 @@
         logger(JSON.stringify(data));
       });
 
+      io().on("notify", function() {
+        notify();
+        logger("on notify.");
+      });
+
       function update(data) {
         const root = document.body.querySelector(".values-group");
         root.querySelector(".date").textContent = new Date().toLocaleString();
@@ -68,6 +87,14 @@
             data[key]
           ).toString();
         });
+      }
+
+      function notify() {
+        const { dataset } = document.body;
+        dataset.notify = true;
+        setTimeout(() => {
+          delete dataset.notify;
+        }, 30e3);
       }
 
       function logger(message) {
