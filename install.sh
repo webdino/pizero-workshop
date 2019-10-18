@@ -122,7 +122,7 @@ installAptPackages () {
 
 
 ConfigJsInitialContent=$(mktemp)
-cat <<EOF > $ConfigJsInitialContent
+cat <<'EOF' > $ConfigJsInitialContent
 /*
 This is pizero-workshop config.js.
 
@@ -156,7 +156,7 @@ module.exports = [
       /** @type {({ temperature, relativeHumidity, barometricPressure, ambientLight, soundNoise, eTVOC, eCO2 }) => boolean} */
       when: ({ temperature }) => temperature > 25,
       /** @type {({ temperature, relativeHumidity, barometricPressure, ambientLight, soundNoise, eTVOC, eCO2 }) => string} */
-      script: ({ temperature }) => `現在の温度は\${temperature}度です。`
+      script: ({ temperature }) => `現在の温度は${temperature}度です。`
     },
 
     //have to filled belows to sensing
