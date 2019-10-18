@@ -3,10 +3,10 @@
 const OpenJTalk = require("openjtalk");
 
 function main(
-  { enable, on, script } = {
+  { enable, when, script } = {
     enable: false,
     /** @type {({ temperature, relativeHumidity, barometricPressure, ambientLight, soundNoise, eTVOC, eCO2 }) => boolean} */
-    on: () => true,
+    when: () => true,
     /** @type {({ temperature, relativeHumidity, barometricPressure, ambientLight, soundNoise, eTVOC, eCO2 }) => string} */
     script: ({
       temperature,
@@ -46,7 +46,7 @@ function main(
      * }} data
      */
     async write(data) {
-      if (!on(data)) return;
+      if (!when(data)) return;
 
       talker.talk(
         [
