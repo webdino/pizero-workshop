@@ -181,7 +181,7 @@ config &&
       pattern.sensorRecords({
         loopInterval: param.intervalMillisec,
         sensor: omron2jcieBu01,
-        records: [server, talk, csv, machinist, ambient].filter(
+        records: [webAgent, speechAgent, csv, machinist, ambient].filter(
           record => record
         )
       });
