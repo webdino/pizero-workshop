@@ -6,8 +6,8 @@ const Omron2jcieBu01 = require("omron2jcieBu01.js");
 const Csv = require("csv.js");
 const Machinist = require("machinist.js");
 const Ambient = require("ambient.js");
-const localServer = require("pizero-workshop-http");
-const talker = require("pizero-workshop-talk");
+const WebAgent = require("omron-iot-sensor-web-agent");
+const SpeechAgent = require("omron-iot-sensor-speech-agent");
 const pattern = require("pattern.js");
 
 const logDirectory = "/home/pi/pizero-workshop/log";
@@ -40,8 +40,8 @@ console.log('config_file: "' + configFile + '"');
  *   ambientReadKey: string,
  *   ambientBatchQuantity: number
  * }} AmbientConfig
- * @typedef {{server: Object}} ServerConfig
- * @typedef {{talk: Object}} TalkConfig
+ * @typedef {{webAgent: Object}} WebAgentConfig
+ * @typedef {{speechAgent: Object}} SpeechAgentConfig
  * @type {Array<
  *   {
  *     intervalMillisec: number,
@@ -50,8 +50,8 @@ console.log('config_file: "' + configFile + '"');
  *   } & Partial<CsvConfig>
  *     & Partial<MachinistConfig>
  *     & Partial<AmbientConfig>
- *     & Partial<ServerConfig>
- *     & Partial<TalkConfig>
+ *     & Partial<WebAgentConfig>
+ *     & Partial<SpeechAgentConfig>
  * >}
  */
 const config = require(configFile);
@@ -160,15 +160,18 @@ config &&
             };
           })
       });
-    const server = param.server && localServer(param.server);
-    const talk = param.talk && talker(param.talk);
-    if (omron2jcieBu01 && (server || talk || csv || machinist || ambient)) {
+    const webAgent = param.webAgent && WebAgent(param.webAgent);
+    const speechAgent = param.speechAgent && SpeechAgent(param.speechAgent);
+    if (
+      omron2jcieBu01 &&
+      (webAgent || speechAgent || csv || machinist || ambient)
+    ) {
       console.log(
         [
           "sensorRecords pattern start with:",
           omron2jcieBu01 ? "omron2jcieBu01" : "",
-          server ? "server" : "",
-          talk ? "talk" : "",
+          webAgent ? "webAgent" : "",
+          speechAgent ? "speechAgent" : "",
           csv ? "csv" : "",
           machinist ? "machinist" : "",
           ambient ? "ambient" : ""

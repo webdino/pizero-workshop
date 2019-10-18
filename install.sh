@@ -146,18 +146,6 @@ module.exports = [
   //first setting
   {
     intervalMillisec: 60000, //sensing and record interval (milli second)
-    server: {
-      enable: false, // Enable local server (default: false).
-      /** @type {({ temperature, relativeHumidity, barometricPressure, ambientLight, soundNoise, eTVOC, eCO2 }) => boolean} */
-      notifyWhen: ({ temperature }) => temperature > 25
-    },
-    talk: {
-      enable: false, // Enable talk mode (default: false).
-      /** @type {({ temperature, relativeHumidity, barometricPressure, ambientLight, soundNoise, eTVOC, eCO2 }) => boolean} */
-      when: ({ temperature }) => temperature > 25,
-      /** @type {({ temperature, relativeHumidity, barometricPressure, ambientLight, soundNoise, eTVOC, eCO2 }) => string} */
-      script: ({ temperature }) => `現在の温度は${temperature}度です。`
-    },
 
     //have to filled belows to sensing
     omron2jcieBu01Name: "Rbt", //maybe fix "Rbt"
@@ -174,7 +162,20 @@ module.exports = [
     //if filled belows, uploading to Ambient
     ambientChannelId: "", //from Ambient acount. if value is "", uploading to Ambient is disable.
     ambientWriteKey: "", //from Ambient acount. if value is "", uploading to Ambient is disable.
-    ambientBatchQuantity: 1 //number of temporary stock the sensing data before sending
+    ambientBatchQuantity: 1, //number of temporary stock the sensing data before sending
+
+    webAgent: {
+      enable: false, // Enable local server (default: false).
+      /** @type {({ temperature, relativeHumidity, barometricPressure, ambientLight, soundNoise, eTVOC, eCO2 }) => boolean} */
+      notifyWhen: ({ temperature }) => temperature > 25
+    },
+    speechAgent: {
+      enable: false, // Enable talk mode (default: false).
+      /** @type {({ temperature, relativeHumidity, barometricPressure, ambientLight, soundNoise, eTVOC, eCO2 }) => boolean} */
+      notifyWhen: ({ temperature }) => temperature > 25,
+      /** @type {({ temperature, relativeHumidity, barometricPressure, ambientLight, soundNoise, eTVOC, eCO2 }) => string} */
+      notifyScript: ({ temperature }) => `現在の温度は${temperature}度です。`
+    }
   },
 
   //second setting

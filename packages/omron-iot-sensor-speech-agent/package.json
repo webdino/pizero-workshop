@@ -1,12 +1,12 @@
 {
-  "name": "pizero-workshop-talk",
+  "name": "omron-iot-sensor-speech-agent",
   "version": "1.0.0",
   "description": "Talk in Japanese for Raspberry Pi Zero Workshop",
   "main": "index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/webdino/pizero-workshop.git",
-    "directory": "packages/pizero-workshop-talk"
+    "directory": "packages/omron-iot-sensor-speech-agent"
   },
   "author": "Kohei Watanabe <kou029w@gmail.com>",
   "license": "MIT",

@@ -3,12 +3,12 @@
 const OpenJTalk = require("openjtalk");
 
 function main(
-  { enable, when, script } = {
+  { enable, notifyWhen, notifyScript } = {
     enable: false,
     /** @type {({ temperature, relativeHumidity, barometricPressure, ambientLight, soundNoise, eTVOC, eCO2 }) => boolean} */
-    when: () => true,
+    notifyWhen: () => true,
     /** @type {({ temperature, relativeHumidity, barometricPressure, ambientLight, soundNoise, eTVOC, eCO2 }) => string} */
-    script: ({
+    notifyScript: ({
       temperature,
       relativeHumidity,
       barometricPressure,
@@ -46,12 +46,12 @@ function main(
      * }} data
      */
     async write(data) {
-      if (!when(data)) return;
+      if (!notifyWhen(data)) return;
 
       talker.talk(
         [
           "っ。", // FIXME: HDMIの音声出力を使うと最初数ミリ秒出力されない
-          script(data)
+          notifyScript(data)
         ].join("")
       );
     }

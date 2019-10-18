@@ -12,8 +12,6 @@ try {
         key =>
           [
             "intervalMillisec",
-            "server",
-            "talk",
             "omron2jcieBu01Name",
             "omron2jcieBu01Address",
             "csvFilename",
@@ -22,7 +20,9 @@ try {
             "machinistBatchQuantity",
             "ambientChannelId",
             "ambientWriteKey",
-            "ambientBatchQuantity"
+            "ambientBatchQuantity",
+            "webAgent",
+            "speechAgent"
           ].indexOf(key) == -1 && err.push(`${key}は誤った設定項目です。`)
       );
 
