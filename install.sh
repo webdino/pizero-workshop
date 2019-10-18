@@ -149,12 +149,12 @@ module.exports = [
     sever: {
       enable: false, // Enable local server (default: false).
       /** @type {({ temperature, relativeHumidity, barometricPressure, ambientLight, soundNoise, eTVOC, eCO2 }) => boolean} */
-      notifyWhen: ({ temperature }) => temperature > 20
+      notifyWhen: ({ temperature }) => temperature > 25
     },
     talk: {
       enable: false, // Enable talk mode (default: false).
       /** @type {({ temperature, relativeHumidity, barometricPressure, ambientLight, soundNoise, eTVOC, eCO2 }) => boolean} */
-      when: ({ temperature }) => temperature > 20,
+      when: ({ temperature }) => temperature > 25,
       /** @type {({ temperature, relativeHumidity, barometricPressure, ambientLight, soundNoise, eTVOC, eCO2 }) => string} */
       script: ({ temperature }) => `現在の温度は${temperature}度です。`
     },
