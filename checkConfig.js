@@ -12,6 +12,8 @@ try {
         key =>
           [
             "intervalMillisec",
+            "server",
+            "talk",
             "omron2jcieBu01Name",
             "omron2jcieBu01Address",
             "csvFilename",
