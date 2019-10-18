@@ -82,7 +82,7 @@ installNode () {
     else
 	echo -n 'Install node v8.15.0 from nodebrew ... '
 	if ! [ "$(which nodebrew)" ]; then curl -L git.io/nodebrew | perl - setup; fi
-        export PATH=/home/pi/.nodebrew/current/bin:\$PATH
+        export PATH=/home/pi/.nodebrew/current/bin:\$lxsession_PATH
 	nodebrew ls-all
 	nodebrew install v8.15.0
 	nodebrew use v8.15.0
@@ -101,7 +101,7 @@ installNpmPackages () {
     apt update;
     apt install -y bluetooth bluez libbluetooth-dev libudev-dev
     su - pi <<EOF
-    export PATH=/home/pi/.nodebrew/current/bin:\$PATH
+    export PATH=/home/pi/.nodebrew/current/bin:\$lxsession_PATH
     echo -n "Install npm package... "
     cd "$Dir"
     $Npm i
@@ -420,15 +420,15 @@ EOF
 
 if [ $# -gt 0 ]; then
     case "$1" in
-	-installFirst) installFirst;;
-	-installNode) installNode;;
-	-installNpmPackages) installNpmPackages;;
-	-installAptPackages) installAptPackages;;
-	-installFiles) installFiles;;
-	-initConfigJs) initConfigJs;;
+	-installFirst)  installFirst;;
+	-installNode)   installNode;;
+	-installNpmPackages)    installNpmPackages;;
+	-installAptPackages)    installAptPackages;;
+	-installFiles)  installFiles;;
+	-initConfigJs)  initConfigJs;;
 	-setupKiosk)    setupKiosk;;
 	-teardownKiosk) teardownKiosk;;
-	*) showOptions;;
+	*)  showOptions;;
     esac
 else
     showOptions
