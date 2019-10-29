@@ -1,0 +1,17 @@
+{
+  "name": "omron-iot-sensor-web-agent",
+  "version": "1.0.0",
+  "description": "HTTP Server for Raspberry Pi Zero Workshop",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/webdino/pizero-workshop.git",
+    "directory": "packages/omron-iot-sensor-web-agent"
+  },
+  "author": "Kohei Watanabe <kou029w@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0"
+  }
+}

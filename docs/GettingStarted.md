@@ -1,3 +1,5 @@
+_この文書の内容はメンテナンスされておらず古い内容のため、実際の環境での方法と大きく異なる可能性があります。_
+
 # Getting Started
 
 ## Raspberry Pi を組み立てる
@@ -137,7 +139,7 @@ module.exports = {
 
 ファイルの内容を下記に変更します
 
-`[YOUR AMBIENT CHANNEL ID]` を先程控えた `チャネルID` に変更  
+`[YOUR AMBIENT CHANNEL ID]` を先程控えた `チャネルID` に変更
 `[YOUR AMBIENT WRITE ID]` を先程控えた `ライトキー` に変更
 
 `config.js` を RPi にアップロードして上書きします

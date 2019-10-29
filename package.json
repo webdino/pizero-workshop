@@ -17,7 +17,9 @@
     "ambient-lib": "^0.1.5",
     "bme280-sensor": "^0.1.6",
     "date-utils": "^1.2.21",
-    "noble": "^1.9.1"
+    "noble": "^1.9.1",
+    "omron-iot-sensor-web-agent": "file:packages/omron-iot-sensor-web-agent",
+    "omron-iot-sensor-speech-agent": "file:packages/omron-iot-sensor-speech-agent"
   },
   "devDependencies": {}
 }
