@@ -78,7 +78,14 @@ module.exports = [
 ];
 ```
 
-## キオスクモードの有効化
+## 開発者向け補足
+
+- 設定ファイル config.js は pizero-workshop.js と omron-iot-sensor-web-agent によって読み込む
+- pizero-workshop.js に関するドキュメントは、[pizero-workshop for developers](pizero-workshopForDevelopers)を参照
+- omron-iot-sensor-web-agent は環境センサー (OMRON 2JCIE-BU) から得られた値を Web ページとして配信するためのモジュール
+- インターネットに接続することなくローカル環境で表示することが可能
+
+### キオスクモードの有効化
 
 起動後、画面を全画面で表示するようにするためにキオスクモードを有効化するには、ターミナルで次のコマンドを実行してください。
 
@@ -88,20 +95,13 @@ module.exports = [
 sudo ~/pizero-workshop/install.sh -setupKiosk
 ```
 
-### キオスクモードを無効化するには
+#### キオスクモードを無効化するには
 
 次のコマンドを実行します。
 
 ```sh
 sudo ~/pizero-workshop/install.sh -teardownKiosk
 ```
-
-## 開発者向け補足
-
-- 設定ファイル config.js は pizero-workshop.js と omron-iot-sensor-web-agent によって読み込む
-- pizero-workshop.js に関するドキュメントは、[pizero-workshop for developers](pizero-workshopForDevelopers)を参照
-- omron-iot-sensor-web-agent は環境センサー (OMRON 2JCIE-BU) から得られた値を Web ページとして配信するためのモジュール
-- インターネットに接続することなくローカル環境で表示することが可能
 
 ### 通知設定
 
