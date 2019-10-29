@@ -225,3 +225,15 @@ module.exports = [
 ```
 
 `syncLogConfig.js`ファイルを以上のように編集します。
+
+### 現在の値をディスプレイ上に表示する
+
+webAgent のセットアップを行うことで、環境センサー (OMRON 2JCIE-BU) から得られた現在の値をディスプレイ上に表示することが出来ます。
+
+詳しい内容は[webAgentのドキュメント](ForDevelopers/web-agent.md)を参照してください。
+
+### 現在の値をスピーカーで読み上げる
+
+speechAgent のセットアップを行うことで、環境センサー (OMRON 2JCIE-BU) から得られた現在の値をスピーカーで読み上げることが出来ます。
+
+詳しい内容は[speechAgentのドキュメント](ForDevelopers/speech-agent.md)を参照してください。
