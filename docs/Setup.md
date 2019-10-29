@@ -1,3 +1,5 @@
+_この文書の内容はメンテナンスされておらず古い内容のため、実際の環境での方法と大きく異なる可能性があります。_
+
 # セットアップ手順
 ワークショップ環境のセットアップ手順です。
 
@@ -105,7 +107,7 @@
   sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
   ```
 * USB 有線での接続を止めて PC も同じ WiFi に接続し、WiFi から `ssh pi@raspberrypi.local` で ssh 接続できるか確認する
-* 接続安定化のためパワーマネージメント機能をオフにするには `/sbin/iw dev wlan0 set power_save off` コマンドを使うが、再起動時に保存されないため `sudo nano /etc/rc.local` で最終行の `exit 0` と書かれている前に実行する行を追記: 
+* 接続安定化のためパワーマネージメント機能をオフにするには `/sbin/iw dev wlan0 set power_save off` コマンドを使うが、再起動時に保存されないため `sudo nano /etc/rc.local` で最終行の `exit 0` と書かれている前に実行する行を追記:
   ```
   # Set WiFi Power Management off
   sudo /sbin/iw dev wlan0 set power_save off
@@ -115,7 +117,7 @@
 
 ## ついでにインストール・設定しておく
 
-* python で bluetooth の操作によく使う bluez をインストール: 
+* python で bluetooth の操作によく使う bluez をインストール:
   ```
   sudo apt-get install python-bluez
   ```

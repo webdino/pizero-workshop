@@ -1,6 +1,8 @@
+_この文書の内容はメンテナンスされておらず古い内容のため、実際の環境での方法と大きく異なる可能性があります。_
+
 # プログラムをサービス化する
 
-プログラムをサービス化することで、Raspberry Piを起動したときに自動的にプログラムを開始してセンシングを実行することができます  
+プログラムをサービス化することで、Raspberry Piを起動したときに自動的にプログラムを開始してセンシングを実行することができます
 
 ## サービスを設定する
 
@@ -38,7 +40,7 @@ systemctl status omron2jciebu01 -l
 
 ```
 ● omron2jciebu01.service - Omron2JCIEBU01
-   Loaded: loaded (/etc/systemd/system/omron2jciebu01.service; disabled; vendor 
+   Loaded: loaded (/etc/systemd/system/omron2jciebu01.service; disabled; vendor
    Active: active (running) since Thu 2019-02-21 08:40:34 GMT; 38s ago
  Main PID: 2545 (node)
    CGroup: /system.slice/omron2jciebu01.service
@@ -66,7 +68,7 @@ systemctl status omron2jciebu01 -l
 
 ```
 ● omron2jciebu01.service - Omron2JCIEBU01
-   Loaded: loaded (/etc/systemd/system/omron2jciebu01.service; disabled; vendor 
+   Loaded: loaded (/etc/systemd/system/omron2jciebu01.service; disabled; vendor
    Active: inactive (dead)
 
 Feb 21 08:40:34 raspberrypi systemd[1]: Started Omron2JCIEBU01.
