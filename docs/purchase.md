@@ -84,3 +84,88 @@
     - [秋月電子通商](http://akizukidenshi.com/catalog/g/gM-13879/)
 - Grove の各種センサー
 - その他のセンサー
+
+### ディスプレイ
+
+(オプション)
+
+小型の Raspberry Pi 向けディスプレイを繋いでブラウザをフル画面表示すれば現在のセンサーの値を表示しつつ、背景色の変化で通知が可能。インストール方法は [webAgent のドキュメント](ForDevelopers/web-agent.md) を参照してください。
+
+ディスプレイとそれを接続するためのケーブル一式に追加で必要な機材:
+
+| 機材                      | 価格 (最低限の機材の参考値) |
+| ------------------------- | --------------------------- |
+| HDMI ディスプレイ         | 2750 円                     |
+| HDMI - HDMI mini ケーブル | 130 円                      |
+| 合計                      | 2880 円                     |
+
+#### HDMI ディスプレイ
+
+3.5 インチ 480x320 が多くある。音声出力端子があるとスピーカーに出力可能。
+
+- 3.5inch 480x320
+  - [Amazon | 3.5 インチ HDMI LCD ディスプレイ ラズベリーパイ対応 1920x1080 タッチスクリーン タッチペン付 | LCD 表示器 | 産業・研究開発用品 通販](https://www.amazon.co.jp/dp/B07VSB4TS2/)
+  - [Amazon | Kuman 3.5 インチ HDMI 小型モニター 480\*320 ラズベリーパイ 3b タッチスクリーン ディスプレイ ビデオ/ゲーム可能 保護ケースセット raspberry pi 3 b+ 2 Model B A+ A に対応 ラズベリー パイ SC6AC | Kuman | ベアボーン PC 通販](https://www.amazon.co.jp/dp/B07TXTSJBY/)
+  - AliExpress にて \$17 [3.5 インチ液晶 HDMI USB タッチスクリーンリアル Hd 1920 × 1080 lcd ディスプレイ Py ための Raspberri 3 モデル B /オレンジパイ (ゲームをプレイビデオ) MPI3508 - AliExpress | Alibaba グループ上の 電子部品 & 用品 からの LCD モジュール の中 - 11.11\_ダブル 11 シングルスデイ](https://ja.aliexpress.com/item/32818537950.html)
+- 4.0inch 800x480
+  - AliExpress にて \$22.56 [4.0 "インチ HDMI IPS 液晶モニター画面モジュール表示 GPIO 抵抗タッチパネルオーディオ出力ラズベリーパイ 4 - AliExpress | Alibaba グループ上の 電子部品 & 用品 からの LCD モジュール の中 - 11.11\_ダブル 11 シングルスデイ](https://ja.aliexpress.com/item/33057280844.html)
+
+#### HDMI - HDMI mini ケーブル
+
+Raspberry Pi Zero の場合、HDMI mini 端子なので、HDMI - HDMI mini ケーブルが必要
+
+HDMI - HDMI mini 変換アダプターと HDMI - HDMI ケーブルでも代替可能。
+
+L 字ケーブル類は隣の端子と干渉することが多いので要注意
+
+- [Alibaba グループ | AliExpress 上の 30 センチ 1 メートル、 1.5 メートル、 2 メートル、 3 メートル、 5 メートル高速金めっきの Hdmi ミニ HDMI プラグオス オス HDMI ケーブル 1.4 バージョン 1080 p 3D 錠剤 DVD - 11.11\_ダブル 11 シングルスデイ](https://ja.aliexpress.com/item/32519099637.html)
+- [Amazon | エレコム ハイスピード HDMI-Mini ケーブル 4K 3D フル HD イーサネット対応 1.0m ブラック DH-HD14SSM10BK | エレコム | 家電＆カメラ](https://www.amazon.co.jp/dp/B00HQY7W22/)
+- FPV [FPV マイクロ HDMI ミニ HDMI 90 度アダプタ 5 センチメートル 100 センチメートル FPC リボンフラット HDMI ケーブルピッチ 20pin プラグコネクタ - AliExpress | Alibaba グループ上の 家電製品 からの HDMI ケーブル の中 - 11.11\_ダブル 11 シングルスデイ](https://ja.aliexpress.com/item/32982250238.html)
+  - 価格を気にせず綺麗にするのには良いが USB ケーブルなどとの干渉に要注意
+
+### スピーカー
+
+(オプション)
+
+スピーカー、HDMI ディスプレイ (または、音声出力可能な USB デバイス)を接続すれば、現在のセンサーの値を音声で読み上げることが可能。インストール方法は [speechAgent のドキュメント](ForDevelopers/speech-agent.md) を参照してください。
+
+スピーカーとそれを接続するためのケーブル一式に追加で必要な機材:
+
+| 機材                                     | 価格 (最低限の機材の参考値) |
+| ---------------------------------------- | --------------------------- |
+| ダイソー USB ミニスピーカー              | 330 円                      |
+| 電源二股ケーブル                         | 141 円                      |
+| オーディオ端子付き HDMI VGA 変換ケーブル | 920 円                      |
+| 合計                                     | 1391 円                     |
+
+#### ダイソー USB ミニスピーカー
+
+USB 給電で動作する Φ3.5mm オーディオミニプラグ入力のスピーカー。乾電池式のスピーカーで代替可能。
+
+##### USB 給電式
+
+- [Amazon | ポータブル USB 2.0 マルチメディアデスクトップコンピュータノートブックミニスピーカー音楽ステレオホームシアターパーティースピーカー 3.5mm ジャック-青と黒 | BellalueeJP | ポータブルスピーカー](https://www.amazon.co.jp/dp/B07XQHRCS9/)
+- [Amazon | iBUFFALO PC 用スピーカー USB 電源 ホワイト BSSP29UWH | バッファロー | PC スピーカー 通販](https://www.amazon.co.jp/dp/B01JI045RQ/)
+- [Amazon | 小型 携帯便利 有線 USB 多機能 実用的 卓上スピーカー コンピュータスピーカー | D DOLITY | PC スピーカー 通販](https://www.amazon.co.jp/dp/B079ZVK9LP/)
+
+##### 乾電池式
+
+- [Amazon | Flymylion 高音質ミニ ポータブルスピーカー スマホスピーカー PC スピーカー USB 充電 サブウーファ 3.5 MM Aux オーディオジャックラップトップ/タブレット PC/スマートフォン | Flymylion | ポータブルスピーカー](https://www.amazon.co.jp/dp/B07W5M5CQN/)
+- [Amazon | uzinby ミニ ポータブル スピーカー サブウーファ 3.7 MM Aux オーディオジャック 小型軽量 ラップトップ/タブレット PC/スマートフォン　「100%新品」 | uzinby | ポータブルスピーカー](https://www.amazon.co.jp/dp/B07K6M1285/)
+- [Amazon | PUERI 3.5 MM インラインステレオミニスピーカーポータブルスピーカー MP3 音楽プレーヤー携帯電話用タブレットタブレット直接挿入型スピーカー | PUERI | PC スピーカー 通販](https://www.amazon.co.jp/dp/B07RLMKB7C/)
+
+#### 電源二股ケーブル
+
+USB 給電式のスピーカーの駆動に必要。乾電池式のスピーカーの場合は不要。モバイルバッテリー、USB ハブ、給電分岐ケーブルでも代替可能。
+
+- [Amazon | Yammy データ転送+充電と充電のみを使い分けられる二股(Y 字)USB ケーブル [ USB A・オス - USB A・メス(x2) ] | Yammy | USB ケーブル 通販](https://www.amazon.co.jp/dp/B076CCM9LP)
+- [3 ポート USB ハブミニ USB 2.0 3.0 高速ハブ PC のラップトップ U ディスク用のカードリーダー iphone 7 8 × 携帯電話安い - AliExpress | Alibaba グループ上の パソコン & オフィス からの USB ハブ の中 - 11.11\_ダブル 11 シングルスデイ](https://ja.aliexpress.com/item/33034957047.html)
+- [Kebidu ミニ 3 ポート USB 3.0 スプリッタハブ高速データ転送スプリッタに Pc のラップトップの Macbook - AliExpress | Alibaba グループ上の パソコン & オフィス からの USB ハブ の中 - 11.11\_ダブル 11 シングルスデイ](https://ja.aliexpress.com/item/4000077505184.html)
+- [USB 3.0 2 ポートハブ USB 充電器 2in1 OTG ハブラップトップマイクロ USB 充電ポート Android のスマートフォン/ コンピュータ # BL1 - AliExpress | Alibaba グループ上の パソコン & オフィス からの USB ハブ の中 - 11.11\_ダブル 11 シングルスデイ](https://ja.aliexpress.com/item/4000030666712.html)
+- [2 ポート ABS スプリッタアダプタファッションミニツイン充電器ポータブル実用エクステンダー安定電話タブレット USB ハブプロ - AliExpress | Alibaba グループ上の パソコン & オフィス からの USB ハブ の中 - 11.11\_ダブル 11 シングルスデイ](https://ja.aliexpress.com/item/33019197633.html)
+
+#### オーディオ端子付き HDMI VGA 変換ケーブル
+
+多くの場合、HDMI ディスプレイにオーディオ出力端子があるので、その場合不要。あるいは、 USB オーディオ 変換アダプタで代替可能。
+
+- [Amazon | HDMI VGA 変換ケーブル WERPOWER HDMI VGA D-Sub 15 ピン 変換ケーブル 金メッキ 高速伝送 HD1080p hdmi オス to vga オス オーディオケーブル付属 ビデオ変換コード プロジェクター PC HDTV 用【相性保証付】 | WERPOWER | DVI-HDMI アダプタ 通販](https://www.amazon.co.jp/dp/B07Y1R7GDN/)
