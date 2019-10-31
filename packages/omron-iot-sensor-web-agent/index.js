@@ -7,13 +7,15 @@ const io = require("socket.io")(http);
 const port = Number(process.env.PORT) || 3000;
 
 function main(
-  { enable, notifyWhen } = {
+  { enable, ...options } = {
     enable: false,
-    /** @type {({ temperature, relativeHumidity, barometricPressure, ambientLight, soundNoise, eTVOC, eCO2 }) => boolean} */
-    notifyWhen: () => false
+    /** @type {(({ temperature, relativeHumidity, barometricPressure, ambientLight, soundNoise, eTVOC, eCO2 }) => boolean) | undefined} */
+    notifyWhen: undefined
   }
 ) {
   if (!enable) return;
+
+  const notifyWhen = options.notifyWhen || (() => false);
 
   app.get("/", function(_, res) {
     res.sendFile(path.join(__dirname, "public", "index.html"));

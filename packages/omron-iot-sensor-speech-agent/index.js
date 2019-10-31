@@ -3,12 +3,20 @@
 const OpenJTalk = require("openjtalk");
 
 function main(
-  { enable, notifyWhen, notifyScript } = {
+  { enable, ...options } = {
     enable: false,
-    /** @type {({ temperature, relativeHumidity, barometricPressure, ambientLight, soundNoise, eTVOC, eCO2 }) => boolean} */
-    notifyWhen: () => true,
-    /** @type {({ temperature, relativeHumidity, barometricPressure, ambientLight, soundNoise, eTVOC, eCO2 }) => string} */
-    notifyScript: ({
+    /** @type {(({ temperature, relativeHumidity, barometricPressure, ambientLight, soundNoise, eTVOC, eCO2 }) => boolean) | undefined} */
+    notifyWhen: undefined,
+    /** @type {(({ temperature, relativeHumidity, barometricPressure, ambientLight, soundNoise, eTVOC, eCO2 }) => string) | undefined} */
+    notifyScript: undefined
+  }
+) {
+  if (!enable) return;
+
+  const notifyWhen = options.notifyWhen || (() => true);
+  const notifyScript =
+    options.notifyScript ||
+    (({
       temperature,
       relativeHumidity,
       barometricPressure,
@@ -26,10 +34,7 @@ function main(
         `騒音${soundNoise}デシベル`,
         `総揮発性有機化合物${eTVOC}ピーピービー`,
         `二酸化炭素濃度${eCO2}ピーピーエム`
-      ].join("。")
-  }
-) {
-  if (!enable) return;
+      ].join("。"));
 
   const talker = new OpenJTalk();
 
