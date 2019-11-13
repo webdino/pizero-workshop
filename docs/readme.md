@@ -14,6 +14,8 @@ Raspberry Pi へのログイン・遠隔操作などとそのためのソフト�
 
 - [機材の紹介と購入先](purchase.md)
 - [Raspbian をこのワークショップ用にセットアップ](ForDevelopers/pizero-workshopForDevelopers.md)
+- [清翔開智高校・鳥取城北高校でワークショップをした際に使った説明資料](https://speakerdeck.com/dynamis/pi-zero-iot-workshop-at-high-school)
+  - 当日使用したものを公開用に一部編集したものです。また、当時のプログラム実装に合わせたものであり最新版では変更が必要ですが参考資料として。
 
 ## Raspberry Pi Zero で IoT センサーデータ収集
 
