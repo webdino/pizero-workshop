@@ -20,9 +20,8 @@
 まずは計測データを取得・WiFi 経由でインターネットに送信するボードが必要。
 
 - Raspberry Pi Zero W or Raspberry Pi Zero WH - 1300 円程度 or 1800 円程度
-  - WiFi 対応モデルは W または WH であることに注意。
-  - OMRON 環境センサーなどを利用する場合は GPIO ピンヘッダのないモデル (W) で良い
-  - その他のセンサーを利用する場合はピンヘッダありのモデル (WH) を用意すること
+  - **WiFi 対応モデルは W または WH** であることに注意。
+  - OMRON 環境センサーなど Bluetooth や USB で通信するセンサーを利用する場合は GPIO ピンヘッダのないモデル (W) で良いが、GPIO や I2C などで通信するセンサーを利用する場合はピンヘッダありのモデル (WH) を用意すること
   - 購入先 (WH, Wifi 対応、ピンヘッダ付き): [Switch Science](https://www.switch-science.com/catalog/3646/), [KSY (RASPIZWHSC0065)](https://raspberry-pi.ksyic.com/main/index/pdp.id/406/pdp.open/406), [marutsu](https://www.marutsu.co.jp/pc/i/1320453/)
   - 購入先 (W, Wifi 対応、ピンヘッダ無し): [Switch Sciense](https://www.switch-science.com/catalog/3200/), [KSY (RASPI0W11)](https://raspberry-pi.ksyic.com/main/index/pdp.id/219) - 通常一度に 1 つしか購入できないことに注意
 - [オフィシャル Pi Zero ケース](https://www.raspberrypi.org/products/raspberry-pi-zero-case/) - 税込 648 円
@@ -41,22 +40,22 @@
   - 読み書きできれば何でも良いし PC に付属していれば不要
   - micro USB 端子もスマホ対応リーダーなどを使えば PC ナシでのワークショップも可能 (テキストエディタのインストールは必要)
   - 購入先:
-    - [100 均の USB2.0 カードリーダーでも問題ない](https://tech.nikkeibp.co.jp/atcl/nxt/column/18/00424/101000004/)
+    - [100 均の USB2.0 カードリーダーでも十分](https://tech.nikkeibp.co.jp/atcl/nxt/column/18/00424/101000004/)
     - [エレコム カードリーダー (Amazon)](https://www.amazon.co.jp/dp/B01NBHK133/) - メーカー製のものでも 500 円前後である例
     - [キングストン MobileLite G4 カードリーダー (Amazon)](https://www.amazon.co.jp/gp/product/B00KX4TORI/) - 1300 円程度、SD イメージ作成などで高速なものが欲しい場合はこちらが比較的安価でオススメ
 - USB 電源 AC アダプタ + micro USB ケーブル - 500 円程度 + 100 円程度
-  - Raspberry Pi Zero への給電用 AC アダプターと設置箇所に合わた配線に必要な長さのケーブルです
-  - スマートフォン向けなどの一般的な電源で流用可能。持っている場合は追加購入不要
-  - PC などでも 24 時間電源を入れておけるものであれば電源として利用可能
-  - OMRON センサーへの給電に使うことも出来るが直接刺すと AC アダプターの熱でセンサーの値がずれるので注意
+  - Raspberry Pi Zero への給電用 AC アダプターと設置箇所に合わた配線に必要な長さのケーブル
+  - スマートフォン向けなどの一般的な AC アダプターや 24 時間稼働している USB 出力ポートのある PC などでも利用可能
+  - OMRON センサーへの給電に使うことも出来るが直接刺すと AC アダプターの熱でセンサーの値が不正確になるため注意
   - 購入先:
-    - microUSB 給電ケーブルは 100 均のものでも大丈夫です (給電だけに使う場合は通信非対応でもよい) -[エレコム USB 充電器 (Amazon)](https://www.amazon.co.jp/dp/B01M073QDM/) - 何でも良いが執筆時に送料無料で安かった
+    - microUSB 給電ケーブルは 100 均のものでも大丈夫です (給電だけに使う場合は通信非対応でもよい)
+    -[エレコム USB 充電器 (Amazon)](https://www.amazon.co.jp/dp/B01M073QDM/) (何でも良いが執筆時に送料無料で安かった例)
 - microUSB - USB 変換アダプタまたは USB 電源 - 100〜数百円
   - OMRON 環境センサーに Raspberry Pi Zero から給電する場合に micro USB から給電できるアダプターかケーブルを用意する
   - Raspberry Pi Zero とは USB ではなく BLE で無線通信するため USB 電源とケーブルを OMRON センサー用に別途用意する場合は不要
   - 購入先: [ノーブランド OTG ケーブル (Amazon)](https://www.amazon.co.jp/dp/B0074D3QCK/), [ノーブランド OTG ケーブル x10 (Amazon)](https://www.amazon.co.jp/dp/B07WYYSRN3/), [超小型変換アダプタ x5 (Amazon)](https://www.amazon.co.jp/gp/product/B01GFOOXO8/) など
 
-注意: "Pi Zero WH Official Simple Kit" というボード本体・ケースの他に USB 変換ケーブルと mini HDMI 変換アダプターが同梱されているセットが 3000 円程度で販売されているが、USB 変換ケーブルの出来が非常に悪く、特に OMRON 環境センサーとは相性が悪く刺したらほぼ確実にピンが曲がって壊れるため非推奨です。その状態で電源を入れると最悪、Raspberry Pi Zero 本体やセンサーの故障に繋がるためご注意ください。なお、本ワークショップでは Raspberry Pi Zero をディスプレイに繋いで操作する必要は無いため、mini HDMI 変換アダプタは不要です (欲しい場合は 100 均や Amazon で 100-200 円程度で購入可能)。
+注意: "Pi Zero WH Official Simple Kit" というボード本体・ケースの他に USB 変換ケーブルと mini HDMI 変換アダプターが同梱されているセットが 3000 円程度で販売されているが、USB 変換ケーブルの出来が非常に悪く、OMRON 環境センサーを刺したらほぼ確実にピンが曲がり壊れるため使わないこと。最悪、Raspberry Pi Zero 本体やセンサーが故障します。
 
 ### OMRON 環境センサー利用時
 
