@@ -2,8 +2,8 @@
 theme: jekyll-theme-slate
 repository: webdino/pizero-workshop
 lang: ja
-title: 'Pi Zero IoT Workshop'
-description: Raspberry Pi Zero による IoT ワークショップ
+title: 'Pi Zero Easy IoT'
+description: 安価で簡単に IoT を始めよう！ - Raspberry Pi Zero によるプログラミングレス IoT 環境データ収集
 show_downloads: false
 #google_analytics:
 #include:
