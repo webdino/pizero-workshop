@@ -23,13 +23,15 @@ Raspberry Pi Zero を利用して安価な機材でセンサーデータを収�
 SD カードの設定ファイル編集だけで、IoT 環境センサーを使ってデータを収集し、クラウドサービスによるデータ可視化・監視まで可能なワークショップ資料です。
 Raspberry Pi へのログイン・遠隔操作などとそのためのソフトウェアのインストールなどは一切不要です。
 
-- プログラミングレス IoT 環境データ収集
-  - [基本的な使い方](basic-usage.md)
-    - まずは OMRON 環境センサーからセンサーデータを取得し IIJ Machinist に送信してみましょう。
-  - [便利な機能とカスタマイズ](advanced-usage.md)
-    - [Ambient にデータを送信する](ambient.md)
-    - [計測値を画面に表示する (Web Agent の使い方)](usage/web-agent.md)
-    - [計測値を音声読み上げする (Speech Agent の使い方)](usage/speech-agent.md)
+- [基本的な使い方](basic-usage.md)
+  - まずは OMRON 環境センサーからセンサーデータを取得し IIJ Machinist に送信してみましょう。
+- [便利な機能とカスタマイズ](advanced-usage.md)
+  - [基本的な設定の変更](basic-config.md)
+  - [Machinist をもっと活用する](machinist.md)
+  - [Ambient にセンサーデータを送信する](ambient.md)
+  - [SD カードや Google Drive にデータを保存する](storage.md)
+  - [現在の値をディスプレイに表示する](usage/web-agent.md)
+  - [現在の値をスピーカーで読み上げる](usage/speech-agent.md)
 
 ### 機材の手配とセットアップ
 
