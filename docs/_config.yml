@@ -2,7 +2,7 @@
 theme: jekyll-theme-slate
 repository: webdino/pizero-workshop
 lang: ja
-title: '<a href="/">Pi Zero Easy IoT</a>'
+title: '<a href="/" style="color: white>Pi Zero Easy IoT</a>'
 description: 安価で簡単に IoT を始めよう！ - Raspberry Pi Zero によるプログラミングレス IoT 環境データ収集
 show_downloads: false
 #google_analytics:
