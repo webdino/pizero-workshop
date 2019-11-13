@@ -1,0 +1,30 @@
+---
+---
+
+@import "{{ site.theme }}"; // override default style
+
+// adjust margin/padding of header
+.page-header {
+  padding: 1.2rem 3rem;
+}
+
+.project-tagline {
+  margin-bottom: 0.8rem;
+}
+
+.main-content {
+  @include large {
+    max-width: 72rem;
+    padding: 2rem 3rem;
+    line-height: 1.75;
+  }
+
+  @include medium {
+    padding: 2rem 2rem;
+    line-height: 1.75;
+  }
+
+  @include small {
+    padding: 2rem 1rem;
+  }
+}
