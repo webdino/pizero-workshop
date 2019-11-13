@@ -9,8 +9,8 @@ Raspberry Pi へのログイン・遠隔操作などとそのためのソフト�
 - SD カードの編集だけでできる IoT 環境センサーデータ収集
   - [基礎編: まずは動かしてみよう](Workshop.md)
   - [応用編: もっと便利につかってみよう](Workshop2ndPage.md)
-  - [計測値を画面に表示する (webAgent)](web-agent.md)
-  - [計測値を音声読み上げする (speechAgent)](speech-agent.md)
+  - [計測値を画面に表示する (webAgent)](ForDevelopers/web-agent.md)
+  - [計測値を音声読み上げする (speechAgent)](ForDevelopers/speech-agent.md)
 
 ### ワークショップ運営者向け
 
