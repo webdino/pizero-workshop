@@ -1,4 +1,4 @@
-_この文書の内容はメンテナンスされておらず古い内容のため、実際の環境での方法と大きく異なる可能性があります。_
+_この文書は [初期リリース](https://github.com/webdino/pizero-workshop/releases/tag/20190528) 時のものです。参考のため残していますがメンテナンスされておらず古い内容のため、実際の環境での方法と大きく異なる可能性があります。_
 
 # セットアップ手順
 ワークショップ環境のセットアップ手順です。
@@ -18,6 +18,7 @@ _この文書の内容はメンテナンスされておらず古い内容のた�
   dtoverlay=dwc2
   ```
 * OTG モードでネットワーククライアントとして起動するには cmdline.txt の `rootwait` の直後に `modules-load=dwc2,g_ether` を挿入
+  
   * 一度も起動してない場合は `quiet init=/usr/lib/raspi-config/init_resize.sh` 等も入ってるが初回起動後には削除される
 * boot パーティーション直下に `ssh` という空のファイルを作成 (mac なら `touch /Volumes/boot/ssh` などとする)
 * Windows の場合はドライバーと Bonjour のサービスをインストール (Mac では追加インストール作業無し)
@@ -47,6 +48,7 @@ _この文書の内容はメンテナンスされておらず古い内容のた�
     * タイムゾーンは  Asia -> Tokyo
   * `5 Interfacing Options` にて ssh サーバを有効化
 * Mac から RNDIS/Ethernet Gadget へネットワーク共有
+  
   * 接続開始したタイミングで ssh が切れる場合がある。暫く待ったら再度 ssh 可能になる
 * 取りあえずアップデートはしておく
   ```

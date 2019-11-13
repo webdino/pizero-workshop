@@ -8,13 +8,13 @@
 
 以降に登場する`0x0000`といったバイト値はビッグエンディアンで表記されており、設定する時はリトルエンディアンに読み替える必要がある
 
-## 2JCIEBU01に接続する
+## 2JCIE-BU01に接続する
 
 プロファイルにアクセスするには、[BLE Scanner for Android](https://play.google.com/store/apps/details?id=com.macdom.ble.blescanner&hl=ja)等を用いると便利
 
 以下ではBLE Scanerを用いた変更方法を記載する
 
-BLE Scannerを起動する。2JCIEBU01はデフォルトで`Rbt`という名前になっている。`Rbt`の`CONNECT`ボタンをタップする
+BLE Scannerを起動する。2JCIE-BU01はデフォルトで`Rbt`という名前になっている。`Rbt`の`CONNECT`ボタンをタップする
 
 ![](./images/00008.jpg)
 
@@ -26,7 +26,7 @@ BLE ScannerでCUSTOM SERVICE の中からUUIDの先頭が `AB705110`になって
 
 ![](./images/00009.jpg)
 
-その下のCUStOM CHARACTERISTICの先頭が`AB705115`になっているものを探す
+その下のCUSTOM CHARACTERISTICの先頭が`AB705115`になっているものを探す
 
 ![](./images/00010.jpg)
 
