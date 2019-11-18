@@ -6,18 +6,18 @@ Web Agent をセットアップすると、環境センサー (OMRON 2JCIE-BU) �
 
 ## セットアップ
 
-事前にディスプレイと Raspberry Pi 本体を含むデータ収集環境一式を準備します。
-[SD カードの編集だけでできる IoT 環境データ収集](../Workshop)のページを参考にしてください。
+事前に HDMI ディスプレイと Raspberry Pi 本体を含むデータ収集環境一式を準備します。
+[基本的な使い方](../basic-usage.md) と [利用機材情報](../purchase.md) ページを参考にしてください。
 
 現在の値を画面上に表示するためには、以下の 3 つを実施します。
 
 1. ディスプレイを Raspberry Pi に接続
-2. webAgent の有効化
+2. Web Agent の有効化
 3. 再起動
 
-ここでは webAgent の有効化する方法を詳しく説明します。
+ここでは Web Agent の有効化する方法を詳しく説明します。
 
-## webAgent の有効化
+## Web Agent の有効化
 
 microSD カードの中にある、設定ファイル config.js を書き換えます。
 config.js の書き換え方は [基本的な使い方](../basic-usage.md) を参考にしてください。
@@ -60,9 +60,9 @@ module.exports = [
 ];
 ```
 
-設定の記述方法について詳しくは下記「開発者向けの解説」を参照してください。
+設定の記述方法について詳しくは下記「機能と実装の詳細」を参照してください。
 
-### webAgent を無効化するには
+### Web Agent を無効化するには
 
 config.js の webAgent.enable を `false` にします。
 
@@ -78,7 +78,7 @@ module.exports = [
 ];
 ```
 
-## 開発者向けの解説
+## 機能と実装の詳細
 
 - 設定ファイル config.js は pizero-workshop.js と omron-iot-sensor-web-agent によって読み込む
 - pizero-workshop.js に関するドキュメントは、[pizero-workshop for developers](index.md) を参照
