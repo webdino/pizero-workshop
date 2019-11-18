@@ -1,12 +1,12 @@
-# webAgent
+# Web Agent (計測値の画面表示機能)
 
 ![画面](../images/omron-iot-sensor-web-agent.png)
 
-webAgent のセットアップを行うことで、環境センサー (OMRON 2JCIE-BU) から得られた現在の値をディスプレイ上に表示することが出来ます。
+Web Agent をセットアップすると、環境センサー (OMRON 2JCIE-BU) から得られた現在の値をディスプレイ上に表示できます。
 
 ## セットアップ
 
-前提として、事前にディスプレイと Raspberry Pi 本体を含むデータ収集環境一式を準備します。
+事前にディスプレイと Raspberry Pi 本体を含むデータ収集環境一式を準備します。
 [SD カードの編集だけでできる IoT 環境データ収集](../Workshop)のページを参考にしてください。
 
 現在の値を画面上に表示するためには、以下の 3 つを実施します。
@@ -20,7 +20,7 @@ webAgent のセットアップを行うことで、環境センサー (OMRON 2JC
 ## webAgent の有効化
 
 microSD カードの中にある、設定ファイル config.js を書き換えます。
-config.js の書き変える方法は[SD カードの編集だけでできる IoT 環境データ収集](../Workshop)のページを参考にしてください。
+config.js の書き換え方は [基本的な使い方](../basic-usage.md) を参考にしてください。
 次のコードのように、webAgent.enable を `true` に書き換えましょう。
 
 ```js
@@ -35,11 +35,11 @@ module.exports = [
 ];
 ```
 
-以上で、次回再起動後、Raspberry Pi で http://localhost:3000 にアクセス出来るようになり、画面上に現在の値を表示することが出来ます。
+以上で、次回再起動後、Raspberry Pi が自動的にブラウザを起動し、現在の計測値を表示する Web サーバ (http://localhost:3000) のページを開いて、画面上に最新の計測値を表示するようになります。
 
-### ある条件のとき通知する設定
+### 特定条件を満たしたときに通知する設定
 
-計測した値がある条件を満たすとき、画面を点滅させることによって視覚的に通知することが可能です。
+計測した値がある条件を満たすとき、画面全体を白黒に点滅させることにより視覚的に通知することができます。
 例えば、温度が 25℃ を超えた時、画面を点滅させるには、以下のように webAgent.notifyWhen を書き加えます。
 
 ```diff
@@ -60,7 +60,7 @@ module.exports = [
 ];
 ```
 
-詳しくは開発者向け補足を参照してください。
+設定の記述方法について詳しくは下記「開発者向けの解説」を参照してください。
 
 ### webAgent を無効化するには
 
@@ -78,10 +78,10 @@ module.exports = [
 ];
 ```
 
-## 開発者向け補足
+## 開発者向けの解説
 
 - 設定ファイル config.js は pizero-workshop.js と omron-iot-sensor-web-agent によって読み込む
-- pizero-workshop.js に関するドキュメントは、[pizero-workshop for developers](pizero-workshopForDevelopers)を参照
+- pizero-workshop.js に関するドキュメントは、[pizero-workshop for developers](index.md) を参照
 - omron-iot-sensor-web-agent は環境センサー (OMRON 2JCIE-BU) から得られた値を Web ページとして配信するためのモジュール
 - インターネットに接続することなくローカル環境で表示することが可能
 
@@ -106,12 +106,10 @@ sudo ~/pizero-workshop/install.sh -teardownKiosk
 ### 通知設定
 
 ある特定の条件で画面を点滅させるには、 webAgent.notifyWhen で設定することが可能です。
-webAgent.notifyWhen には、[JavaScript の関数式](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Functions/Arrow_functions)を与えましょう。
-この関数は計測する度に実行されます。
-この関数の戻り値が `true` (真) のとき、通知が画面に送られ、画面が点滅します。
+webAgent.notifyWhen には、[JavaScript の関数式](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Functions/Arrow_functions) を与えましょう。
+この関数は計測する度に実行されます。この関数の戻り値が `true` (真) のとき、通知が画面に送られ、画面が点滅します。
 
-引数には計測値を含むオブジェクトが得られます。
-オブジェクトに含まれるパラメーターは、次のとおりです。
+引数には計測値を含むオブジェクトが得られます。オブジェクトに含まれるパラメーターは、次のとおりです。
 
 | パラメーター       | 型     | 単位 | 説明                   |
 | ------------------ | ------ | ---- | ---------------------- |
@@ -123,7 +121,7 @@ webAgent.notifyWhen には、[JavaScript の関数式](https://developer.mozilla
 | eTVOC              | number | ppb  | 総揮発性有機化合物濃度 |
 | eCO2               | number | ppm  | 二酸化炭素濃度         |
 
-webAgent.notifyWhen を省略すると、デフォルトではいかなる場合も画面上に通知されません。
+webAgent.notifyWhen を省略すると、デフォルトではいかなる場合も画面を点滅する通知は行われません。
 
 ### 環境変数
 
