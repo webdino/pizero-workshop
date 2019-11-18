@@ -15,9 +15,9 @@
 | micro USB ケーブル             | 100〜 円 |
 | micro USB - USB-A 変換アダプタ | 100〜 円 |
 
-### Raspberry Pi Zero
+### Raspberry Pi Zero 基本セット
 
-まずは計測データを取得・WiFi 経由でインターネットに送信するボードが必要。
+まずは計測データを取得し、WiFi 経由でインターネットに送信するボードと電源・ケーブルなどが必要です。
 
 - Raspberry Pi Zero W or Raspberry Pi Zero WH - 1300 円程度 or 1800 円程度
   - **WiFi 対応モデルは W または WH** であることに注意。
@@ -50,13 +50,10 @@
   - 購入先:
     - microUSB 給電ケーブルは 100 均のものでも大丈夫です (給電だけに使う場合は通信非対応でもよい)
     -[エレコム USB 充電器 (Amazon)](https://www.amazon.co.jp/dp/B01M073QDM/) (何でも良いが執筆時に送料無料で安かった例)
-- microUSB - USB 変換アダプタまたは USB 電源 - 100〜数百円
-  - OMRON 環境センサーに Raspberry Pi Zero から給電する場合に micro USB から給電できるアダプターかケーブルを用意する
-  - Raspberry Pi Zero とは USB ではなく BLE で無線通信するため USB 電源とケーブルを OMRON センサー用に別途用意する場合は不要
-  - 購入先: [ノーブランド OTG ケーブル (Amazon)](https://www.amazon.co.jp/dp/B0074D3QCK/), [ノーブランド OTG ケーブル x10 (Amazon)](https://www.amazon.co.jp/dp/B07WYYSRN3/), [超小型変換アダプタ x5 (Amazon)](https://www.amazon.co.jp/gp/product/B01GFOOXO8/) など
 
 注意: "Pi Zero WH Official Simple Kit" というボード本体・ケースの他に USB 変換ケーブルと mini HDMI 変換アダプターが同梱されているセットが 3000 円程度で販売されているが、USB 変換ケーブルの出来が非常に悪く、OMRON 環境センサーを刺したらほぼ確実にピンが曲がり壊れるため使わないこと。最悪、Raspberry Pi Zero 本体やセンサーが故障します。
 
+----------
 ### OMRON 環境センサー利用時
 
 企業でも利用できる環境センサーとしては OMRON のものが比較的安価でしっかりしているのでオススメ (本ワークショップでメインに採用)
@@ -71,7 +68,12 @@
     - [Mousur](https://www.mouser.jp/ProductDetail/Omron/2JCIE-BU01?qs=qSfuJ%252bfl%2Fd5uHxAOzS%252bn8w%3D%3D)
     - [Digi Key](https://www.digikey.jp/product-detail/ja/omron-electronics-inc-emc-div/2JCIE-BU01/Z11673-ND/9603172?utm_adgroup=&mkwid=sLrpajr1l&pcrid=317427575467&pkw=&pmt=&pdv=c&productid=9603172&&gclid=EAIaIQobChMI69Oiib2h4QIV0KuWCh2oygIwEAYYASABEgJzefD_BwE)
     - [Chip 1 Stop](https://www.chip1stop.com/product/detail?partId=OMRO-0141827&mpn=2JCIE-BU01) - 10 以上まとめ買いする場合の単価が低いが単体購入は高い注意。
+- microUSB - USB 変換アダプタまたは USB 電源 - 100〜数百円
+  - OMRON 環境センサーに Raspberry Pi Zero から給電する場合に micro USB から給電できるアダプターかケーブルを用意する
+  - Raspberry Pi Zero とは USB ではなく BLE で無線通信するため USB 電源とケーブルを OMRON センサー用に別途用意する場合は不要
+  - 購入先: [ノーブランド OTG ケーブル (Amazon)](https://www.amazon.co.jp/dp/B0074D3QCK/), [ノーブランド OTG ケーブル x10 (Amazon)](https://www.amazon.co.jp/dp/B07WYYSRN3/), [超小型変換アダプタ x5 (Amazon)](https://www.amazon.co.jp/gp/product/B01GFOOXO8/) など
 
+----------
 ### その他のセンサー利用時
 
 扱うセンサー毎にコードを書いて対応する必要があるが、OMRON のセンサーで対応できない情報も安価に取得可能。企業で利用する場合には設置時の防塵対策などの安定性も考えて利用可能か要検討。
@@ -84,7 +86,8 @@
 - Grove の各種センサー
 - その他のセンサー
 
-### ディスプレイ (オプション)
+----------
+### ディスプレイ (画面表示) 利用時
 
 小型の Raspberry Pi 向けディスプレイを繋いでブラウザをフル画面表示すれば現在のセンサーの値を表示しつつ、背景色の変化で通知が可能。インストール方法は [Web Agent のドキュメント](usage/web-agent.md) を参照してください。
 
@@ -98,11 +101,12 @@
 
 #### HDMI ディスプレイ
 
-3.5 インチ 480x320 が多くある。音声出力端子があるとスピーカーに出力可能。
+3.5 インチ 480x320 が多くある。音声出力端子があるとスピーカーに出力可能。SPI 接続ディスプレイなどもあるがリフレッシュレートが低いとかドライバのセットアップが必要とか、音声出力端子がないとかいったデメリットもあるため HDMI ディスプレイがオススメ。画面上で何か操作したいなら 5.0inch 800x480 以上のサイズのものが便利。
 
 - 3.5inch 480x320 モデルの購入先: [Amazon](https://www.amazon.co.jp/dp/B07VSB4TS2/), [Amazon (ケース付き)](https://www.amazon.co.jp/dp/B07TXTSJBY/), [AliExpress](https://ja.aliexpress.com/item/32818537950.html)
 - 4.0inch 800x480 モデルの購入先: [AliExpress](https://ja.aliexpress.com/item/33057280844.html)
   - 4.0inch はデフォルト縦長方向であることには注意
+- 5.0inch 800x480 モデルの購入先: [AliExpress](https://ja.aliexpress.com/item/32993813607.html)
 
 #### HDMI - HDMI mini ケーブル
 
@@ -112,9 +116,10 @@ Raspberry Pi Zero の場合、HDMI mini 端子なので、HDMI - HDMI mini ケ�
 - FPV タイプのケーブル購入先: [AliExpress](https://ja.aliexpress.com/item/32982250238.html)
   - 価格を気にせず綺麗にするのには良いが USB ケーブルなどとの干渉に要注意
 
-### スピーカー (オプション)
+----------
+### スピーカー (音声読み上げ) 利用時
 
-スピーカー、HDMI ディスプレイ (または、音声出力可能な USB デバイス)を接続すれば、現在のセンサーの値を音声で読み上げることが可能。インストール方法は [Speech Agent のドキュメント](usage/speech-agent.md) を参照してください。
+アクティブスピーカー、HDMI ディスプレイ (または、音声出力可能な USB デバイス)を接続すれば、現在のセンサーの値を音声で読み上げることが可能。インストール方法は [Speech Agent のドキュメント](usage/speech-agent.md) を参照してください。
 
 スピーカーとそれを接続するためのケーブル一式に追加で必要な機材:
 
@@ -124,13 +129,13 @@ Raspberry Pi Zero の場合、HDMI mini 端子なので、HDMI - HDMI mini ケ�
 | 電源二股ケーブル                         | 141 円                      |
 | 合計                                     | 471 円                     |
 
-##### USB 給電式スピーカー
+#### USB 給電式スピーカー
 
 - ダイソー USB ミニスピーカー (オススメ)
   - USB 給電で動作する Φ3.5mm オーディオミニプラグ入力のスピーカー。300 円と安価だが音量も十分 (調整可)
 - Amazon でも 1000 円以下のスピーカーは複数あり: [Amazon (ノーブランド)](https://www.amazon.co.jp/dp/B07XQHRCS9/), [Amazon (iBUFFALO)](https://www.amazon.co.jp/dp/B01JI045RQ/), [Amazon (ノーブランド)](https://www.amazon.co.jp/dp/B079ZVK9LP/)
 
-#### USB 電源二股ケーブルまたはハブ
+#### USB 電源二股ケーブルまたは USB ハブ
 
 Raspberry Pi Zero からは USB 出力が一つしか無く、OMRON 環境センサーと USB スピーカーの両方に給電するには必要。乾電池式のスピーカーの場合は不要。モバイルバッテリー、USB ハブ、給電分岐ケーブルでも代替可能。
 
