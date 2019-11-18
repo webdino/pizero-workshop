@@ -103,7 +103,7 @@ module.exports = [
 ## 機能と実装の詳細
 
 - 設定ファイル config.js は pizero-workshop.js と omron-iot-sensor-speech-agent によって読み込む
-- pizero-workshop.js に関するドキュメントは、[pizero-workshop for developers](pizero-workshopForDevelopers)を参照
+- pizero-workshop.js に関するドキュメントは、[pizero-workshop for developers](index.md)を参照
 - omron-iot-sensor-speech-agent は環境センサー (OMRON 2JCIE-BU) から得られた値を音声出力として読み上げるモジュール
 - インターネットに接続することなくローカル環境で読み上げることが可能
 
