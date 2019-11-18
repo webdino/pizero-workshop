@@ -27,3 +27,10 @@ commonmark:
     - strikethrough
     - autolink
     - table
+
+# Polyglot: Multilingual (i18n) support
+# https://github.com/untra/polyglot
+languages: ["ja", "en"]
+default_lang: "ja"
+exclude_from_localization: ["assets", "images"]
+parallel_localization: true
