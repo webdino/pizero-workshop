@@ -50,9 +50,10 @@ SD カードの設定ファイル編集だけで、IoT 環境センサーを使�
 
 ## 利活用事例
 
-- [「とっとりIoT推進ラボ西部プロジェクト」IoT試作体験ワークショップを開催します ～「とっとりIoT推進ラボ」産学官連携先導事例創出プロジェクト～](http://db.pref.tottori.jp/pressrelease.nsf/webview/441DD1FD54BB3814492583AD000164F8?OpenDocument)
-- [鳥取県、WebDINO Japanと共同で県内教育現場を活用した IoT等先端技術人材育成プログラム開発をスタート ～「とっとりIoT推進ラボ」先端人材育成プログラム開発事業～](http://db.pref.tottori.jp/pressrelease.nsf/webview/499E4EB9C39A63C34925846D000221CA)
+- [「とっとり IoT 推進ラボ西部プロジェクト」IoT 試作体験ワークショップを開催します ～「とっとり IoT 推進ラボ」産学官連携先導事例創出プロジェクト～](http://db.pref.tottori.jp/pressrelease.nsf/webview/441DD1FD54BB3814492583AD000164F8?OpenDocument)
+- [鳥取県、WebDINO Japan と共同で県内教育現場を活用した IoT 等先端技術人材育成プログラム開発をスタート ～「とっとり IoT 推進ラボ」先端人材育成プログラム開発事業～](http://db.pref.tottori.jp/pressrelease.nsf/webview/499E4EB9C39A63C34925846D000221CA)
   - [清翔開智高校・鳥取城北高校でワークショップをした際に使った説明資料](https://speakerdeck.com/dynamis/pi-zero-iot-workshop-at-high-school) - 当日使用したものを公開用に一部編集したものです。当時のプログラム実装に合わせたものですが参考資料としてリンクしています
+  - [画面表示・読み上げ機能に関する説明資料](https://speakerdeck.com/kou029w/pi-zero-iot-workshop-at-high-school) - 応用編として、画面表示・読み上げ機能を使うための参考資料です。この資料には新しい設定ファイルへの移行方法に関する説明も含まれます。
 
 ## お問い合わせ
 
